@@ -1,0 +1,30 @@
+produto:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:Product:index" }
+
+produto_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:Product:show" }
+
+produto_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:Product:new" }
+
+produto_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:Product:create" }
+    requirements: { _method: post }
+
+produto_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:Product:edit" }
+
+produto_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:Product:update" }
+    requirements: { _method: post|put }
+
+produto_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:Product:delete" }
+    requirements: { _method: post|delete }

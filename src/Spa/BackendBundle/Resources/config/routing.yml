@@ -1,0 +1,7 @@
+spa_backend_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: SpaBackendBundle:Default:index }
+
+SpaBackendBundle_produto:
+    resource: "@SpaBackendBundle/Resources/config/routing/product.yml"
+    prefix:   /admin/produto

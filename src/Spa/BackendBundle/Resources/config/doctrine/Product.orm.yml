@@ -1,0 +1,17 @@
+Spa\BackendBundle\Entity\Product:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+        info:
+            type: text
+        pic:
+            type: blob
+    lifecycleCallbacks: {  }
