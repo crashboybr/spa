@@ -1,0 +1,21 @@
+Spa\BackendBundle\Entity\Video:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        url:
+            type: string
+            length: 255
+        featured:
+            type: boolean
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+    lifecycleCallbacks: {  }

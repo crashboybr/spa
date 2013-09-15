@@ -1,0 +1,30 @@
+video:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:Video:index" }
+
+video_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:Video:show" }
+
+video_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:Video:new" }
+
+video_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:Video:create" }
+    requirements: { _method: post }
+
+video_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:Video:edit" }
+
+video_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:Video:update" }
+    requirements: { _method: post|put }
+
+video_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:Video:delete" }
+    requirements: { _method: post|delete }

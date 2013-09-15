@@ -5,3 +5,7 @@ spa_backend_homepage:
 SpaBackendBundle_produto:
     resource: "@SpaBackendBundle/Resources/config/routing/product.yml"
     prefix:   /produto
+
+SpaBackendBundle_video:
+        resource: "@SpaBackendBundle/Resources/config/routing/video.yml"
+        prefix:   /video

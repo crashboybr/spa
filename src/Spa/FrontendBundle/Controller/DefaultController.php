@@ -8,6 +8,15 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SpaFrontendBundle:Default:index.html.twig');
+    	$em = $this->getDoctrine()->getManager();
+		$featured_video = $em->getRepository('SpaBackendBundle:Video')
+            ->findOneBy(array('featured' => 1));
+        
+        return $this->render('SpaFrontendBundle:Default:index.html.twig', array('featured_video' => $featured_video));
+    }
+    public function productAction()
+    {
+
+    	return $this->render('SpaFrontendBundle:Default:product.html.twig');
     }
 }
