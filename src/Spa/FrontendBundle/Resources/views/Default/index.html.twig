@@ -1,0 +1,54 @@
+{% extends 'SpaFrontendBundle::layout.html.twig' %}
+{% block body %}
+		<div class="slider"><img src="{{ asset('images/home-slider-01.jpg') }}" /><ul class="sliderNav"><li class="sliderAnterior"><a href="#"><span>anterior</span></a></li><li class="sliderProximo"><a href="#"><span>próximo</span></a></li></ul></div>
+		<div class="home col1">
+			<div class="bannerDestaque"><img src="{{ asset('images/home-destaque-01.jpg') }}" /><h4>Destaque</h4><p>Primeira Dama do estado de São Paulo visita unidade do Spa das Sobrancelhas</p></div>
+			<div id="homeRedesSociais">
+				<h4>O Spa nas Redes Sociais</h4>
+				<div id="boxesContainer">
+					<div id="fbBox">
+						<h5>
+							<span class="franqueadorCurtir">
+								<img src="{{ asset('images/curtir-btn.gif') }}" title="curtir" alt="curtir" />
+								<span>5.532</span>
+							</span>
+							<a href="#">
+								<img src="{{ asset('images/fbbox-spa-avatar.jpg') }}" title="Spa das Sobrancelhas Franqueador" />Spa das Sobrancelhas<br />
+								<span>Franqueador</span>
+							</a>
+						</h5>
+						<h6>Top 3 <span>Unidades no Facebook</span></h6>
+						<ul>
+							<li class="franqueadoPrimeiro">
+								<span class="franqueadoCurtir">
+									<span>17.501</span> 
+									<img src="{{ asset('images/curtir-btn.gif') }}" title="curtir" alt="curtir" />
+								</span>Unidade Curitiba 1
+							</li>
+							<li><span class="franqueadoCurtir"><span>16.372</span> 
+								<img src="{{ asset('images/curtir-btn.gif') }}" title="curtir" alt="curtir" /></span>Unidade Campinas 1</li>
+							<li><span class="franqueadoCurtir"><span>16.372</span> <img src="{{ asset('images/curtir-btn.gif') }}" title="curtir" alt="curtir" /></span>Unidade Barra 1</li>
+						</ul>
+					</div>
+					<div id="twitterBox">
+						<h5><a href="#"><span>@SpadasSobrancelhas</span></a></h5>
+						<div class="tweetBox"><p class="tweet"><a class="twitterUser" href="#">SpadasSobrancelhas</a> Email marketing que produzimos para a Fisioplenus: <a href="#">fb.me/2nm9y6KpC</a></p><p class="tweetAcoes">2 hours ago · <a href="#">replay</a> · <a href="#">retweet</a> · <a href="#">favorite</a></p></div>
+						<div class="tweetBox"><p class="tweet"><a class="twitterUser" href="#">SpadasSobrancelhas</a> "Estou plenamente certo de que aquele que começou boa obra em vós há de completá-la até ao Dia de Cristo Jesus."... <a href="#">fb.me/OQ71mIT6</a></p><p class="tweetAcoes">8 hours ago · <a href="#">replay</a> · <a href="#">retweet</a> · <a href="#">favorite</a></p></div>
+					</div>
+					<hr class="fim" />
+				</div>
+			</div>
+		</div>
+		<div class="home col2">
+			<div class="bannerFranquiaHome"><img src="{{ asset('images/home-banner-franqueado.jpg') }}" /><h4>Faça parte da nossa rede. Seja um franqueado de sucesso.<span>Saiba mais</span></h4><a href="/seja_franqueado/"><span>Saiba mais</span></a></div>
+			<div id="homeVideoDestaque">
+				<h4>Vídeo em Destaque</h4>
+				<div id="boxesContainer">
+					<a class="linkVideo" href="#">
+						<img src="{{ asset('images/home-video-destaque-01.jpg') }}" />
+					</a>
+					<a href="#"><span>[+]</span> Veja mais vídeos</a></div>
+			</div>
+		</div>
+		<hr class="fim" />
+{% endblock %}

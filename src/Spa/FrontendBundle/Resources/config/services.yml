@@ -1,0 +1,7 @@
+parameters:
+#    spa_frontend.example.class: Spa\FrontendBundle\Example
+
+services:
+#    spa_frontend.example:
+#        class: %spa_frontend.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

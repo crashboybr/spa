@@ -1,0 +1,3 @@
+spa_frontend_homepage:
+    pattern:  /
+    defaults: { _controller: SpaFrontendBundle:Default:index }

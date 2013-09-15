@@ -1,0 +1,685 @@
+@import url(http://fonts.googleapis.com/css?family=Cinzel:400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+
+body {position:absolute;top:0;left:0;margin:0;padding:0;width:100%;height:100%;background:#fff url(/spa/web/images/body-bkg.gif);font-family:'Open Sans',Verdana,Arial,sans-serif;font-size:16px;color:#666;}
+a,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,textarea {
+	line-height:1.25em;
+	margin:0;
+	padding:0;
+}
+h1,h2,h3,h4,h5,h6,.nav {font-family:'Cinzel','Times New Roman',Georgia,serif;}
+a {color:#7c51a1;text-decoration:none;}
+
+
+#container {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:transparent url(/spa/web/images/container-bkg.png) repeat-x;
+	text-align:center;
+}
+#cabecalho {
+	position:relative;
+	width:96%;
+	max-width:1024px;
+	min-width:740px;
+	height:159px;
+	margin:0 auto;
+	padding:0;
+	z-index:100;
+}
+#cabecalho h1 {
+	position:absolute;
+	top:0;
+	left:0;
+}
+#cabecalho h1 a {
+	display:block;
+	height:118px;
+	width:236px;
+	background:url(/spa/web/images/spadassobrancelhas-logotipo.png) 0 0 no-repeat;
+}
+#cabecalho h1 a:hover {
+	background:url(/spa/web/images/spadassobrancelhas-logotipo.png) 0 -6px no-repeat;
+}
+#cabecalho h1 span {
+	display:none;
+}
+#cabecalho ul.navSec {
+	position:absolute;
+	top:1.55em;
+	right:0;
+	font-size:.85em;
+	list-style:none;
+}
+#cabecalho ul.navSec li {
+	display:inline;
+	color:#fff;
+	padding:0 .5em;
+	border-left:1px solid #96c;
+}
+#cabecalho ul.navSec li.faleconosco {
+	border:none;
+}
+#cabecalho ul.navSec li.areaFranqueado a {
+	background:url(/spa/web/images/navsec-areafranqueado-icone.png) right top no-repeat;
+	padding-right:24px;
+}
+#cabecalho ul.navSec li a {
+	color:#fff;
+}
+#cabecalho ul.navSec li a:hover {
+	color:#bf9fcb;
+}
+#cabecalho ul.navSec li a.navSigaItem {
+	display:inline-block;
+	width:20px;
+	height:20px;
+	margin:0 0 -5px 1px;
+}
+#cabecalho ul.navSec li a.navSigaItem span {
+	display:none;
+}
+#cabecalho ul.navSec li a#navTwitter {
+	background:url(/spa/web/images/navsec-icones.png) 0 0 no-repeat;
+	background-size:auto 100%;
+}
+#cabecalho ul.navSec li a#navTwitter:hover {
+	background:url(/spa/web/images/navsec-icones.png) 0 -1px no-repeat;
+	background-size:auto 100%;
+}
+#cabecalho ul.navSec li a#navFacebook {
+	background:url(/spa/web/images/navsec-icones.png) -20px 0 no-repeat;
+	background-size:auto 100%;
+}
+#cabecalho ul.navSec li a#navFacebook:hover {
+	background:url(/spa/web/images/navsec-icones.png) -20px -1px no-repeat;
+	background-size:auto 100%;
+}
+#cabecalho ul.navSec li a#navYoutube {
+	background:url(/spa/web/images/navsec-icones.png) -40px 0 no-repeat;
+	background-size:auto 100%;
+}
+#cabecalho ul.navSec li a#navYoutube:hover {
+	background:url(/spa/web/images/navsec-icones.png) -40px -1px no-repeat;
+	background-size:auto 100%;
+}
+#cabecalho ul.nav {
+	position:absolute;
+	bottom:.2em;
+	right:0;
+	font-weight:400;
+}
+#cabecalho ul.nav li {
+	position:relative;
+	display:inline-block;
+	color:#fff;
+	padding:0 .5em;
+	border-left:1px solid #96c;
+}
+#cabecalho ul.nav li.nav1 {
+	border:none;
+}
+#cabecalho ul.nav li a {
+	color:#fff;
+	padding-bottom:.15em;
+}
+#cabecalho ul.nav li:hover a {
+	border-top:3px solid #fff;
+}
+#cabecalho ul.nav li ul {
+	position:absolute;
+	text-align:left;
+	top:1.7em;
+	left:0;
+	display:none;
+	background:rgba(167,138,194,.85);
+	font-family:'Open Sans',Verdana,Arial,sans-serif;
+	font-size:.85em;
+	font-weight:400;
+	white-space:nowrap;
+}
+#cabecalho ul.nav li:hover ul {
+	display:block;
+	padding:.15em .5em;
+}
+#cabecalho ul.nav li ul li {
+	display:block;
+	border:none;
+	border-top:1px solid #7c51a1;
+	padding:.3em 0;
+}
+#cabecalho ul.nav li ul li.navSub1 {
+	border:none;
+}
+#cabecalho ul.nav li:hover ul li a {
+	border:none;
+}
+#conteudo {
+	position:relative;
+	width:96%;
+	max-width:1024px;
+	min-width:740px;
+	margin:75px auto 0 auto;
+	padding-bottom:20px;
+	background:#fff;
+	text-align:left;
+}
+.home #conteudo {
+	border-top:3px solid #fff;
+	margin-top:0;
+}
+#conteudo h2 {
+	position:relative;
+	display:inline-block;
+	padding:0 .4em;
+	margin:2em 0 .5em 0;
+	color:#FFF;
+	font-weight:400;
+	font-size:1.75em;
+	background:#7f3f98 url(/spa/web/images/banner-titulo-bkg.png) .5em bottom no-repeat;
+	z-index:2;
+}
+.empresa #conteudo h2 {
+	margin-top:-1.25em;
+}
+#conteudo h3.box {
+	position:relative;
+	width:35%;
+	color:#fff;
+	font-size:1.85em;
+	font-weight:400;
+	text-align:center;
+	padding:1% 4% 1% 2%;
+	background:#7f3f98 url(/spa/web/images/titulo-box-bkg.gif) right center no-repeat;
+	float:left;
+}
+#conteudo p {
+	line-height:1.5em;
+	margin-bottom:.85em;
+	text-align:justify;
+}
+#conteudo p.video-empresa-thumb {
+	position:relative;
+	width:57%;
+	float:right;
+}
+#conteudo p.video-empresa-thumb img {
+	width:100%;
+}
+#conteudo .destaque {
+	font-weight:600;
+	color:#7f3f98;
+}
+#conteudo .margem {
+	position:relative;
+	width:96%;
+	margin:0 2%;
+}
+.home #conteudo .margem {
+	width:100%;
+	margin:0;
+}
+#conteudo .slider {
+	position:relative;
+	width:100%;
+}
+#conteudo .slider img {
+	width:100%;
+}
+.empresa #conteudo .slider img {
+	border:2px solid #7f3f98;
+	border-top:0;
+}
+#conteudo .slider ul.sliderNav {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	list-style:none;
+	background:url(/spa/web/images/home-slider-sombra.png) repeat-x;
+}
+#conteudo .slider ul.sliderNav li {
+	position:absolute;
+	top:50%;
+	margin-top:-37px;
+	width:27px;
+	height:73px;
+}
+#conteudo .slider ul.sliderNav li.sliderAnterior {
+	background:url(/spa/web/images/home-slider-anterior.png) 5px 0 no-repeat;
+	left:7px;
+}
+#conteudo .slider ul.sliderNav li.sliderAnterior:hover {
+	background-position:0 0;
+}
+#conteudo .slider ul.sliderNav li.sliderProximo {
+	background:url(/spa/web/images/home-slider-proximo.png) 5px 0 no-repeat;
+	right:7px;
+}
+#conteudo .slider ul.sliderNav li.sliderProximo:hover {
+	background-position:10px 0;
+}
+#conteudo .slider ul.sliderNav li a {
+	display:block;
+	width:100%;
+	height:100%;
+}
+#conteudo .slider ul.sliderNav li a span {
+	display:none;
+}
+#conteudo .home {
+	position:relative;
+	margin-top:20px;
+}
+#conteudo .home.col1 {
+	width:63%;
+	float:left;
+}
+#conteudo .home.col2 {
+	width:35%;
+	float:right;
+}
+#conteudo .bannerDestaque,
+#conteudo .bannerFranquiaHome {
+	position:relative;
+	width:100%;
+}
+#conteudo .bannerDestaque img,
+#conteudo .bannerFranquiaHome img {
+	position:relative;
+	width:100%;
+}
+#conteudo .bannerDestaque h4 {
+	position:absolute;
+	display:inline-block;
+	bottom:0;
+	left:0;
+	padding:2px 10px 1px 10px;
+	font-size:1.25em;
+	font-weight:400;
+	color:#fff;
+	background:#7f3f98 url(/spa/web/images/banner-titulo-bkg.png) 1px bottom no-repeat;
+}
+#conteudo .bannerDestaque p {
+	position:absolute;
+	display:inline-block;
+	bottom:50px;
+	left:0;
+	width:30%;
+	min-width:200px;
+	padding:6px 10px;
+	font-size:.85em;
+	font-weight:400;
+	color:#fff;
+	background:rgba(127,63,152,.7);
+}
+#conteudo .bannerFranquiaHome h4 {
+	position:absolute;
+	top:0;
+	left:0;
+	padding:10px 25px 25px 25px;
+	font-size:1.25em;
+	font-weight:400;
+	color:#fff;
+	background:url(/spa/web/images/home-banner-franqueado-titulo-bkg.png) left bottom no-repeat;
+}
+#conteudo .bannerFranquiaHome h4 span {
+	display:block;
+	position:absolute;
+	bottom:15px;
+	right:0;
+	padding:0 10px 0 6px;
+	margin:0;
+	font-family:'Open Sans',Verdana,Arial,sans-serif;
+	font-size:.85em;
+	font-weight:400;
+	background:#7f3f98;
+}
+#conteudo .bannerFranquiaHome a {
+	display:block;
+	position:absolute;
+	top:0;
+	right:0;
+	width:100%;
+	height:100%;
+}
+#conteudo .bannerFranquiaHome a span {
+	display:none;
+}
+#conteudo #homeRedesSociais,
+#conteudo #homeVideoDestaque {
+	position:relative;
+	margin-top:20px;
+	width:100%;
+}
+#conteudo #homeRedesSociais h4,
+#conteudo #homeVideoDestaque h4 {
+	position:relative;
+	display:inline-block;
+	padding:2px 10px 1px 10px;
+	margin-bottom:-1px;
+	font-size:1.25em;
+	font-weight:400;
+	color:#fff;
+	background:#7f3f98 url(/spa/web/images/banner-titulo-bkg.png) 1px bottom no-repeat;
+	z-index:2;
+}
+#conteudo #boxesContainer {
+	position:relative;
+	border:1px solid #ccc;
+	background:url(/spa/web/images/home-redes_sociais-bkg.gif) 55% 0 repeat-y;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox {
+	position:relative;
+	width:55%;
+	float:left;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox h5 {
+	font-family:'Open Sans',Verdana,Arial,sans-serif;
+	font-size:.85em;
+	color:#7c51a1;
+	padding:15px 10px 15px 10px;
+	border-bottom:1px solid #ccc;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox h5 span {
+	font-weight:400;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox h5 span.franqueadorCurtir {
+	display:block;
+	float:right;
+	width:54px;
+	text-align:right;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox h5 span.franqueadorCurtir span {
+	display:block;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox h5 img {
+	float:left;
+	margin-right:10px;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox h6 {
+	font-family:'Open Sans',Verdana,Arial,sans-serif;
+	font-size:1em;
+	color:#af97c5;
+	padding:3px 10px 5px 10px;
+	border-bottom:1px solid #ccc;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox ul {
+	list-style:none;
+	padding:10px;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox ul li {
+	clear:both;
+	line-height:1.85em;
+	font-size:.85em;
+	white-space:nowrap;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox ul li.franqueadoPrimeiro {
+	font-weight:700;
+	font-size:1em;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox ul li span.franqueadoCurtir {
+	display:block;
+	float:right;
+	font-size:.85em;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox ul li img {
+	vertical-align:middle;
+	padding-bottom:3px;
+}
+#conteudo #homeRedesSociais #boxesContainer #twitterBox {
+	position:relative;
+	float:right;
+	width:45%;
+	padding-bottom:15px;
+}
+#conteudo #homeRedesSociais #boxesContainer #twitterBox h5 {
+	font-family:'Open Sans',Verdana,Arial,sans-serif;
+	background:url(/spa/web/images/home-redes_sociais-twitter-icone.gif) 5px 0 no-repeat;
+	margin:0 0 0 10px;
+	padding:0 0 0 45px;
+	color:#7c51a1;
+	font-size:.85em;
+	border-bottom:1px solid #ccc;
+	height:35px;
+}
+#conteudo #homeRedesSociais #boxesContainer #twitterBox h5 span {
+	display:block;
+	padding:5px 5px 7px 5px;
+	margin:5px 0 0 0;
+	border-left:1px solid #ccc;
+}
+#conteudo #homeRedesSociais #boxesContainer #twitterBox .tweetBox {
+	margin:10px 10px 0 15px;
+	font-size:.8em;
+}
+#conteudo #homeRedesSociais #boxesContainer #twitterBox .tweetBox a {
+	color:#c3c;
+}
+#conteudo #homeRedesSociais #boxesContainer #twitterBox .tweetBox a:hover {
+	text-decoration:underline;
+}
+#conteudo #homeRedesSociais #boxesContainer #twitterBox .tweetBox a.twitterUser {
+	font-weight:700;
+}
+#conteudo #homeRedesSociais #boxesContainer #twitterBox .tweetBox .tweetAcoes {
+	color:#c3c;
+	font-size:.85em;
+	margin-top:.2em;
+}
+#conteudo #homeRedesSociais #boxesContainer #twitterBox .tweetBox .tweetAcoes a {
+	color:#c3c;
+}
+#conteudo #homeVideoDestaque #boxesContainer {
+	padding:5px 10px;
+	background-image:none;
+	font-size:.75em;
+	text-align:right;
+}
+#conteudo #homeVideoDestaque #boxesContainer a {
+	display:block;
+	margin:.4em 0 .35em 0;
+}
+#conteudo #homeVideoDestaque #boxesContainer a:hover {
+	text-decoration:underline;
+}
+#conteudo #homeVideoDestaque #boxesContainer a span {
+	font-size:.95em;
+}
+#conteudo #homeVideoDestaque #boxesContainer a.linkVideo {
+	margin:0;
+}
+#conteudo #homeVideoDestaque #boxesContainer img {
+	width:100%;
+}
+#conteudo hr {
+	border:none;
+	border-top:1px solid #666;
+	margin-bottom:.85em;
+}
+#conteudo hr.video {
+	margin-bottom:3em;
+}
+#conteudo hr.titulo {
+	position:absolute;
+	width:100%;
+	top:5.15em;
+}
+#conteudo hr.fim {
+	clear:both;
+	border:none;
+	margin-bottom:0;
+}
+#rodape {
+	position:relative;
+	width:100%;
+	background:#7f3f98;
+	border-top:10px solid #bf9fcb;
+	padding-bottom:3em;
+}
+#rodape #rodapeNav {
+	position:relative;
+	width:96%;
+	max-width:1024px;
+	min-width:740px;
+	margin:auto;
+	color:#fff;
+	background:url(/spa/web/images/rodape-separador.png) repeat-y;
+	background-size:100% auto;
+}
+#rodape #rodapeNav h1 {
+	position:relative;
+	display:inline-block;
+	width:20%;
+	height:100%;
+}
+#rodape #rodapeNav h1 img {
+	position:absolute;
+	width:92.5%;
+	left:0;
+	bottom:1em;
+}
+#rodape #rodapeNav ul {
+	position:relative;
+	display:inline-block;
+	list-style:none;
+	text-align:left;
+}
+#rodape #rodapeNav ul a {
+	color:#fff;
+}
+#rodape #rodapeNav ul a:hover {
+	color:#bf9fcb;
+}
+#rodape #rodapeNav ul.nav ul {
+	display:none;
+}
+#rodape #rodapeNav ul.nav {
+	width:20%;
+	padding:.5em 1.5% 0 1.5%;
+}
+#rodape #rodapeNav ul li {
+	line-height:1em;
+	margin-bottom:.25em;
+}
+#rodape #rodapeNav ul.navSec {
+	font-family:'Cinzel','Times New Roman',Georgia,serif;
+	width:20%;
+	padding:0 1.5%;
+}
+#rodape #rodapeNav ul.navSec li a.navSigaItem {
+	display:inline-block;
+	width:28px;
+	height:28px;
+	margin:.3em 2px -5px 0;
+}
+#rodape #rodapeNav ul.navSec li span.sigaIcones {
+	display:block;
+}
+#rodape #rodapeNav ul.navSec li a.navSigaItem span {
+	display:none;
+}
+#rodape #rodapeNav ul.navSec li a#navTwitter {
+	background:url(/spa/web/images/navsec-icones.png) 0 0 no-repeat;
+	background-size:auto 100%;
+}
+#rodape #rodapeNav ul.navSec li a#navTwitter:hover {
+	background:url(/spa/web/images/navsec-icones.png) 0 -1px no-repeat;
+	background-size:auto 100%;
+}
+#rodape #rodapeNav ul.navSec li a#navFacebook {
+	background:url(/spa/web/images/navsec-icones.png) -28px 0 no-repeat;
+	background-size:auto 100%;
+}
+#rodape #rodapeNav ul.navSec li a#navFacebook:hover {
+	background:url(/spa/web/images/navsec-icones.png) -28px -1px no-repeat;
+	background-size:auto 100%;
+}
+#rodape #rodapeNav ul.navSec li a#navYoutube {
+	background:url(/spa/web/images/navsec-icones.png) -56px 0 no-repeat;
+	background-size:auto 100%;
+}
+#rodape #rodapeNav ul.navSec li a#navYoutube:hover {
+	background:url(/spa/web/images/navsec-icones.png) -56px -1px no-repeat;
+	background-size:auto 100%;
+}
+#rodape #rodapeNav ul.navSec .areaFranqueado {
+	display:none;
+}
+#rodape #rodapeNav ul.logos {
+	width:32%;
+	text-align:right;
+}
+#rodape #rodapeNav ul.logos li {
+	display:inline-block;
+	margin-left:5.5%;
+}
+#rodape #rodapeNav ul.logos li#abfLogo {
+	width:57.5%;
+}
+#rodape #rodapeNav ul.logos li#abfSelo {
+	width:27%;
+}
+#rodape #rodapeNav ul.logos li#abfLogo img,
+#rodape #rodapeNav ul.logos li#abfSelo img {
+	width:100%;
+}
+
+.produtoBox {
+	position:relative;
+	border:1px solid #999;
+	background:#bf9fcb;
+	color:#333;
+	margin-top:1.5em;
+}
+.produtoBox .produtoFoto {
+	position:relative;
+	width:52%;
+	height:315px;
+	float:left;
+	background-repeat:no-repeat;
+	background-position:top center;
+}
+.produtoBox .produtoDescricao {
+	position:relative;
+	width:48%;
+	float:right;
+}
+.produtoBox .produtoDescricao h3 {
+	display:inline-block;
+	color:#fff;
+	font-size:1.75em;
+	font-weight:400;
+	background:#7f3f98 url(/_imgs/subtitulo-bkg.png) left center no-repeat;
+	padding:.1em .3em 0 .5em;
+	margin-top:2em;
+}
+.produtoBox .produtoDescricao p {
+	margin:1em;
+}
+.produtoBox a {
+	position:absolute;
+	top:0;
+	left:0;
+	display:block;
+	width:100%;
+	height:100%;
+}
+.produtoBox a:hover {
+	background:rgba(255,255,255,.35);
+}
+
+
+
+@media (max-width: 950px) {
+#conteudo #homeRedesSociais #boxesContainer #fbBox ul li {
+	font-size:.75em;
+}
+#conteudo #homeRedesSociais #boxesContainer #fbBox ul li.franqueadoPrimeiro {
+	font-size:.85em;
+}
+}

@@ -4,4 +4,4 @@ spa_backend_homepage:
 
 SpaBackendBundle_produto:
     resource: "@SpaBackendBundle/Resources/config/routing/product.yml"
-    prefix:   /admin/produto
+    prefix:   /produto
