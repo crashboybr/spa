@@ -16,7 +16,10 @@ class DefaultController extends Controller
     }
     public function productAction()
     {
-
-    	return $this->render('SpaFrontendBundle:Default:product.html.twig');
+    	$em = $this->getDoctrine()->getManager();
+		$products = $em->getRepository('SpaBackendBundle:Product')
+            ->findAll();
+   
+    	return $this->render('SpaFrontendBundle:Default:product.html.twig', array('products' => $products));
     }
 }

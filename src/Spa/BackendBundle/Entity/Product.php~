@@ -79,7 +79,6 @@ class Product
      */
     public function upload()
     {
-
         if (null === $this->getFile()) {
             return;
         }
@@ -202,7 +201,7 @@ class Product
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/products';
+        return 'uploads/documents';
     } 
 
     

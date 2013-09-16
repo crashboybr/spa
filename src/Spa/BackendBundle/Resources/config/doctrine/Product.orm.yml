@@ -12,6 +12,9 @@ Spa\BackendBundle\Entity\Product:
             length: 255
         info:
             type: text
-        pic:
-            type: blob
-    lifecycleCallbacks: {  }
+        path:
+            type: string
+            length: 255
+    lifecycleCallbacks:
+        prePersist: [ preUpload ]
+        postPersist: [ upload ]

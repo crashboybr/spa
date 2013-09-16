@@ -1,0 +1,5 @@
+Spa\BackendBundle\Entity\Product:
+    properties:
+        file:
+            - File:
+                maxSize: 6000000
