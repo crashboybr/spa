@@ -22,4 +22,14 @@ class DefaultController extends Controller
    
     	return $this->render('SpaFrontendBundle:Default:product.html.twig', array('products' => $products));
     }
+
+    public function unitAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $units = $em->getRepository('SpaBackendBundle:Unit')
+            //->findBy(array('status' => true))
+            ->findAll();
+   
+        return $this->render('SpaFrontendBundle:Default:unit.html.twig', array('units' => $units));
+    }
 }

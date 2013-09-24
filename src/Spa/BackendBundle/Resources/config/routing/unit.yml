@@ -1,0 +1,30 @@
+unidades:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:Unit:index" }
+
+unidades_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:Unit:show" }
+
+unidades_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:Unit:new" }
+
+unidades_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:Unit:create" }
+    requirements: { _method: post }
+
+unidades_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:Unit:edit" }
+
+unidades_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:Unit:update" }
+    requirements: { _method: post|put }
+
+unidades_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:Unit:delete" }
+    requirements: { _method: post|delete }

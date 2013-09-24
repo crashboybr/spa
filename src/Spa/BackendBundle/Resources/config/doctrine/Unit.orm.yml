@@ -1,0 +1,30 @@
+Spa\BackendBundle\Entity\Unit:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+        address:
+            type: string
+            length: 255
+        state:
+            type: string
+            length: 255
+        phone1:
+            type: string
+            length: 255
+        phone2:
+            type: string
+            length: 255
+        status:
+            type: boolean
+    lifecycleCallbacks: {  }

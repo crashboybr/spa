@@ -673,7 +673,84 @@ a {color:#7c51a1;text-decoration:none;}
 	background:rgba(255,255,255,.35);
 }
 
+.servicoBox a:hover {
+	background:rgba(255,255,255,.35);
+}
 
+.unidadesForm {
+	position:relative;
+	width:32%;
+	background:#b19bc9;
+}
+.unidadesForm h3 {
+	color:#fff;
+	font-weight:400;
+	line-height:1.05em;
+	padding:.45em .6em;
+	background:#7f3f98 url(../_imgs/unidades_form-titulo-bkg.png) .5em bottom no-repeat;
+}
+.unidadesForm form {
+	position:relative;
+	padding:.8em;
+	margin:0;
+	text-align:right;
+}
+.unidadesForm form select {
+	margin:0 0 1em 0;
+	width:100%;
+	border:0;
+	font-family:'Open Sans',Verdana,Arial,sans-serif;
+	font-size:.85em;
+	color:#333;
+	cursor:pointer;
+}
+.unidadesForm form input {
+	padding:.15em .65em .3em .65em;
+	border:0;
+	font-family:'Open Sans',Verdana,Arial,sans-serif;
+	font-size:.85em;
+	color:#333;
+	background:#fff;
+	cursor:pointer;
+}
+.unidadesForm {position:relative;float:left;}
+.unidadesMapa {position:relative;width:68%;text-align:center;float:right;margin-top:-1.5em;}
+.unidadesResultado h4 {
+	font-size:1.15em;
+	font-weight:400;
+	color:#7f3f98;
+	border-bottom:1px solid #999;
+	margin-bottom:1em;
+}
+.unidadesResultado h5 {
+	font-family:'Open Sans',Verdana,Arial,sans-serif;
+	font-weight:400;
+	font-size:1em;
+	color:#fff;
+	background:#7f3f98;
+	padding:.15em .5em;
+	margin-top:.25em;
+}
+.unidadesResultado h5 a {
+	color:#fff;
+}
+.unidadesResultado .lista {
+	background:#e6e6e6;
+	padding:.6em 2em;
+	font-size:.85em;
+	border-bottom:1px solid #7f3f98;
+}
+.unidadesResultado .lista dl {
+	margin-bottom:.6em;
+}
+.unidadesResultado .lista dl dt {
+	margin-top:.6em;
+	font-weight:600;
+}
+.unidadesResultado .lista dl dd {
+	font-size:.95em;
+	padding-left:.75em;
+}
 
 @media (max-width: 950px) {
 #conteudo #homeRedesSociais #boxesContainer #fbBox ul li {

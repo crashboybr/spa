@@ -5,3 +5,7 @@ spa_frontend_homepage:
 spa_frontend_product:
     pattern:  /produtos
     defaults: { _controller: SpaFrontendBundle:Default:product }
+
+spa_frontend_unit:
+    pattern:  /unidades
+    defaults: { _controller: SpaFrontendBundle:Default:unit }

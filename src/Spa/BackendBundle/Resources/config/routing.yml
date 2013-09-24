@@ -9,3 +9,7 @@ SpaBackendBundle_produto:
 SpaBackendBundle_video:
         resource: "@SpaBackendBundle/Resources/config/routing/video.yml"
         prefix:   /video
+
+SpaBackendBundle_unidades:
+        resource: "@SpaBackendBundle/Resources/config/routing/unit.yml"
+        prefix:   /unidades
