@@ -5,5 +5,3 @@ spa_frontend:
 spa_backend:
     resource: "@SpaBackendBundle/Resources/config/routing.yml"
     prefix:   /admin
-
-

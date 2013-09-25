@@ -10,7 +10,7 @@
   function buscaUnidade()
   {
   	uf = $("#estado").val();
-	$('.active-region').removeClass();
+	$('.active-region').removeClass('active-region');
   	switch(uf)
 	{
 		case "AC":
@@ -124,21 +124,28 @@
 	}
   	
   	$.getJSON( "/spa/web/app_dev.php/buscaUnidade/" + uf, function( data ) {
-	  var items = [];
+	  var cityOptions = [];
+	  var cityDivs = [];
+	  var infoDivs = [];
+	  i = 0;
 	  $.each( data, function( key, cities ) {
 	    //items.push( "<li id='" + key + "'>" + val + "</li>" );
-	    items.push( "<option value=''>Selecione uma cidade</option>" );
-	    $.each(cities, function (city, objs) {
-	    	items.push( "<option value='" + city + "'>" + city + "</option>" );
-	    }
-	    	);
+	    cityOptions.push( "<option value=''>Selecione uma cidade</option>" );
+	    $.each(cities, function (city, objs) 
+		    {
+		    	i++;
+		    	cityOptions.push( "<option value='" + city + "'>" + city + "</option>" );
+		    	cityDivs.push('<h5><a href="javascript:void(0)" onclick="$(\'#city_' + i + '\').slideToggle();">' + city + "</a></h5>");
+		    	cityDivs.push('<div class="lista" id="city_' + i + '" style="display:none"><dl>	<dt>Unidade Campos 1</dt>							<dd class="endereco">Rua Voluntários da Pátria, 426 - Loja 21 (Pelinca Plaza Center) - Bairro Pelinca</dd>							<dd class="fones">(22) 2737-7520 / (22) 9888-2844</dd>							<dd class="email"><a href="mailto:rjcampos1@spadassobrancelhas.com.br">rjcampos1@spadassobrancelhas.com.br</a></dd>');		    }
+	    );
 	  });
-	 
-	  /*$( "<ul/>", {
-	    "class": "my-new-list",
-	    html: items.join( "" )
-	  }).appendTo( "body" );
-*/	$('#cidades').find('option').remove().end().append(items);
+	$('#unidadesResultado h4').text();
+	$("#unidadesResultado").show();
+	$('#cidades').find('option').remove().end().append(cityOptions);
+
+	$('#unidadesResultado').empty();
+	$('#unidadesResultado').append('<h4>' + $('#estado option[value=' + uf + ']').text() + '<h4>');
+	$('#unidadesResultado').append(cityDivs);
   	//console.log(items);
 	});
 
@@ -227,11 +234,11 @@
 					</div>
 				</div>
 				<hr class="fim" />
-				<div class="unidadesResultado">
+				<div id="unidadesResultado" class="unidadesResultado" style="display:block;">
 					<h4>Rio de Janeiro</h4>
 					<h5><a href="#">Cabo Frio</a></h5>
-					<h5><a href="#">Campos dos Goytacazes</a></h5>
-					<div class="lista">
+					<h5><a href="javascript:void()" onclick="$('#vai').slideToggle();">Campos dos Goytacazes</a></h5>
+					<div class="lista" id="vai" style="display:none">
 						<dl>
 							<dt>Unidade Campos 1</dt>
 							<dd class="endereco">Rua Voluntários da Pátria, 426 - Loja 21 (Pelinca Plaza Center) - Bairro Pelinca</dd>
