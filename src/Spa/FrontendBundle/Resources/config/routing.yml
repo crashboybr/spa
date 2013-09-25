@@ -9,3 +9,7 @@ spa_frontend_product:
 spa_frontend_unit:
     pattern:  /unidades
     defaults: { _controller: SpaFrontendBundle:Default:unit }
+
+spa_frontend_find_unit:
+    pattern:  /buscaUnidade/{uf}
+    defaults: { _controller: SpaFrontendBundle:Default:findUnit }

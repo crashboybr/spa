@@ -38,7 +38,7 @@ class UnitController extends Controller
         $entity = new Unit();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        var_dump($form);exit;
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -62,6 +62,7 @@ class UnitController extends Controller
     */
     private function createCreateForm(Unit $entity)
     {
+
         $form = $this->createForm(new UnitType(), $entity, array(
             'action' => $this->generateUrl('unidades_create'),
             'method' => 'POST',

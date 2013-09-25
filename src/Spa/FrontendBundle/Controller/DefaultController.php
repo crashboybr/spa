@@ -3,6 +3,8 @@
 namespace Spa\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class DefaultController extends Controller
 {
@@ -31,5 +33,29 @@ class DefaultController extends Controller
             ->findAll();
    
         return $this->render('SpaFrontendBundle:Default:unit.html.twig', array('units' => $units));
+    }
+
+    public function findUnitAction($uf)
+    {
+
+        $response = new JsonResponse();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('status' =>true, 'state' => $uf));
+        $json_unit = array();
+        foreach ($units as $unit)
+        {
+            $json_unit[$unit->getCity()][$unit->getName()]['address'] = $unit->getAddress();
+            $json_unit[$unit->getCity()][$unit->getName()]['email'] = $unit->getEmail();
+            $json_unit[$unit->getCity()][$unit->getName()]['phone1'] = $unit->getPhone1();
+            $json_unit[$unit->getCity()][$unit->getName()]['phone2'] = $unit->getPhone2();
+
+        }
+        $response->setData(array(
+            'units' => $json_unit
+        ));
+        return $response;
+
     }
 }

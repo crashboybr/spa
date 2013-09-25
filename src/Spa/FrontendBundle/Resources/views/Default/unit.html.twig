@@ -4,8 +4,152 @@
 {% block body %}
 <script type="text/javascript">
   $(function($){
-    $('#map-brazil').cssMap({'size' : 340,loadingText : 'Carregando mapa...'});
+    $('#map-brazil').cssMap({'size' : 500,loadingText : 'Carregando mapa...'});
    });
+
+  function buscaUnidade()
+  {
+  	uf = $("#estado").val();
+	$('.active-region').removeClass();
+  	switch(uf)
+	{
+		case "AC":
+		  $('.br1').addClass('active-region');
+		  break;
+		
+		case "AL":
+		  $('.br2').addClass('active-region');
+		  break;
+
+		case "AP":
+		  $('.br3').addClass('active-region');
+		  break;
+
+		case "AM":
+		  $('.br4').addClass('active-region');
+		  break;
+
+		case "BA":
+		  $('.br5').addClass('active-region');
+		  break;
+		
+		case "CE":
+		  $('.br6').addClass('active-region');
+		  break;
+
+		case "DF":
+		  $('.br7').addClass('active-region');
+		  break;
+
+		case "ES":
+		  $('.br8').addClass('active-region');
+		  break;
+
+		case "GO":
+		  $('.br9').addClass('active-region');
+		  break;
+		
+		case "MA":
+		  $('.br10').addClass('active-region');
+		  break;
+
+		case "MT":
+		  $('.br11').addClass('active-region');
+		  break;
+
+		case "MS":
+		  $('.br12').addClass('active-region');
+		  break;
+		
+		case "MG":
+		  $('.br13').addClass('active-region');
+		  break;
+		
+		case "PA":
+		  $('.br14').addClass('active-region');
+		  break;
+
+		case "PB":
+		  $('.br15').addClass('active-region');
+		  break;
+
+		case "PR":
+		  $('.br16').addClass('active-region');
+		  break;  
+
+		case "PE":
+		  $('.br17').addClass('active-region');
+		  break;
+		
+		case "PI":
+		  $('.br18').addClass('active-region');
+		  break;
+
+		case "RJ":
+		  $('.br19').addClass('active-region');
+		  break;
+
+		case "RN":
+		  $('.b20').addClass('active-region');
+		  break;
+
+		case "RS":
+		  $('.br21').addClass('active-region');
+		  break;
+		
+		case "RO":
+		  $('.br22').addClass('active-region');
+		  break;
+
+		case "RR":
+		  $('.br23').addClass('active-region');
+		  break;
+
+		case "SC":
+		  $('.br24').addClass('active-region');
+		  break;
+
+		case "SP":
+		  $('.br25').addClass('active-region');
+		  break;
+		
+		case "SE":
+		  $('.br26').addClass('active-region');
+		  break;
+
+		case "TO":
+		  $('.br27').addClass('active-region');
+		  break;
+    
+	}
+  	
+  	$.getJSON( "/spa/web/app_dev.php/buscaUnidade/" + uf, function( data ) {
+	  var items = [];
+	  $.each( data, function( key, cities ) {
+	    //items.push( "<li id='" + key + "'>" + val + "</li>" );
+	    items.push( "<option value=''>Selecione uma cidade</option>" );
+	    $.each(cities, function (city, objs) {
+	    	items.push( "<option value='" + city + "'>" + city + "</option>" );
+	    }
+	    	);
+	  });
+	 
+	  /*$( "<ul/>", {
+	    "class": "my-new-list",
+	    html: items.join( "" )
+	  }).appendTo( "body" );
+*/	$('#cidades').find('option').remove().end().append(items);
+  	//console.log(items);
+	});
+
+
+    $.post('/spa/web/app_dev.php/buscaUnidade/' + uf, function(res) {
+
+    	
+        //console.log(res);
+        
+    }, 'json');
+  }
 </script>
 
 	<h2>Unidades</h2>
@@ -14,8 +158,38 @@
 			<div class="colConteudo">
 				<div class="unidadesForm"><h3>Encontre o Spa das Sobrancelhas mais perto de Você</h3>
 					<form>
-						<select><option value="" selected="selected">Rio de Janeiro</option></select>
-						<select><option value="" selected="selected">Selecione a sua cidade</option></select>
+						<select id="estado" onchange="buscaUnidade()">
+							<option value="" selected="selected">Selecione seu Estado</option>
+							<option value="AC">Acre</option>
+							<option value="AL">Alagoas</option>
+							<option value="AP">Amapá</option>
+							<option value="AM">Amazonas</option>
+							<option value="BA">Bahia</option>
+							<option value="CE">Ceará</option>
+							<option value="DF">Distrito Federal</option>
+							<option value="ES">Espírito Santo</option>
+							<option value="GO">Goiás</option>
+							<option value="MA">Maranhão</option>
+							<option value="MT">Mato Grosso</option>
+							<option value="MS">Mato Grosso do Sul</option>
+							<option value="MG">Minas Gerais</option>
+							<option value="PA">Pará</option>
+							<option value="PB">Paraíba</option>
+							<option value="PR">Paraná</option>
+							<option value="PE">Pernambuco</option>
+							<option value="PI">Piauí</option>
+							<option value="RJ">Rio de Janeiro</option>
+							<option value="RN">Rio Grande do Norte</option>
+							<option value="RS">Rio Grande do Sul</option>
+							<option value="RO">Rondônia</option>
+							<option value="RR">Roraima</option>
+							<option value="SC">Santa Catarina</option>
+							<option value="SP">São Paulo</option>
+							<option value="SE">Sergipe</option>
+							<option value="TO">Tocantins</option>
+
+						</select>
+						<select id="cidades" name="cidades"><option value="" selected="selected"></option></select>
 						<input type="submit" name="button" id="button" value="Buscar" />
 					</form>
 				</div>
@@ -76,9 +250,18 @@
 				</div>
 			</div>
 			<div class="colBanners">
-				<div class="bannerInterno"><img src="/_imgs/banner-unidades.jpg" /><h4>Unidades elegantes e confortáveis</h4><a href="/seja_franqueado/"><span>Saiba mais</span></a></div>
-				<div class="bannerInterno"><img src="/_imgs/banner-avaliacao_gratuita.jpg" /><h4>Agende já a sua avaliação gratuita</h4><a href="/seja_franqueado/"><span>Saiba mais</span></a></div>
-				<div class="bannerInterno"><img src="/_imgs/home-banner-franqueado.jpg" /><h4>Faça parte da nossa rede. Seja um franqueado de sucesso.</h4><a href="/seja_franqueado/"><span>Saiba mais</span></a></div>
+				<div class="bannerInterno">
+					<img src="{{ asset('bundles/spafrontend/images/banner-unidades.jpg') }}" />
+					<h4>Unidades elegantes e confortáveis</h4><a href="/seja_franqueado/"><span>Saiba mais</span></a>
+				</div>
+				<div class="bannerInterno">
+					<img src="{{ asset('bundles/spafrontend/images/banner-avaliacao_gratuita.jpg') }}" />
+					<h4>Agende já a sua avaliação gratuita</h4><a href="/seja_franqueado/"><span>Saiba mais</span></a>
+				</div>
+				<div class="bannerInterno">
+					<img src="{{ asset('bundles/spafrontend/images/home-banner-franqueado.jpg') }}" />
+					<h4>Faça parte da nossa rede. Seja um franqueado de sucesso.</h4><a href="/seja_franqueado/"><span>Saiba mais</span></a>
+				</div>
 			</div>
 			<hr class="fim" />
 		</div>

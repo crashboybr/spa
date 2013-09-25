@@ -16,6 +16,9 @@ Spa\BackendBundle\Entity\Unit:
         address:
             type: string
             length: 255
+        city:
+            type: string
+            length: 255
         state:
             type: string
             length: 255
