@@ -25,9 +25,11 @@ Spa\BackendBundle\Entity\Unit:
         phone1:
             type: string
             length: 255
+            nullable: true
         phone2:
             type: string
             length: 255
+            nullable: true
         status:
             type: boolean
     lifecycleCallbacks: {  }
