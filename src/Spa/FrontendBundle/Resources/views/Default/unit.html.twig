@@ -5,11 +5,191 @@
 <script type="text/javascript">
   $(function($){
     $('#map-brazil').cssMap({'size' : 500,loadingText : 'Carregando mapa...'});
-   });
+    
 
-  function buscaUnidade()
+    $('#map-brazil li').on('click', function(){
+		var uf = $(this).attr('class').split(' ')[0];
+		
+		switch(uf)
+		{
+			case "br1":
+			  $('#estado option[value=AC]').attr('selected', 'selected');
+			  break;
+
+			case "br2":
+			  $('#estado option[value=AL]').attr('selected', 'selected');
+			  break;
+
+			case "br3":
+			  $('#estado option[value=AP]').attr('selected', 'selected');
+			  break;
+
+			case "br4":
+			  $('#estado option[value=AM]').attr('selected', 'selected');
+			  break;
+
+			case "br5":
+			  $('#estado option[value=BA]').attr('selected', 'selected');
+			  break;
+			
+			case "br6":
+			  $('#estado option[value=CE]').attr('selected', 'selected');
+			  break;
+
+			case "br7":
+			  $('#estado option[value=DF]').attr('selected', 'selected');
+			  break;
+
+			case "br8":
+			  $('#estado option[value=ES]').attr('selected', 'selected');
+			  break;
+
+			case "br9":
+			  $('#estado option[value=GO]').attr('selected', 'selected');
+			  break;
+			
+			case "br10":
+			  $('#estado option[value=MA]').attr('selected', 'selected');
+			  break;
+
+			case "br11":
+			  $('#estado option[value=MT]').attr('selected', 'selected');
+			  break;
+
+			case "br12":
+			  $('#estado option[value=AC]').attr('selected', 'selected');
+			  break;
+			
+			case "br13":
+			  $('#estado option[value=MG]').attr('selected', 'selected');
+			  break;
+			
+			case "br14":
+			  $('#estado option[value=PA]').attr('selected', 'selected');
+			  break;
+
+			case "br15":
+			  $('#estado option[value=PB]').attr('selected', 'selected');
+			  break;
+
+			case "br16":
+			  $('#estado option[value=PR]').attr('selected', 'selected');
+			  break;  
+
+			case "br17":
+			  $('#estado option[value=PE]').attr('selected', 'selected');
+			  break;
+			
+			case "br18":
+			  $('#estado option[value=PI]').attr('selected', 'selected');
+			  break;
+
+			case "br19":
+			  $('#estado option[value=RJ]').attr('selected', 'selected');
+			  break;
+
+			case "br20":
+			  $('#estado option[value=RN]').attr('selected', 'selected');
+			  break;
+
+			case "br21":
+			  $('#estado option[value=RS]').attr('selected', 'selected');
+			  break;
+			
+			case "br22":
+			  $('#estado option[value=RO]').attr('selected', 'selected');
+			  break;
+
+			case "br23":
+			  $('#estado option[value=RR]').attr('selected', 'selected');
+			  break;
+
+			case "br24":
+			  $('#estado option[value=SC]').attr('selected', 'selected');
+			  break;
+
+			case "br25":
+			  $('#estado option[value=SP]').attr('selected', 'selected');
+			  break;
+			
+			case "br26":
+			  $('#estado option[value=SE]').attr('selected', 'selected');
+			  break;
+
+			case "br27":
+			  $('#estado option[value=TO]').attr('selected', 'selected');
+			  break;
+    
+			
+		}	
+		populaCidades()
+	}); 
+});
+
+  function populaCidades()
+  {
+	uf = $("#estado").val();
+	var cityOptions = [];
+  	$.getJSON( "/spa/web/app_dev.php/buscaUnidade/" + uf, function( data ) {
+	  	
+	  	$.each( data, function( key, cities ) {
+	  		
+	  		cityOptions.push( "<option value=''>Selecione uma cidade</option>" );
+			$.each(cities, function (city, objs) 
+			{
+				cityOptions.push( "<option value='" + city + "'>" + city + "</option>" );
+			}
+			);
+		});
+		$('#cidades').find('option').remove().end().append(cityOptions);
+		$('#cidades').show();
+		$('#buscar').show();
+  	});
+  	
+  	
+  }
+
+  function populaUnidades(data)
+  {
+	
+	var cityDivs = [];
+	var infoDivs = [];
+	var city_html = '';
+	i = 0;
+	$.each( data, function( key, cities ) {
+
+	$.each(cities, function (city, objs) 
+	    {
+	    	i++;
+	    	
+	    	city_html = '';
+	    	$.each(objs, function (key, city_info)
+	    	{
+	    		
+	    		city_html += '<dt>' + key + '</dt>';	
+	    		city_html += '<dd class="endereco">' + city_info.address + '</dd>';
+	    		city_html += '<dd class="fones">' + city_info.phone1 + ' / ' + city_info.phone2 + '</dd>';
+	    		city_html += '<dd class="email"><a href="mailto:' + city_info.email + '">' + city_info.email + '</a></dd>';
+				
+	    	});
+			
+	    	cityDivs.push('<h5><a href="javascript:void(0)" onclick="$(\'#city_' + i + '\').slideToggle();">' + city + "</a></h5>");
+	    	cityDivs.push('<div class="lista" id="city_' + i + '" style="display:none"><dl>' + city_html + '</dl></div>');		    }
+	);
+	});
+
+	$("#unidadesResultado").show();
+	
+
+	$('#unidadesResultado').empty();
+	$('#unidadesResultado').append('<h4>' + $('#estado option[value=' + uf + ']').text() + '</h4>');
+	$('#unidadesResultado').append(cityDivs);
+  	//console.log(items);
+  }
+  function buscaUnidades()
   {
   	uf = $("#estado").val();
+  	city = $("#cidades").val();
 	$('.active-region').removeClass('active-region');
   	switch(uf)
 	{
@@ -123,39 +303,22 @@
     
 	}
   	
-  	$.getJSON( "/spa/web/app_dev.php/buscaUnidade/" + uf, function( data ) {
-	  var cityOptions = [];
-	  var cityDivs = [];
-	  var infoDivs = [];
-	  i = 0;
-	  $.each( data, function( key, cities ) {
-	    //items.push( "<li id='" + key + "'>" + val + "</li>" );
-	    cityOptions.push( "<option value=''>Selecione uma cidade</option>" );
-	    $.each(cities, function (city, objs) 
-		    {
-		    	i++;
-		    	cityOptions.push( "<option value='" + city + "'>" + city + "</option>" );
-		    	cityDivs.push('<h5><a href="javascript:void(0)" onclick="$(\'#city_' + i + '\').slideToggle();">' + city + "</a></h5>");
-		    	cityDivs.push('<div class="lista" id="city_' + i + '" style="display:none"><dl>	<dt>Unidade Campos 1</dt>							<dd class="endereco">Rua Voluntários da Pátria, 426 - Loja 21 (Pelinca Plaza Center) - Bairro Pelinca</dd>							<dd class="fones">(22) 2737-7520 / (22) 9888-2844</dd>							<dd class="email"><a href="mailto:rjcampos1@spadassobrancelhas.com.br">rjcampos1@spadassobrancelhas.com.br</a></dd>');		    }
-	    );
-	  });
-	$('#unidadesResultado h4').text();
-	$("#unidadesResultado").show();
-	$('#cidades').find('option').remove().end().append(cityOptions);
+  	if (!city)
+  	{
+  		$.getJSON( "/spa/web/app_dev.php/buscaUnidade/" + uf, function( data ) {
+		  populaUnidades(data);
+		});
+  	}
+  	else
+  	{
+  		$.getJSON( "/spa/web/app_dev.php/buscaUnidade/" + uf + "/" + city, function( data ) {
+		  populaUnidades(data);
+		});
+		
+  	}
+  	$('body').scrollTo('#unidadesResultado');
+  	populaCidades();
 
-	$('#unidadesResultado').empty();
-	$('#unidadesResultado').append('<h4>' + $('#estado option[value=' + uf + ']').text() + '<h4>');
-	$('#unidadesResultado').append(cityDivs);
-  	//console.log(items);
-	});
-
-
-    $.post('/spa/web/app_dev.php/buscaUnidade/' + uf, function(res) {
-
-    	
-        //console.log(res);
-        
-    }, 'json');
   }
 </script>
 
@@ -165,7 +328,7 @@
 			<div class="colConteudo">
 				<div class="unidadesForm"><h3>Encontre o Spa das Sobrancelhas mais perto de Você</h3>
 					<form>
-						<select id="estado" onchange="buscaUnidade()">
+						<select id="estado" onchange='populaCidades()'>
 							<option value="" selected="selected">Selecione seu Estado</option>
 							<option value="AC">Acre</option>
 							<option value="AL">Alagoas</option>
@@ -196,8 +359,8 @@
 							<option value="TO">Tocantins</option>
 
 						</select>
-						<select id="cidades" name="cidades"><option value="" selected="selected"></option></select>
-						<input type="submit" name="button" id="button" value="Buscar" />
+						<select id="cidades" style='display:none;' name="cidades"><option value="" selected="selected"></option></select>
+						<input type="button" style='display:none;' name="button" id="buscar" value="Buscar" onclick='buscaUnidades()'/>
 					</form>
 				</div>
 				<div class="unidadesMapa">
@@ -235,25 +398,7 @@
 				</div>
 				<hr class="fim" />
 				<div id="unidadesResultado" class="unidadesResultado" style="display:block;">
-					<h4>Rio de Janeiro</h4>
-					<h5><a href="#">Cabo Frio</a></h5>
-					<h5><a href="javascript:void()" onclick="$('#vai').slideToggle();">Campos dos Goytacazes</a></h5>
-					<div class="lista" id="vai" style="display:none">
-						<dl>
-							<dt>Unidade Campos 1</dt>
-							<dd class="endereco">Rua Voluntários da Pátria, 426 - Loja 21 (Pelinca Plaza Center) - Bairro Pelinca</dd>
-							<dd class="fones">(22) 2737-7520 / (22) 9888-2844</dd>
-							<dd class="email"><a href="mailto:rjcampos1@spadassobrancelhas.com.br">rjcampos1@spadassobrancelhas.com.br</a></dd>
-							<dt>Unidade Campos 2</dt>
-							<dd class="endereco">Rua Teotônio Ferreira de Araújo, 75 - Sobreloja C - Centro</dd>
-							<dd class="fones">(22) 2738-0584 / (22) 9888-2800</dd>
-							<dd class="email"><a href="mailto:rjcampos2@spadassobrancelhas.com.br">rjcampos2@spadassobrancelhas.com.br</a></dd>
-						</dl>
-					</div>
-					<h5><a href="#">Duque de Caxias</a></h5>
-					<h5><a href="#">Itaguaí</a></h5>
-					<h5><a href="#">Macaé</a></h5>
-					<h5><a href="#">Nilópolis</a></h5>
+					
 				</div>
 			</div>
 			<div class="colBanners">

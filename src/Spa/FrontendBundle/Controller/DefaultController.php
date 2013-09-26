@@ -35,14 +35,18 @@ class DefaultController extends Controller
         return $this->render('SpaFrontendBundle:Default:unit.html.twig', array('units' => $units));
     }
 
-    public function findUnitAction($uf)
+    public function findUnitAction($uf, $city)
     {
+
 
         $response = new JsonResponse();
 
         $em = $this->getDoctrine()->getManager();
-
-        $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('status' =>true, 'state' => $uf));
+        if (!$city)
+            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('status' => true, 'state' => $uf));
+        else
+            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('status' => true, 'state' => $uf, 'city' => $city));
+        
         $json_unit = array();
         foreach ($units as $unit)
         {

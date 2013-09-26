@@ -11,5 +11,5 @@ spa_frontend_unit:
     defaults: { _controller: SpaFrontendBundle:Default:unit }
 
 spa_frontend_find_unit:
-    pattern:  /buscaUnidade/{uf}
-    defaults: { _controller: SpaFrontendBundle:Default:findUnit }
+    pattern:  /buscaUnidade/{uf}/{city}
+    defaults: { _controller: SpaFrontendBundle:Default:findUnit, city: '' }
