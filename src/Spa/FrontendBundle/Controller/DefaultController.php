@@ -38,7 +38,7 @@ class DefaultController extends Controller
     public function findUnitAction($uf, $city)
     {
 
-
+        Header('Access-Control-Allow-Origin: *');
         $response = new JsonResponse();
 
         $em = $this->getDoctrine()->getManager();
@@ -95,5 +95,16 @@ class DefaultController extends Controller
         }
         fclose ($handle);
         exit;
+    }
+    public function viewMapAction()
+    {
+        Header('Access-Control-Allow-Origin: *');
+        $em = $this->getDoctrine()->getManager();
+        $units = $em->getRepository('SpaBackendBundle:Unit')
+            //->findBy(array('status' => true))
+            ->findAll();
+   
+        return $this->render('SpaFrontendBundle:Default:viewMap.html.twig', array('units' => $units));
+
     }
 }
