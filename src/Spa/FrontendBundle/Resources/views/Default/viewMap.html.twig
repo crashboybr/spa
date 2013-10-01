@@ -316,7 +316,11 @@
 	$.getJSON( "http://spa.bernardoalves.com.br/buscaUnidade/" + uf, function( data ) {
 		if (!Array.isArray(data.units))
 		{
-			populaUnidades(data);
+			
+			if (Object.keys(data.units).length == 1) 
+				populaUnidades(data, 1);
+			else
+				populaUnidades(data);
 			$.each( data, function( key, cities ) {
 		  		
 		  		cityOptions.push( "<option value=''>Selecione uma cidade</option>" );
@@ -394,7 +398,7 @@
 						
 						<select id="cidades" onchange='buscaCidade()' style='display:none;' name="cidades"><option value="" selected="selected"></option></select>
 						<div id="nocity" style="display:none; text-align: center; color: white">Não existe unidade disponível para este estado</div>
-						<div id="div_carregando" style="display:none; text-align: center;"><img src="{{ asset('bundles/spafrontend/images/carregando.gif') }}"></div>
+						<div id="div_carregando" style="display:none; text-align: center;"><img src="/_imgs/carregando.gif'"></div>
 						
 					</form>
 				</div>
