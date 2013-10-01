@@ -133,33 +133,11 @@
     
 			
 		}	
-		buscaUnidades();
+		buscaEstado();
 		//populaCidades();
 	}); 
 });
 
-  function populaCidades()
-  {
-	uf = $("#estado").val();
-	var cityOptions = [];
-  	$.getJSON( "http://spa.bernardoalves.com.br/buscaUnidade/" + uf, function( data ) {
-	  	
-	  	$.each( data, function( key, cities ) {
-	  		
-	  		cityOptions.push( "<option value=''>Selecione uma cidade</option>" );
-			$.each(cities, function (city, objs) 
-			{
-				cityOptions.push( "<option value='" + city + "'>" + city + "</option>" );
-			}
-			);
-		});
-		$('#cidades').find('option').remove().end().append(cityOptions);
-		$('#cidades').show();
-		$('#buscar').show();
-  	});
-  	
-  	
-  }
 
   function populaUnidades(data, displayCity)
   {
@@ -209,12 +187,19 @@
 	$('#unidadesResultado').empty();
 	$('#unidadesResultado').append('<h4>' + $('#estado option[value=' + uf + ']').text() + '</h4>');
 	$('#unidadesResultado').append(cityDivs);
+	$('body').scrollTo('#unidadesResultado');
   	//console.log(items);
   }
-  function buscaUnidades()
+  function buscaEstado()
   {
+  	$("#nocity").hide();
+  	$('#unidadesResultado').empty();
+  	$("#cidades").hide();
+  	$('#div_carregando').show();
+  	var cityOptions = [];
+  	//console.log($("div_carregando"));
   	uf = $("#estado").val();
-  	city = $("#cidades").val();
+
 	$('.active-region').removeClass('active-region');
   	switch(uf)
 	{
@@ -327,29 +312,55 @@
 		  break;
     
 	}
+
+	$.getJSON( "http://spa.bernardoalves.com.br/buscaUnidade/" + uf, function( data ) {
+		if (!Array.isArray(data.units))
+		{
+			populaUnidades(data);
+			$.each( data, function( key, cities ) {
+		  		
+		  		cityOptions.push( "<option value=''>Selecione uma cidade</option>" );
+				$.each(cities, function (city, objs) 
+				{
+					cityOptions.push( "<option value='" + city + "'>" + city + "</option>" );
+				}
+				);
+			});
+			
+			$('#cidades').find('option').remove().end().append(cityOptions);
+			$('#cidades').show();
+		}
+		else
+		{
+			$("#nocity").show();
+		}
+		$('#div_carregando').hide();
+	});
+
+	//populaCidades();
+  }
+  function buscaCidade()
+  {
+  	$("#nocity").hide();
+  	$('#div_carregando').show();
+  	//console.log($("div_carregando"));
+  	uf = $("#estado").val();
+  	city = $("#cidades").val();
+
+	$.getJSON( "http://spa.bernardoalves.com.br/buscaUnidade/" + uf + "/" + city, function( data ) {
+		populaUnidades(data, 1);
+		$('#div_carregando').hide();
+		$("#cidades").val(city);
+
+	});
   	
-  	if (!city)
-  	{
-  		$.getJSON( "http://spa.bernardoalves.com.br/buscaUnidade/" + uf, function( data ) {
-		  populaUnidades(data);
-		});
-  	}
-  	else
-  	{
-  		$.getJSON( "http://spa.bernardoalves.com.br/buscaUnidade/" + uf + "/" + city, function( data ) {
-		  populaUnidades(data, 1);
-		});
-		
-  	}
-  	$('body').scrollTo('#unidadesResultado');
-  	populaCidades();
 
   }
 </script>
 
 				<div class="unidadesForm"><h3>Encontre o Spa das Sobrancelhas mais perto de Você</h3>
 					<form>
-						<select id="estado" onchange='buscaUnidades()'>
+						<select id="estado" onchange='buscaEstado()'>
 							<option value="" selected="selected">Selecione seu Estado</option>
 							<option value="AC">Acre</option>
 							<option value="AL">Alagoas</option>
@@ -380,8 +391,11 @@
 							<option value="TO">Tocantins</option>
 
 						</select>
-						<select id="cidades" style='display:none;' name="cidades"><option value="" selected="selected"></option></select>
-						<input type="button" style='display:none;' name="button" id="buscar" value="Buscar" onclick='buscaUnidades()'/>
+						
+						<select id="cidades" onchange='buscaCidade()' style='display:none;' name="cidades"><option value="" selected="selected"></option></select>
+						<div id="nocity" style="display:block; text-align: center; color: white">Não existem unidades disponível para este estado</div>
+						<div id="div_carregando" style="display:none; text-align: center;"><img src="{{ asset('bundles/spafrontend/images/carregando.gif') }}"></div>
+						
 					</form>
 				</div>
 				<div class="unidadesMapa">
