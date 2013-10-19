@@ -1,50 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Spa das Sobrancelhas</title>
-<link href="{ asset('images/favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
-<link rel="stylesheet" type="text/css" href="/bundles/spafrontend/css/default.css" />
-<link rel="stylesheet" type="text/css" href="/bundles/spafrontend/css/cssmap-brazil.css" />
-<script  type="text/javascript" src="/bundles/spafrontend/js/jquery.min.js"></script>
-<script type="text/javascript" src="/bundles/spafrontend/js/jquery.cssmap.js"></script>
-<script type="text/javascript" src="/bundles/spafrontend/js/scrollTo.js"></script>
+<title>Spa das Sobrancelhas {% block title %}{% endblock %}</title>
+<link href="{{ asset('/bundles/spafrontend/images/favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
 
+{% javascripts
+    '@SpaFrontendBundle/Resources/public/js/jquery.min.js'
+    '@SpaFrontendBundle/Resources/public/js/responsiveslides.min.js' %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+
+{% stylesheets 'bundles/spafrontend/css/default.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
 
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
 <div id="container">
 	<div id="cabecalho">
-		<ul class="navSec"><li class="faleconosco"><a href="/faleconosco/">fale conosco</a></li><li class="siga">siga-nos <span class="sigaIcones"><a id="navTwitter" class="navSigaItem" href="https://twitter.com/SdaSobrancelhas" target="_blank" title="Twitter"><span>twitter</span></a><a id="navFacebook" class="navSigaItem" href="https://www.facebook.com/spadassobrancelhas" target="_blank" title="Facebook"><span>facebook</span></a><a id="navYoutube" class="navSigaItem" href="http://www.youtube.com/user/spasobrancelhas" target="_blank" title="Youtube"><span>youtube</span></a></span></li><li class="areaFranqueado"><a href="/areafranqueado/">área do franqueado</a></li></ul>
-
-
 		<h1><a href="/" title="Home"><span>Spa das Sobrancelhas</span></a></h1>
-		<ul class="nav"><li class="empresa nav1"><a href="/empresa/">Empresa</a></li><li class="produtos"><a href="/produtos">Produtos</a><ul><li class="navSub1"><a href="/produtos/sabonete_liq_facial/">Sabonete Líquido Facial</a></li><li><a href="/produtos/locao_adstringente/">Loção Adstringente</a></li><li><a href="/produtos/demaquilante/">Demaquilante</a></li><li><a href="/produtos/primer_facial/">Primer Facial</a></li><li><a href="/produtos/mousse_corretiva/">Mousse Corretiva</a></li><li><a href="/produtos/nutrifix/">Nutrifix</a></li><li><a href="/produtos/lapis/">Lápis</a></li><li><a href="/produtos/gel_emoliente/">Gel Emoliente</a></li><li><a href="/produtos/creme_maos/">Creme para as Mãos</a></li><li><a href="/produtos/creme_pes/">Creme para os Pés</a></li><li><a href="/produtos/gel_calmante/">Gel Calmante</a></li></ul></li><li class="servicos"><a href="/servicos/">Serviços</a><ul><li class="navSub1"><a href="/servicos/avaliacao/">Avaliação</a></li><li><a href="/servicos/design/">Design de sobrancelhas</a></li><li><a href="/servicos/manutencao/">Manutenção de design</a></li><li><a href="/servicos/coloracao_henna_sobrancelhas/">Coloração com Henna para sobrancelhas</a></li><li><a href="/servicos/coloracao_sobrancelhas_cilios/">Coloração de pelos de sobrancelhas e cílios</a></li><li><a href="/servicos/desondulacao/">Desondulaçao de sobrancelhas</a></li><li><a href="/servicos/dermopigmentacao/">Dermopigmentação</a></li><li><a href="/servicos/permanente_cilios/">Permanente de cílios</a></li></ul></li><li class="promocoes"><a href="/promocoes/">Promoções</a></li><li class="unidades"><a href="/unidades">Unidades</a></li><li class="sejaFranqueado"><a href="/seja_franqueado/">Seja um Franqueado</a></li></ul>
+
+		{{ include('SpaFrontendBundle::nav.html.twig') }}
 
 
 	</div>
 	<div id="conteudo">
 	<div class="margem">
-
 		{% block body %}{% endblock %}
-
-
 	</div>
 	</div>
 	<div id="rodape">
 		<div id="rodapeNav">
 			<h1><a href="/" title="Home"><img src="{{ asset('bundles/spafrontend/images/rodape-spadassobrancelhas-logotipo.png') }}" /></a></h1>
-			<ul class="navSec"><li class="faleconosco"><a href="/faleconosco/">fale conosco</a></li><li class="siga">siga-nos <span class="sigaIcones"><a id="navTwitter" class="navSigaItem" href="https://twitter.com/SdaSobrancelhas" target="_blank" title="Twitter"><span>twitter</span></a><a id="navFacebook" class="navSigaItem" href="https://www.facebook.com/spadassobrancelhas" target="_blank" title="Facebook"><span>facebook</span></a><a id="navYoutube" class="navSigaItem" href="http://www.youtube.com/user/spasobrancelhas" target="_blank" title="Youtube"><span>youtube</span></a></span></li><li class="areaFranqueado"><a href="/areafranqueado/">área do franqueado</a></li></ul>
+			
+			{{ include('SpaFrontendBundle::nav.html.twig') }}
 
-
-			<h1><a href="/" title="Home"><span>Spa das Sobrancelhas</span></a></h1>
-			<ul class="nav"><li class="empresa nav1"><a href="/empresa/">Empresa</a></li><li class="produtos"><a href="/produtos/">Produtos</a><ul><li class="navSub1"><a href="/produtos/sabonete_liq_facial/">Sabonete Líquido Facial</a></li><li><a href="/produtos/locao_adstringente/">Loção Adstringente</a></li><li><a href="/produtos/demaquilante/">Demaquilante</a></li><li><a href="/produtos/primer_facial/">Primer Facial</a></li><li><a href="/produtos/mousse_corretiva/">Mousse Corretiva</a></li><li><a href="/produtos/nutrifix/">Nutrifix</a></li><li><a href="/produtos/lapis/">Lápis</a></li><li><a href="/produtos/gel_emoliente/">Gel Emoliente</a></li><li><a href="/produtos/creme_maos/">Creme para as Mãos</a></li><li><a href="/produtos/creme_pes/">Creme para os Pés</a></li><li><a href="/produtos/gel_calmante/">Gel Calmante</a></li></ul></li><li class="servicos"><a href="/servicos/">Serviços</a><ul><li class="navSub1"><a href="/servicos/avaliacao/">Avaliação</a></li><li><a href="/servicos/design/">Design de sobrancelhas</a></li><li><a href="/servicos/manutencao/">Manutenção de design</a></li><li><a href="/servicos/coloracao_henna_sobrancelhas/">Coloração com Henna para sobrancelhas</a></li><li><a href="/servicos/coloracao_sobrancelhas_cilios/">Coloração de pelos de sobrancelhas e cílios</a></li><li><a href="/servicos/desondulacao/">Desondulaçao de sobrancelhas</a></li><li><a href="/servicos/dermopigmentacao/">Dermopigmentação</a></li><li><a href="/servicos/permanente_cilios/">Permanente de cílios</a></li></ul></li><li class="promocoes"><a href="/promocoes/">Promoções</a></li><li class="unidades"><a href="/unidades/">Unidades</a></li><li class="sejaFranqueado"><a href="/seja_franqueado/">Seja um Franqueado</a></li></ul>
-
-			<ul class="logos"><li id="abfLogo"><img src="{{ asset('bundles/spafrontend/images/rodape-abf-logotipo.png') }}" /></li><li id="abfSelo"><img src="{{ asset('bundles/spafrontend/images/rodape-selo-excelencia-abf.png') }}" /></li></ul>
+			<ul class="logos">
+				<li id="abfLogo"><img src="{{ asset('bundles/spafrontend/images/rodape-abf-logotipo.png') }}" /></li>
+				<li id="abfSelo"><img src="{{ asset('bundles/spafrontend/images/rodape-selo-excelencia-abf.png') }}" /></li>
+			</ul>
 		</div>
 	</div>
 </div>
 </body>
 </html>
-

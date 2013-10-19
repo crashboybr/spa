@@ -14,7 +14,11 @@ class DefaultController extends Controller
 		$featured_video = $em->getRepository('SpaBackendBundle:Video')
             ->findOneBy(array('featured' => 1));
         
-        return $this->render('SpaFrontendBundle:Default:index.html.twig', array('featured_video' => $featured_video));
+        $sliders = $em->getRepository('SpaBackendBundle:Slider')
+            ->findAll(); 
+        
+
+        return $this->render('SpaFrontendBundle:Default:index.html.twig', array('featured_video' => $featured_video, 'sliders' => $sliders));
     }
     public function productAction()
     {

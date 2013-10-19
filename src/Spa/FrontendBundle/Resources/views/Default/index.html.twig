@@ -1,54 +1,113 @@
 {% extends 'SpaFrontendBundle::layout.html.twig' %}
 {% block body_class %}home{% endblock %}
 {% block body %}
-		<div class="slider"><img src="{{ asset('images/home-slider-01.jpg') }}" /><ul class="sliderNav"><li class="sliderAnterior"><a href="#"><span>anterior</span></a></li><li class="sliderProximo"><a href="#"><span>próximo</span></a></li></ul></div>
+
+		
+<script>
+$(function () {
+  $("#slider").responsiveSlides({
+	auto: true,
+	timeout: 10000,
+	nav: true,
+	speed: 500,
+  });
+
+});
+</script>
+<div class="sliderContainer">
+<div class="sliderSombra"></div>
+<ul class="rslides" id="slider">
+	{% for slider in sliders %}
+
+	<li>
+		<a href="{{ slider.url }}">
+			<img src="{{ slider.pic | apply_filter('banner_slider') }}" />
+		</a>
+	</li>
+	{% endfor %}
+	
+</ul>
+<hr class="fim" />
+</div>
+
+		<div class="homeCols">
 		<div class="home col1">
-			<div class="bannerDestaque"><img src="{{ asset('images/home-destaque-01.jpg') }}" /><h4>Destaque</h4><p>Primeira Dama do estado de São Paulo visita unidade do Spa das Sobrancelhas</p></div>
-			<div id="homeRedesSociais">
-				<h4>O Spa nas Redes Sociais</h4>
-				<div id="boxesContainer">
-					<div id="fbBox">
-						<h5>
-							<span class="franqueadorCurtir">
-								<img src="{{ asset('images/curtir-btn.gif') }}" title="curtir" alt="curtir" />
-								<span>5.532</span>
-							</span>
-							<a href="#">
-								<img src="{{ asset('images/fbbox-spa-avatar.jpg') }}" title="Spa das Sobrancelhas Franqueador" />Spa das Sobrancelhas<br />
-								<span>Franqueador</span>
-							</a>
-						</h5>
-						<h6>Top 3 <span>Unidades no Facebook</span></h6>
+			<div class="destaques">
+				<h4><span>Destaques</span></h4>
+				<hr class="destaquesLinha" />
+				<div class="destaquesBanners">
+					<div class="destaqueDireita">
 						<ul>
-							<li class="franqueadoPrimeiro">
-								<span class="franqueadoCurtir">
-									<span>17.501</span> 
-									<img src="{{ asset('images/curtir-btn.gif') }}" title="curtir" alt="curtir" />
-								</span>Unidade Curitiba 1
-							</li>
-							<li><span class="franqueadoCurtir"><span>16.372</span> 
-								<img src="{{ asset('images/curtir-btn.gif') }}" title="curtir" alt="curtir" /></span>Unidade Campinas 1</li>
-							<li><span class="franqueadoCurtir"><span>16.372</span> <img src="{{ asset('images/curtir-btn.gif') }}" title="curtir" alt="curtir" /></span>Unidade Barra 1</li>
+							<li><a href="/noticias/20130926-002.php"><img src="{{ asset('bundles/spafrontend/images/noticia-20130926-002.jpg') }}" /><span class="texto"><span class="titulo">Saiba como é fácil manter sua pele sempre linda.</span><span class="descricao">O trio perfeiro para o cuidado diário da sua pele.</span></span><hr class="fim" /></a></li>
+							<li><a href="#"><img src="{{ asset('bundles/spafrontend/images/noticia-20131012-001.jpg') }}" /><span class="texto"><span class="titulo">Maquiagem com gloss nos olhos é tendência internacional</span><span class="descricao">Especialistas afirmam que a nova tendência de maquiagem é o gloss nos olhos.</span></span><hr class="fim" /></a></li>
 						</ul>
 					</div>
-					<div id="twitterBox">
-						<h5><a href="#"><span>@SpadasSobrancelhas</span></a></h5>
-						<div class="tweetBox"><p class="tweet"><a class="twitterUser" href="#">SpadasSobrancelhas</a> Email marketing que produzimos para a Fisioplenus: <a href="#">fb.me/2nm9y6KpC</a></p><p class="tweetAcoes">2 hours ago · <a href="#">replay</a> · <a href="#">retweet</a> · <a href="#">favorite</a></p></div>
-						<div class="tweetBox"><p class="tweet"><a class="twitterUser" href="#">SpadasSobrancelhas</a> "Estou plenamente certo de que aquele que começou boa obra em vós há de completá-la até ao Dia de Cristo Jesus."... <a href="#">fb.me/OQ71mIT6</a></p><p class="tweetAcoes">8 hours ago · <a href="#">replay</a> · <a href="#">retweet</a> · <a href="#">favorite</a></p></div>
-					</div>
+					<div class="destaqueEsquerda">
+						<h5>Tenha um visual lindo com o permanente de cílios.</h5>
+						<img src="{{ asset('bundles/spafrontend/images/noticia-20130926-001.jpg') }}" />
+						<a href="/noticias/20130926-001.php"><span>saiba mais</span></a></div>
+					<hr class="fim" />
+				</div>
+			</div>
+			<div id="homeRedesSociais">
+				<h4>O Spa nas Redes Sociais</h4>
+				<div class="boxesContainer">
+					<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FSdaSobrancelhas&amp;width=500&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100%; height:210px;padding-top:.5em;" allowTransparency="true"></iframe>
 					<hr class="fim" />
 				</div>
 			</div>
 		</div>
+		
 		<div class="home col2">
-			<div class="bannerFranquiaHome"><img src="{{ asset('images/home-banner-franqueado.jpg') }}" /><h4>Faça parte da nossa rede. Seja um franqueado de sucesso.<span>Saiba mais</span></h4><a href="/seja_franqueado/"><span>Saiba mais</span></a></div>
-			<div id="homeVideoDestaque">
+			<div class="localizeUnidade">
+				<h4>Localize uma unidade Spa das Sobrancelhas</h4>
+				<div class="boxesContainer">
+					<form>
+						<select id="estado" onchange="buscaEstado()">
+							<option value="" selected="selected">Selecione seu Estado</option>
+							<option value="AC">Acre</option>
+							<option value="AL">Alagoas</option>
+							<option value="AP">Amapá</option>
+							<option value="AM">Amazonas</option>
+							<option value="BA">Bahia</option>
+							<option value="CE">Ceará</option>
+							<option value="DF">Distrito Federal</option>
+							<option value="ES">Espírito Santo</option>
+							<option value="GO">Goiás</option>
+							<option value="MA">Maranhão</option>
+							<option value="MT">Mato Grosso</option>
+							<option value="MS">Mato Grosso do Sul</option>
+							<option value="MG">Minas Gerais</option>
+							<option value="PA">Pará</option>
+							<option value="PB">Paraíba</option>
+							<option value="PR">Paraná</option>
+							<option value="PE">Pernambuco</option>
+							<option value="PI">Piauí</option>
+							<option value="RJ">Rio de Janeiro</option>
+							<option value="RN">Rio Grande do Norte</option>
+							<option value="RS">Rio Grande do Sul</option>
+							<option value="RO">Rondônia</option>
+							<option value="RR">Roraima</option>
+							<option value="SC">Santa Catarina</option>
+							<option value="SP">São Paulo</option>
+							<option value="SE">Sergipe</option>
+							<option value="TO">Tocantins</option>
+						</select>
+						<select id="cidades" onchange="buscaCidade()" style="display:none;" name="cidades"><option value="" selected="selected"></option></select>
+						<div id="nocity" style="display:none; text-align: center; color: white">Não existe unidade disponível para este estado</div>
+						<div id="div_carregando" style="display:none; text-align: center;"><img src="{{ asset('bundles/spafrontend/images/carregando.gif') }}"></div>
+					</form>
+				</div>
+			</div>
+			<div class="bannerFranquiaHome"><img src="{{ asset('bundles/spafrontend/images/home-banner-franqueado.jpg') }}" /><h4>Faça parte da nossa rede. Seja um franqueado de sucesso.<span>Saiba mais</span></h4><a href="/sejafranqueado/"><span>Saiba mais</span></a></div>
+			<div class="homeVideoDestaque">
 				<h4>Vídeo em Destaque</h4>
-				<div id="boxesContainer">
+				<div class="boxesContainer">
 					<iframe width="336" height="187" src="{{ featured_video.getUrl | replace({'watch?v=': 'embed/'}) }}" frameborder="0" allowfullscreen></iframe>
-					
-					<a href="#"><span>[+]</span> Veja mais vídeos</a></div>
+					<span>[+]</span> Veja mais vídeos</a></div>
 			</div>
 		</div>
 		<hr class="fim" />
+		</div>
+
 {% endblock %}

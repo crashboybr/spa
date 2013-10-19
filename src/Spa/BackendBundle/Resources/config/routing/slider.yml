@@ -1,0 +1,30 @@
+slider:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:Slider:index" }
+
+slider_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:Slider:show" }
+
+slider_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:Slider:new" }
+
+slider_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:Slider:create" }
+    requirements: { _method: post }
+
+slider_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:Slider:edit" }
+
+slider_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:Slider:update" }
+    requirements: { _method: post|put }
+
+slider_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:Slider:delete" }
+    requirements: { _method: post|delete }

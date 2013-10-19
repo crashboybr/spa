@@ -13,3 +13,7 @@ SpaBackendBundle_video:
 SpaBackendBundle_unidades:
         resource: "@SpaBackendBundle/Resources/config/routing/unit.yml"
         prefix:   /unidades
+
+SpaBackendBundle_slider:
+        resource: "@SpaBackendBundle/Resources/config/routing/slider.yml"
+        prefix:   /slider
