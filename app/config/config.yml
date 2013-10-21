@@ -30,7 +30,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ SpaFrontendBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -64,3 +64,32 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+avalanche_imagine:
+    filters:
+        my_thumb:
+            type:    thumbnail
+            options: { size: [120, 90], mode: outbound, quality: 100, format: png }
+        banner_slider:
+            type:    thumbnail
+            options: { size: [1024, 420], mode: outbound, quality: 100}
+        banner_simple:
+            type:    thumbnail
+            options: { size: [322, 293], mode: outbound, quality: 100}
+        banner_right:
+            type:    thumbnail
+            options: { size: [359, 340], mode: outbound, quality: 100}
+        banner_double:
+            type:    thumbnail
+            options: { size: [161, 159], mode: outbound, quality: 100}
+        banner_unity:
+            type:    thumbnail
+            options: { size: [256, 242], mode: outbound, quality: 100}
+
+ivory_ck_editor:
+    configs:
+        my_config:
+            toolbar:                standard
+            uiColor:                "#000000"
+            filebrowserUploadRoute: spa_backend_upload
+            #extraPlugins:           "wordcount"
