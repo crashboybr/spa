@@ -2,6 +2,11 @@ spa_backend_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: SpaBackendBundle:Default:index }
 
+spa_backend_upload:
+    pattern:  /upload
+    defaults: { _controller: SpaBackendBundle:Default:index }
+
+
 SpaBackendBundle_produto:
     resource: "@SpaBackendBundle/Resources/config/routing/product.yml"
     prefix:   /produto
@@ -16,4 +21,20 @@ SpaBackendBundle_unidades:
 
 SpaBackendBundle_slider:
         resource: "@SpaBackendBundle/Resources/config/routing/slider.yml"
-        prefix:   /slider
+        prefix:   /bannerslider
+
+SpaBackendBundle_bannersimples:
+        resource: "@SpaBackendBundle/Resources/config/routing/simplebanner.yml"
+        prefix:   /bannersimples
+
+SpaBackendBundle_bannerduplo:
+        resource: "@SpaBackendBundle/Resources/config/routing/doublebanner.yml"
+        prefix:   /bannerduplo
+
+SpaBackendBundle_bannerdireita:
+        resource: "@SpaBackendBundle/Resources/config/routing/rightbanner.yml"
+        prefix:   /bannerdireita
+
+SpaBackendBundle_bannerunidades:
+        resource: "@SpaBackendBundle/Resources/config/routing/bannerunity.yml"
+        prefix:   /bannerunidades

@@ -13,12 +13,41 @@ class DefaultController extends Controller
     	$em = $this->getDoctrine()->getManager();
 		$featured_video = $em->getRepository('SpaBackendBundle:Video')
             ->findOneBy(array('featured' => 1));
+
+        parse_str( parse_url( $featured_video->getUrl(), PHP_URL_QUERY ), $youtube_id );
+
+        $youtube_id = $youtube_id['v'];
         
         $sliders = $em->getRepository('SpaBackendBundle:Slider')
             ->findAll(); 
+
+        $repo = $this->getDoctrine()->getRepository('SpaBackendBundle:SimpleBanner');
+
+        $bannersimples = $repo->createQueryBuilder('p')
+        ->getQuery()->getSingleResult();
+
+        $query = $em->createQuery(
+            'SELECT p
+            FROM SpaBackendBundle:DoubleBanner p
+            ORDER BY p.createdAt DESC'
+        )->setMaxResults(2);
+
+        $bannersduplo = $query->getResult();
         
 
-        return $this->render('SpaFrontendBundle:Default:index.html.twig', array('featured_video' => $featured_video, 'sliders' => $sliders));
+        $repo = $this->getDoctrine()->getRepository('SpaBackendBundle:RightBanner');
+        $bannerdireita = $repo->createQueryBuilder('p')
+        ->getQuery()->getSingleResult();
+
+        
+        return $this->render('SpaFrontendBundle:Default:index.html.twig', array(
+            'featured_video' => $featured_video,
+            'youtube_id' => $youtube_id,
+            'sliders' => $sliders, 
+            'bannersimples' => $bannersimples, 
+            'bannersduplo' => $bannersduplo,
+            'bannerdireita' => $bannerdireita
+        ));
     }
     public function productAction()
     {
@@ -35,8 +64,23 @@ class DefaultController extends Controller
         $units = $em->getRepository('SpaBackendBundle:Unit')
             //->findBy(array('status' => true))
             ->findAll();
-   
-        return $this->render('SpaFrontendBundle:Default:unit.html.twig', array('units' => $units));
+        
+        $bannersunity = $em->getRepository('SpaBackendBundle:BannerUnity')
+            ->findAll();    
+
+        $query = $em->createQuery(
+            'SELECT p
+            FROM SpaBackendBundle:RightBanner p
+            ORDER BY p.createdAt DESC'
+        )->setMaxResults(2);
+
+        $bannersdireita = $query->getResult(); 
+
+        return $this->render('SpaFrontendBundle:Default:unit.html.twig', array(
+            'units' => $units, 
+            'bannersunity' => $bannersunity,
+            'bannersdireita' => $bannersdireita
+            ));
     }
 
     public function findUnitAction($uf, $city)
@@ -47,9 +91,9 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         if (!$city)
-            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('status' => true, 'state' => $uf));
+            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('state' => $uf));
         else
-            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('status' => true, 'state' => $uf, 'city' => $city));
+            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('state' => $uf, 'city' => $city));
         
         $json_unit = array();
         foreach ($units as $unit)
@@ -58,6 +102,7 @@ class DefaultController extends Controller
             $json_unit[$unit->getCity()][$unit->getName()]['email'] = $unit->getEmail();
             $json_unit[$unit->getCity()][$unit->getName()]['phone1'] = $unit->getPhone1();
             $json_unit[$unit->getCity()][$unit->getName()]['phone2'] = $unit->getPhone2();
+            $json_unit[$unit->getCity()][$unit->getName()]['status'] = $unit->getStatus();
 
         }
         $response->setData(array(

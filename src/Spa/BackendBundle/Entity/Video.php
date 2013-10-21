@@ -136,4 +136,5 @@ class Video
     {
         return $this->updatedAt;
     }
+
 }

@@ -1,5 +1,15 @@
 {% extends 'SpaFrontendBundle::layout.html.twig' %}
 {% block body_class %}home{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    	'@SpaFrontendBundle/Resources/public/js/responsiveslides.min.js'
+ 	%}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
 {% block body %}
 
 		
@@ -12,6 +22,18 @@ $(function () {
 	speed: 500,
   });
 
+  
+
+});
+
+$(document).ready(function() {
+	$('.linkVideo').fancybox({
+		openEffect  : 'none',
+		closeEffect : 'none',
+		helpers : {
+			media : {}
+		}
+	});
 });
 </script>
 <div class="sliderContainer">
@@ -38,14 +60,24 @@ $(function () {
 				<div class="destaquesBanners">
 					<div class="destaqueDireita">
 						<ul>
-							<li><a href="/noticias/20130926-002.php"><img src="{{ asset('bundles/spafrontend/images/noticia-20130926-002.jpg') }}" /><span class="texto"><span class="titulo">Saiba como é fácil manter sua pele sempre linda.</span><span class="descricao">O trio perfeiro para o cuidado diário da sua pele.</span></span><hr class="fim" /></a></li>
-							<li><a href="#"><img src="{{ asset('bundles/spafrontend/images/noticia-20131012-001.jpg') }}" /><span class="texto"><span class="titulo">Maquiagem com gloss nos olhos é tendência internacional</span><span class="descricao">Especialistas afirmam que a nova tendência de maquiagem é o gloss nos olhos.</span></span><hr class="fim" /></a></li>
+							{% for banner in bannersduplo %}
+							<li>
+								<a href="{{ banner.url }}">
+									<img src="{{ banner.pic | apply_filter('banner_double') }}" />
+									<span class="texto">
+										<span class="titulo">{{ banner.title }}</span>
+										<span class="descricao">{{ banner.description }}</span>
+									</span>
+									<hr class="fim" />
+								</a>
+							</li>
+							{% endfor %}
 						</ul>
 					</div>
 					<div class="destaqueEsquerda">
-						<h5>Tenha um visual lindo com o permanente de cílios.</h5>
-						<img src="{{ asset('bundles/spafrontend/images/noticia-20130926-001.jpg') }}" />
-						<a href="/noticias/20130926-001.php"><span>saiba mais</span></a></div>
+						<h5>{{ bannersimples.title }}</h5>
+						<img src="{{ bannersimples.pic |  apply_filter('banner_simple')}}" />
+						<a href="{{ bannersimples.url }}"><span>saiba mais</span></a></div>
 					<hr class="fim" />
 				</div>
 			</div>
@@ -99,11 +131,18 @@ $(function () {
 					</form>
 				</div>
 			</div>
-			<div class="bannerFranquiaHome"><img src="{{ asset('bundles/spafrontend/images/home-banner-franqueado.jpg') }}" /><h4>Faça parte da nossa rede. Seja um franqueado de sucesso.<span>Saiba mais</span></h4><a href="/sejafranqueado/"><span>Saiba mais</span></a></div>
+			
+			<div class="bannerFranquiaHome">
+				<img src="{{ bannerdireita.pic |  apply_filter('banner_right')}}" />
+				<h4>{{ bannerdireita.title }}<span>Saiba mais</span></h4>
+				<a href="{{ bannerdireita.url }}"><span>Saiba mais</span></a>
+			</div>
+			
 			<div class="homeVideoDestaque">
 				<h4>Vídeo em Destaque</h4>
 				<div class="boxesContainer">
-					<iframe width="336" height="187" src="{{ featured_video.getUrl | replace({'watch?v=': 'embed/'}) }}" frameborder="0" allowfullscreen></iframe>
+					<a class="linkVideo" href="{{ featured_video.url }}"><img src="http://img.youtube.com/vi/{{ youtube_id }}/0.jpg"></a>
+					<!--<iframe width="336" height="187" src="{{ featured_video.getUrl | replace({'watch?v=': 'embed/'}) }}" frameborder="0" allowfullscreen></iframe>-->
 					<span>[+]</span> Veja mais vídeos</a></div>
 			</div>
 		</div>

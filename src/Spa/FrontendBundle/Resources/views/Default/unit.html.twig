@@ -1,438 +1,154 @@
 {% extends 'SpaFrontendBundle::layout.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    	'@SpaFrontendBundle/Resources/public/js/jquery.cssmap.js'
+    	'@SpaFrontendBundle/Resources/public/js/scrollTo.js'
+    	'@SpaFrontendBundle/Resources/public/js/unidades.js'
+ 	%}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+	'bundles/spafrontend/css/cssmap-brazil.css'
+		filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+
 {% block body_class %}unidades{% endblock %}
 {% block body %}
+
+
 <script type="text/javascript">
-  $(function($){
-    $('#map-brazil').cssMap({'size' : 500,loadingText : 'Carregando mapa...'});
-    
-
-    $('#map-brazil li').on('click', function(){
-		var uf = $(this).attr('class').split(' ')[0];
-		
-		switch(uf)
-		{
-			case "br1":
-			  $('#estado option[value=AC]').attr('selected', 'selected');
-			  break;
-
-			case "br2":
-			  $('#estado option[value=AL]').attr('selected', 'selected');
-			  break;
-
-			case "br3":
-			  $('#estado option[value=AP]').attr('selected', 'selected');
-			  break;
-
-			case "br4":
-			  $('#estado option[value=AM]').attr('selected', 'selected');
-			  break;
-
-			case "br5":
-			  $('#estado option[value=BA]').attr('selected', 'selected');
-			  break;
-			
-			case "br6":
-			  $('#estado option[value=CE]').attr('selected', 'selected');
-			  break;
-
-			case "br7":
-			  $('#estado option[value=DF]').attr('selected', 'selected');
-			  break;
-
-			case "br8":
-			  $('#estado option[value=ES]').attr('selected', 'selected');
-			  break;
-
-			case "br9":
-			  $('#estado option[value=GO]').attr('selected', 'selected');
-			  break;
-			
-			case "br10":
-			  $('#estado option[value=MA]').attr('selected', 'selected');
-			  break;
-
-			case "br11":
-			  $('#estado option[value=MT]').attr('selected', 'selected');
-			  break;
-
-			case "br12":
-			  $('#estado option[value=AC]').attr('selected', 'selected');
-			  break;
-			
-			case "br13":
-			  $('#estado option[value=MG]').attr('selected', 'selected');
-			  break;
-			
-			case "br14":
-			  $('#estado option[value=PA]').attr('selected', 'selected');
-			  break;
-
-			case "br15":
-			  $('#estado option[value=PB]').attr('selected', 'selected');
-			  break;
-
-			case "br16":
-			  $('#estado option[value=PR]').attr('selected', 'selected');
-			  break;  
-
-			case "br17":
-			  $('#estado option[value=PE]').attr('selected', 'selected');
-			  break;
-			
-			case "br18":
-			  $('#estado option[value=PI]').attr('selected', 'selected');
-			  break;
-
-			case "br19":
-			  $('#estado option[value=RJ]').attr('selected', 'selected');
-			  break;
-
-			case "br20":
-			  $('#estado option[value=RN]').attr('selected', 'selected');
-			  break;
-
-			case "br21":
-			  $('#estado option[value=RS]').attr('selected', 'selected');
-			  break;
-			
-			case "br22":
-			  $('#estado option[value=RO]').attr('selected', 'selected');
-			  break;
-
-			case "br23":
-			  $('#estado option[value=RR]').attr('selected', 'selected');
-			  break;
-
-			case "br24":
-			  $('#estado option[value=SC]').attr('selected', 'selected');
-			  break;
-
-			case "br25":
-			  $('#estado option[value=SP]').attr('selected', 'selected');
-			  break;
-			
-			case "br26":
-			  $('#estado option[value=SE]').attr('selected', 'selected');
-			  break;
-
-			case "br27":
-			  $('#estado option[value=TO]').attr('selected', 'selected');
-			  break;
-    
-			
-		}	
-		populaCidades()
-	}); 
-});
-
-  function populaCidades()
-  {
-	uf = $("#estado").val();
-	var cityOptions = [];
-  	$.getJSON( "http://spa.bernardoalves.com.br/app_dev.php/buscaUnidade/" + uf, function( data ) {
-	  	
-	  	$.each( data, function( key, cities ) {
-	  		
-	  		cityOptions.push( "<option value=''>Selecione uma cidade</option>" );
-			$.each(cities, function (city, objs) 
-			{
-				cityOptions.push( "<option value='" + city + "'>" + city + "</option>" );
-			}
-			);
-		});
-		$('#cidades').find('option').remove().end().append(cityOptions);
-		$('#cidades').show();
-		$('#buscar').show();
-  	});
-  	
-  	
-  }
-
-  function populaUnidades(data)
-  {
-	
-	var cityDivs = [];
-	var infoDivs = [];
-	var city_html = '';
-	i = 0;
-	$.each( data, function( key, cities ) {
-
-	$.each(cities, function (city, objs) 
-	    {
-	    	i++;
-	    	
-	    	city_html = '';
-	    	$.each(objs, function (key, city_info)
-	    	{
-	    		
-	    		city_html += '<dt>' + key + '</dt>';	
-
-	    		phone1 = '';
-	    		if (city_info.phone1 != null)
-	    			phone1 = city_info.phone1;
-
-	    		phone2 = '';
-	    		if (city_info.phone2 != null)
-	    			phone2 = ' / ' + city_info.phone2;
-	    		//console.log(phone2);
-	    		city_html += '<dd class="endereco">' + city_info.address + '</dd>';
-	    		city_html += '<dd class="fones">' + phone1 + phone2 + '</dd>';
-	    		city_html += '<dd class="email"><a href="mailto:' + city_info.email + '">' + city_info.email + '</a></dd>';
-				
-	    	});
-			
-	    	cityDivs.push('<h5><a href="javascript:void(0)" onclick="$(\'#city_' + i + '\').slideToggle();">' + city + "</a></h5>");
-	    	cityDivs.push('<div class="lista" id="city_' + i + '" style="display:none"><dl>' + city_html + '</dl></div>');		    }
-	);
+  $(document).ready(function() {
+	$(".fancybox").fancybox({
+		openEffect	: 'none',
+		closeEffect	: 'none'
 	});
-
-	$("#unidadesResultado").show();
-	
-
-	$('#unidadesResultado').empty();
-	$('#unidadesResultado').append('<h4>' + $('#estado option[value=' + uf + ']').text() + '</h4>');
-	$('#unidadesResultado').append(cityDivs);
-  	//console.log(items);
-  }
-  function buscaUnidades()
-  {
-  	uf = $("#estado").val();
-  	city = $("#cidades").val();
-	$('.active-region').removeClass('active-region');
-  	switch(uf)
-	{
-		case "AC":
-		  $('.br1').addClass('active-region');
-		  break;
-		
-		case "AL":
-		  $('.br2').addClass('active-region');
-		  break;
-
-		case "AP":
-		  $('.br3').addClass('active-region');
-		  break;
-
-		case "AM":
-		  $('.br4').addClass('active-region');
-		  break;
-
-		case "BA":
-		  $('.br5').addClass('active-region');
-		  break;
-		
-		case "CE":
-		  $('.br6').addClass('active-region');
-		  break;
-
-		case "DF":
-		  $('.br7').addClass('active-region');
-		  break;
-
-		case "ES":
-		  $('.br8').addClass('active-region');
-		  break;
-
-		case "GO":
-		  $('.br9').addClass('active-region');
-		  break;
-		
-		case "MA":
-		  $('.br10').addClass('active-region');
-		  break;
-
-		case "MT":
-		  $('.br11').addClass('active-region');
-		  break;
-
-		case "MS":
-		  $('.br12').addClass('active-region');
-		  break;
-		
-		case "MG":
-		  $('.br13').addClass('active-region');
-		  break;
-		
-		case "PA":
-		  $('.br14').addClass('active-region');
-		  break;
-
-		case "PB":
-		  $('.br15').addClass('active-region');
-		  break;
-
-		case "PR":
-		  $('.br16').addClass('active-region');
-		  break;  
-
-		case "PE":
-		  $('.br17').addClass('active-region');
-		  break;
-		
-		case "PI":
-		  $('.br18').addClass('active-region');
-		  break;
-
-		case "RJ":
-		  $('.br19').addClass('active-region');
-		  break;
-
-		case "RN":
-		  $('.b20').addClass('active-region');
-		  break;
-
-		case "RS":
-		  $('.br21').addClass('active-region');
-		  break;
-		
-		case "RO":
-		  $('.br22').addClass('active-region');
-		  break;
-
-		case "RR":
-		  $('.br23').addClass('active-region');
-		  break;
-
-		case "SC":
-		  $('.br24').addClass('active-region');
-		  break;
-
-		case "SP":
-		  $('.br25').addClass('active-region');
-		  break;
-		
-		case "SE":
-		  $('.br26').addClass('active-region');
-		  break;
-
-		case "TO":
-		  $('.br27').addClass('active-region');
-		  break;
-    
-	}
-  	
-  	if (!city)
-  	{
-  		$.getJSON( "http://spa.bernardoalves.com.br/app_dev.php/buscaUnidade/" + uf, function( data ) {
-		  populaUnidades(data);
-		});
-  	}
-  	else
-  	{
-  		$.getJSON( "http://spa.bernardoalves.com.br/app_dev.php/buscaUnidade/" + uf + "/" + city, function( data ) {
-		  populaUnidades(data);
-		});
-		
-  	}
-  	$('body').scrollTo('#unidadesResultado');
-  	populaCidades();
-
-  }
+});
 </script>
+<h2>Unidades</h2>
+	<hr class="titulo" />
+	<div class="c02">
+		<div class="colConteudo" id="colConteudo" style='height: 100%;'>
+			<div class="unidadesForm"><h3>Encontre o Spa das Sobrancelhas mais perto de Você</h3>
+				<form>
+					<select id="estado" onchange='buscaEstado()'>
+						<option value="" selected="selected">Selecione seu Estado</option>
+						<option value="AC">Acre</option>
+						<option value="AL">Alagoas</option>
+						<option value="AP">Amapá</option>
+						<option value="AM">Amazonas</option>
+						<option value="BA">Bahia</option>
+						<option value="CE">Ceará</option>
+						<option value="DF">Distrito Federal</option>
+						<option value="ES">Espírito Santo</option>
+						<option value="GO">Goiás</option>
+						<option value="MA">Maranhão</option>
+						<option value="MT">Mato Grosso</option>
+						<option value="MS">Mato Grosso do Sul</option>
+						<option value="MG">Minas Gerais</option>
+						<option value="PA">Pará</option>
+						<option value="PB">Paraíba</option>
+						<option value="PR">Paraná</option>
+						<option value="PE">Pernambuco</option>
+						<option value="PI">Piauí</option>
+						<option value="RJ">Rio de Janeiro</option>
+						<option value="RN">Rio Grande do Norte</option>
+						<option value="RS">Rio Grande do Sul</option>
+						<option value="RO">Rondônia</option>
+						<option value="RR">Roraima</option>
+						<option value="SC">Santa Catarina</option>
+						<option value="SP">São Paulo</option>
+						<option value="SE">Sergipe</option>
+						<option value="TO">Tocantins</option>
 
-	<h2>Unidades</h2>
-		<hr class="titulo" />
-		<div class="c02">
-			<div class="colConteudo">
-				<div class="unidadesForm"><h3>Encontre o Spa das Sobrancelhas mais perto de Você</h3>
-					<form>
-						<select id="estado" onchange='populaCidades()'>
-							<option value="" selected="selected">Selecione seu Estado</option>
-							<option value="AC">Acre</option>
-							<option value="AL">Alagoas</option>
-							<option value="AP">Amapá</option>
-							<option value="AM">Amazonas</option>
-							<option value="BA">Bahia</option>
-							<option value="CE">Ceará</option>
-							<option value="DF">Distrito Federal</option>
-							<option value="ES">Espírito Santo</option>
-							<option value="GO">Goiás</option>
-							<option value="MA">Maranhão</option>
-							<option value="MT">Mato Grosso</option>
-							<option value="MS">Mato Grosso do Sul</option>
-							<option value="MG">Minas Gerais</option>
-							<option value="PA">Pará</option>
-							<option value="PB">Paraíba</option>
-							<option value="PR">Paraná</option>
-							<option value="PE">Pernambuco</option>
-							<option value="PI">Piauí</option>
-							<option value="RJ">Rio de Janeiro</option>
-							<option value="RN">Rio Grande do Norte</option>
-							<option value="RS">Rio Grande do Sul</option>
-							<option value="RO">Rondônia</option>
-							<option value="RR">Roraima</option>
-							<option value="SC">Santa Catarina</option>
-							<option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-
-						</select>
-						<select id="cidades" style='display:none;' name="cidades"><option value="" selected="selected"></option></select>
-						<input type="button" style='display:none;' name="button" id="buscar" value="Buscar" onclick='buscaUnidades()'/>
-					</form>
-				</div>
-				<div class="unidadesMapa">
-					<div id="map-brazil">
-						<ul class="brazil">
-							<li class="br1"><a href="#acre">Acre</a></li>
-							<li class="br2"><a href="#alagoas">Alagoas</a></li>
-							<li class="br3"><a href="#amapa">Amapá</a></li>
-							<li class="br4"><a href="#amazonas">Amazonas</a></li>
-							<li class="br5"><a href="#bahia">Bahia</a></li>
-							<li class="br6"><a href="#ceara">Ceará</a></li>
-							<li class="br7"><a href="#distrito-federal">Distrito Federal</a></li>
-							<li class="br8"><a href="#espirito-santo">Espírito Santo</a></li>
-							<li class="br9"><a href="#goias">Goiás</a></li>
-							<li class="br10"><a href="#maranhao">Maranhão</a></li>
-							<li class="br11"><a href="#mato-grosso">Mato Grosso</a></li>
-							<li class="br12"><a href="#mato-grosso-do-sul">Mato Grosso do Sul</a></li>
-							<li class="br13"><a href="#minas-gerais">Minas Gerais</a></li>
-							<li class="br14"><a href="#para">Pará</a></li>
-							<li class="br15"><a href="#paraiba">Paraíba</a></li>
-							<li class="br16"><a href="#parana">Paraná</a></li>
-							<li class="br17"><a href="#pernambuco">Pernambuco</a></li>
-							<li class="br18"><a href="#piaui">Piauí</a></li>
-							<li class="br19"><a href="#rio-de-janeiro">Rio de Janeiro</a></li>
-							<li class="br20"><a href="#rio-grande-do-norte">Rio Grande do Norte</a></li>
-							<li class="br21"><a href="#rio-grande-do-sul">Rio Grande do Sul</a></li>
-							<li class="br22"><a href="#rondonia">Rondônia</a></li>
-							<li class="br23"><a href="#roraima">Roraima</a></li>
-							<li class="br24"><a href="#santa-catarina">Santa Catarina</a></li>
-							<li class="br25"><a href="#sao-paulo">São Paulo</a></li>
-							<li class="br26"><a href="#sergipe">Sergipe</a></li>
-							<li class="br27"><a href="#tocantins">Tocantins</a></li>
-						</ul>
-					</div>
-				</div>
-				<hr class="fim" />
-				<div id="unidadesResultado" class="unidadesResultado" style="display:block;">
+					</select>
 					
-				</div>
+					<select id="cidades" onchange='buscaCidade()' style='display:none;' name="cidades">
+						<option value="" selected="selected"></option>
+					</select>
+					<div id="nocity" style="display:none; text-align: center; color: white">
+						Não existe unidade disponível para este estado
+					</div>
+					<div id="div_carregando" style="display:none; text-align: center;">
+						<img src="{{ asset('bundles/spafrontend/images/carregando.gif') }}">
+					</div>
+					
+				</form>
 			</div>
-			<div class="colBanners">
-				<div class="bannerInterno">
-					<img src="{{ asset('bundles/spafrontend/images/banner-unidades.jpg') }}" />
-					<h4>Unidades elegantes e confortáveis</h4><a href="/seja_franqueado/"><span>Saiba mais</span></a>
-				</div>
-				<div class="bannerInterno">
-					<img src="{{ asset('bundles/spafrontend/images/banner-avaliacao_gratuita.jpg') }}" />
-					<h4>Agende já a sua avaliação gratuita</h4><a href="/seja_franqueado/"><span>Saiba mais</span></a>
-				</div>
-				<div class="bannerInterno">
-					<img src="{{ asset('bundles/spafrontend/images/home-banner-franqueado.jpg') }}" />
-					<h4>Faça parte da nossa rede. Seja um franqueado de sucesso.</h4><a href="/seja_franqueado/"><span>Saiba mais</span></a>
+			<div class="unidadesMapa">
+				<div id="map-brazil">
+					<ul class="brazil">
+						<li class="br1"><a href="#acre">Acre</a></li>
+						<li class="br2"><a href="#alagoas">Alagoas</a></li>
+						<li class="br3"><a href="#amapa">Amapá</a></li>
+						<li class="br4"><a href="#amazonas">Amazonas</a></li>
+						<li class="br5"><a href="#bahia">Bahia</a></li>
+						<li class="br6"><a href="#ceara">Ceará</a></li>
+						<li class="br7"><a href="#distrito-federal">Distrito Federal</a></li>
+						<li class="br8"><a href="#espirito-santo">Espírito Santo</a></li>
+						<li class="br9"><a href="#goias">Goiás</a></li>
+						<li class="br10"><a href="#maranhao">Maranhão</a></li>
+						<li class="br11"><a href="#mato-grosso">Mato Grosso</a></li>
+						<li class="br12"><a href="#mato-grosso-do-sul">Mato Grosso do Sul</a></li>
+						<li class="br13"><a href="#minas-gerais">Minas Gerais</a></li>
+						<li class="br14"><a href="#para">Pará</a></li>
+						<li class="br15"><a href="#paraiba">Paraíba</a></li>
+						<li class="br16"><a href="#parana">Paraná</a></li>
+						<li class="br17"><a href="#pernambuco">Pernambuco</a></li>
+						<li class="br18"><a href="#piaui">Piauí</a></li>
+						<li class="br19"><a href="#rio-de-janeiro">Rio de Janeiro</a></li>
+						<li class="br20"><a href="#rio-grande-do-norte">Rio Grande do Norte</a></li>
+						<li class="br21"><a href="#rio-grande-do-sul">Rio Grande do Sul</a></li>
+						<li class="br22"><a href="#rondonia">Rondônia</a></li>
+						<li class="br23"><a href="#roraima">Roraima</a></li>
+						<li class="br24"><a href="#santa-catarina">Santa Catarina</a></li>
+						<li class="br25"><a href="#sao-paulo">São Paulo</a></li>
+						<li class="br26"><a href="#sergipe">Sergipe</a></li>
+						<li class="br27"><a href="#tocantins">Tocantins</a></li>
+					</ul>
 				</div>
 			</div>
 			<hr class="fim" />
+			<div id="unidadesResultado" class="unidadesResultado" style="display:block;">
+				
+			</div>
 		</div>
+		<div class="colBanners">
+			<div class="bannerInterno">
 
+				
+				<h4>Unidades elegantes e confortáveis</h4>
+				{% for banner in bannersunity %}
+					<a class="fancybox" rel="gallery1" href="/{{ banner.pic  }}">
+						<img src="{{ banner.pic | apply_filter('banner_unity') }}" />
+					</a>
+				{% endfor %}
 
-		{% for unit in units %}
-                   
+				
+			</div>
+			<br ><br ><br ><br ><br ><br ><br ><br ><br ><br ><br ><br ><br ><br >
 			
-			
-		{% endfor %}
+
+			{% for banner in bannersdireita %}
+				<div class="bannerInterno">
+					<img src="{{ banner.pic |  apply_filter('banner_right')}}" />
+					<a href="{{ banner.url }}"><span>Saiba mais</span></a>
+					<h4>{{ banner.title }}<span>Saiba mais</span></h4>
+				</div>
+			{% endfor %}
+		
+		</div>
+	
+		<hr class="fim" />
+	</div>
+
 
 {% endblock %}
 

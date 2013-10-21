@@ -4,18 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Spa das Sobrancelhas {% block title %}{% endblock %}</title>
 <link href="{{ asset('/bundles/spafrontend/images/favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
-
+{% block javascripts %}
 {% javascripts
-    '@SpaFrontendBundle/Resources/public/js/jquery.min.js'
-    '@SpaFrontendBundle/Resources/public/js/responsiveslides.min.js' %}
+	'@SpaFrontendBundle/Resources/public/js/jquery.min.js'
+	'@SpaFrontendBundle/Resources/public/js/jquery.fancybox.js'
+	'@SpaFrontendBundle/Resources/public/js/jquery.fancybox-media.js'
+    	  
+ %}
     <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
+{% endblock %}
 
+{% block stylesheets %}
+{% stylesheets 
+	'bundles/spafrontend/css/default.css'
+	'bundles/spafrontend/css/jquery.fancybox.css' 
 
-{% stylesheets 'bundles/spafrontend/css/default.css' filter='cssrewrite' %}
+filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
-
+{% endblock %}
 </head>
 
 <body class="{% block body_class %}{% endblock %}">

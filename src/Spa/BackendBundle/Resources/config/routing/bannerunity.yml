@@ -1,0 +1,30 @@
+bannerunidades:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:BannerUnity:index" }
+
+bannerunidades_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:BannerUnity:show" }
+
+bannerunidades_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:BannerUnity:new" }
+
+bannerunidades_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:BannerUnity:create" }
+    requirements: { _method: post }
+
+bannerunidades_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:BannerUnity:edit" }
+
+bannerunidades_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:BannerUnity:update" }
+    requirements: { _method: post|put }
+
+bannerunidades_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:BannerUnity:delete" }
+    requirements: { _method: post|delete }

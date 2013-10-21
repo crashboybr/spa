@@ -1,0 +1,30 @@
+bannerdireita:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:RightBanner:index" }
+
+bannerdireita_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:RightBanner:show" }
+
+bannerdireita_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:RightBanner:new" }
+
+bannerdireita_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:RightBanner:create" }
+    requirements: { _method: post }
+
+bannerdireita_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:RightBanner:edit" }
+
+bannerdireita_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:RightBanner:update" }
+    requirements: { _method: post|put }
+
+bannerdireita_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:RightBanner:delete" }
+    requirements: { _method: post|delete }

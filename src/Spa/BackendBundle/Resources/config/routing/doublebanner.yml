@@ -1,0 +1,30 @@
+bannerduplo:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:DoubleBanner:index" }
+
+bannerduplo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:DoubleBanner:show" }
+
+bannerduplo_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:DoubleBanner:new" }
+
+bannerduplo_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:DoubleBanner:create" }
+    requirements: { _method: post }
+
+bannerduplo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:DoubleBanner:edit" }
+
+bannerduplo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:DoubleBanner:update" }
+    requirements: { _method: post|put }
+
+bannerduplo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:DoubleBanner:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,30 @@
+bannersimples:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:SimpleBanner:index" }
+
+bannersimples_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:SimpleBanner:show" }
+
+bannersimples_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:SimpleBanner:new" }
+
+bannersimples_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:SimpleBanner:create" }
+    requirements: { _method: post }
+
+bannersimples_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:SimpleBanner:edit" }
+
+bannersimples_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:SimpleBanner:update" }
+    requirements: { _method: post|put }
+
+bannersimples_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:SimpleBanner:delete" }
+    requirements: { _method: post|delete }

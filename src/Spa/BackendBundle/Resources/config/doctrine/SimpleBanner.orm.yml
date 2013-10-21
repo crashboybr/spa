@@ -1,0 +1,28 @@
+Spa\BackendBundle\Entity\SimpleBanner:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        pic:
+            type: string
+            length: 255
+        title:
+            type: string
+            length: 255
+        url:
+            type: string
+            length: 255
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+    lifecycleCallbacks:
+        prePersist: [ preUpload, updatedTimestamps ]
+        preUpdate: [ updatedTimestamps ]
+        postPersist: [ upload ]
