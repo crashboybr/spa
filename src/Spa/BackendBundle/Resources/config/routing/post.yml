@@ -1,0 +1,30 @@
+noticias:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:Post:index" }
+
+noticias_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:Post:show" }
+
+noticias_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:Post:new" }
+
+noticias_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:Post:create" }
+    requirements: { _method: post }
+
+noticias_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:Post:edit" }
+
+noticias_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:Post:update" }
+    requirements: { _method: post|put }
+
+noticias_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:Post:delete" }
+    requirements: { _method: post|delete }

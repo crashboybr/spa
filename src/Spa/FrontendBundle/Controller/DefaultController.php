@@ -5,6 +5,8 @@ namespace Spa\FrontendBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Spa\BackendBundle\Entity\Unit;
+use Spa\BackendBundle\Entity\Post;
+
 
 class DefaultController extends Controller
 {
@@ -155,5 +157,65 @@ class DefaultController extends Controller
    
         return $this->render('SpaFrontendBundle:Default:viewMap.html.twig', array('units' => $units));
 
+    }
+
+    public function newsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $posts = $em->getRepository('SpaBackendBundle:Post')
+            ->findAll();
+
+        return $this->render('SpaFrontendBundle:Default:news.html.twig', array('posts' => $posts));
+    
+    }
+
+    public function viewPostAction(Post $post)
+    {
+        $createdAt = $post->getCreatedAt();
+        //var_dump($createdAt);exit;
+        $dia = date('d');
+        $mes = date('m');
+        $ano = date('Y');
+        $semana = date('w');
+         
+         
+        // configuração mes
+         
+        switch ($mes){
+         
+        case 1: $mes = "JANEIRO"; break;
+        case 2: $mes = "FEVEREIRO"; break;
+        case 3: $mes = "MARÇO"; break;
+        case 4: $mes = "ABRIL"; break;
+        case 5: $mes = "MAIO"; break;
+        case 6: $mes = "JUNHO"; break;
+        case 7: $mes = "JULHO"; break;
+        case 8: $mes = "AGOSTO"; break;
+        case 9: $mes = "SETEMBRO"; break;
+        case 10: $mes = "OUTUBRO"; break;
+        case 11: $mes = "NOVEMBRO"; break;
+        case 12: $mes = "DEZEMBRO"; break;
+         
+        }
+        
+        
+        return $this->render('SpaFrontendBundle:Default:viewNews.html.twig', array('post' => $post));
+    
+    }
+
+    public function bannerUnityAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bannersunity = $em->getRepository('SpaBackendBundle:BannerUnity')
+            ->findAll();    
+         return $this->render('SpaFrontendBundle:Default:bannerUnity.html.twig', array('bannersunity' => $bannersunity));
+    }
+
+    public function servicesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $services = $em->getRepository('SpaBackendBundle:Service')
+            ->findAll();    
+         return $this->render('SpaFrontendBundle:Default:services.html.twig', array('services' => $services));
     }
 }

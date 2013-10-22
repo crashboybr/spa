@@ -1,0 +1,61 @@
+{% extends 'SpaFrontendBundle::layout.html.twig' %}
+
+{% block body_class %}noticias{% endblock %}
+{% block body %}
+<script>
+$(document).ready(function() {
+    // Get the  current URL
+    var pathname = window.location;
+ 
+   // Create the twitter URL
+    var tweeturl = 'http://twitter.com/share?url='+encodeURI(pathname)+'&text=Spa das Sobrancelhas';
+ 
+    // Place the text on the page. Change body to wherever you want the button placed. 
+    $('#twitter').append('<a target=_blank class="shareTwitter" href=" '+ tweeturl+' "><span>twitter</span></a>')
+});
+</script>
+		<h2><a href="/noticias/">Notícias</a></h2>
+		<hr class="titulo" />
+		<div class="c02">
+			<div class="colConteudo">
+				<div class="noticiaConteudo">
+					<div class="noticiaCabecalho">
+						<span class="noticiaCabData">{{ post.createdAt|date('d/m/Y') }}</span>
+						<span class="noticiaShare">
+							<span id="twitter"></span>
+							<a href="#" class="shareFacebook"
+								onclick="
+								window.open(
+								  'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+								  'facebook-share-dialog', 
+								  'width=626,height=436'); 
+								return false;">
+								<span>facebook</span>
+							</a>
+							Compartilhe esta notícia
+						</span>
+					</div>
+					<h3>{{ post.title }}</h3>
+					{{ post.content|raw }}
+					<p class="imgCenter">
+						<img src="{{ asset(post.pic) }}" />
+					</p>
+					<div class="leiatb">
+						<h6>Leia também</h6>
+						<ul>
+							<li><a href="#"><img src="/_imgs/noticia-20130926-001.jpg" /><span class="texto"><span class="titulo">Maquiagem com gloss nos olhos é tendência internacional</span><span class="descricao">Especialistas afirmam que a nova tendência de maquiagem é o gloss nos olhos.</span></span><hr class="fim" /></a></li>
+							<li><a href="#"><img src="/_imgs/noticia-20130926-001.jpg" /><span class="texto"><span class="titulo">Maquiagem com gloss nos olhos é tendência internacional</span><span class="descricao">Especialistas afirmam que a nova tendência de maquiagem é o gloss nos olhos.</span></span><hr class="fim" /></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="colBanners">
+				{{ render(controller('SpaFrontendBundle:Default:bannerUnity')) }}
+				<br><br><br><br><br><br><br><br><br><br>
+				<div class="bannerInterno"><img src="/_imgs/banner-avaliacao_gratuita.jpg" /><h4>Agende já a sua avaliação gratuita</h4><a href="#"><span>Saiba mais</span></a></div>
+			</div>
+			<hr class="fim" />
+
+{% endblock %}
+
+

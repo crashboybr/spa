@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DoubleBannerType extends AbstractType
+class PostType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,10 @@ class DoubleBannerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file')
             ->add('title')
-            //->add('description')
-            ->add('url')
-            ->add('description')
+            ->add('content', 'ckeditor', array('config_name' => 'my_config'))
+            ->add('file')
+            //->add('createdAt')
             
         ;
     }
@@ -30,7 +29,7 @@ class DoubleBannerType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Spa\BackendBundle\Entity\DoubleBanner'
+            'data_class' => 'Spa\BackendBundle\Entity\Post'
         ));
     }
 
@@ -39,6 +38,6 @@ class DoubleBannerType extends AbstractType
      */
     public function getName()
     {
-        return 'spa_backendbundle_doublebanner';
+        return 'spa_backendbundle_post';
     }
 }

@@ -1,0 +1,17 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+	$(".fancybox").fancybox({
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+</script>
+
+<div class="bannerInterno">
+	<h4>Unidades elegantes e confortáveis</h4>
+	{% for banner in bannersunity %}
+		<a class="fancybox" rel="gallery1" href="/{{ banner.pic  }}">
+			<img src="{{ banner.pic | apply_filter('banner_unity') }}" />
+		</a>
+	{% endfor %}
+</div>

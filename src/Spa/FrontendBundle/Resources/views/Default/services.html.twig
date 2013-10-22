@@ -1,0 +1,54 @@
+{% extends 'SpaFrontendBundle::layout.html.twig' %}
+
+
+{% block body_class %}servicos{% endblock %}
+{% block body %}
+<script>
+
+
+function showService(id)
+{
+	//$("#principal").hide();
+
+	$("li").removeClass("foco");
+	$(".colDescricao").hide();
+	$("#" + id).addClass("foco");
+	$("#desc_" + id).show();
+
+}
+</script>
+
+
+		<h2>Servicos</h2>
+		<hr class="titulo" />
+		<div class="c02">
+			<div class="colConteudo">
+				<ul class="submenu-interno">
+					{% for service in services %}
+						<li id="{{ service.id }}">
+							<a href="javascript:void(0)" onclick='showService({{ service.id }})'>{{ service.name }}</a><span></span>
+						</li>
+					{% endfor %}
+
+
+				</ul>
+				<div class="colDescricao" id="principal">
+					<p>O Spa das Sobrancelhas reúne serviços especialmente desenvolvidos para o cuidado com as sobrancelhas, cílios e face, visando o Embelezamento do Olhar. Aliando técnicas especiais e qualificação, nossos profissionais indicarão os melhores serviços para tornar o seu olhar expressivo e sedutor, aumentando seu poder de comunicação com o mundo.</p>
+				</div>
+				{% for service in services %}
+					<div class="colDescricao" id="desc_{{ service.id }}" style="display:none;">
+						<h3>{{ service.name }}</h3>
+						<p>{{ service.description|nl2br }}</p>
+						<p class="imgCenter"><img src="{{ asset(service.pic) }}"></p>
+						
+					</div>
+				{% endfor %}
+
+			</div>
+			<hr class="fim" />
+		</div>
+
+
+{% endblock %}
+
+

@@ -21,3 +21,15 @@ spa_frontend_addunit:
 spa_frontend_viewmap:
     pattern:  /mapinha
     defaults: { _controller: SpaFrontendBundle:Default:viewMap }
+
+spa_frontend_news:
+    pattern:  /noticias
+    defaults: { _controller: SpaFrontendBundle:Default:news }
+
+spa_frontend_view_post:
+    pattern:  /noticia/{post}
+    defaults: { _controller: SpaFrontendBundle:Default:viewPost }
+
+spa_frontend_services:
+    pattern:  /servicos
+    defaults: { _controller: SpaFrontendBundle:Default:services }

@@ -38,3 +38,11 @@ SpaBackendBundle_bannerdireita:
 SpaBackendBundle_bannerunidades:
         resource: "@SpaBackendBundle/Resources/config/routing/bannerunity.yml"
         prefix:   /bannerunidades
+
+SpaBackendBundle_noticias:
+        resource: "@SpaBackendBundle/Resources/config/routing/post.yml"
+        prefix:   /noticias
+
+SpaBackendBundle_servicos:
+        resource: "@SpaBackendBundle/Resources/config/routing/service.yml"
+        prefix:   /servicos

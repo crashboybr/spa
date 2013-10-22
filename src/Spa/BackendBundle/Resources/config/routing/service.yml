@@ -1,0 +1,30 @@
+servicos:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:Service:index" }
+
+servicos_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:Service:show" }
+
+servicos_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:Service:new" }
+
+servicos_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:Service:create" }
+    requirements: { _method: post }
+
+servicos_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:Service:edit" }
+
+servicos_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:Service:update" }
+    requirements: { _method: post|put }
+
+servicos_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:Service:delete" }
+    requirements: { _method: post|delete }
