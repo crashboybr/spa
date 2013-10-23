@@ -211,11 +211,43 @@ class DefaultController extends Controller
          return $this->render('SpaFrontendBundle:Default:bannerUnity.html.twig', array('bannersunity' => $bannersunity));
     }
 
+    public function bannerRightAction()
+    {
+        $repo = $this->getDoctrine()->getRepository('SpaBackendBundle:RightBanner');
+        $bannerdireita = $repo->createQueryBuilder('p')
+        ->getQuery()->getSingleResult();   
+         return $this->render('SpaFrontendBundle:Default:bannerRight.html.twig', array('bannerdireita' => $bannerdireita));
+    }
+
     public function servicesAction()
     {
         $em = $this->getDoctrine()->getManager();
         $services = $em->getRepository('SpaBackendBundle:Service')
             ->findAll();    
+
+            
          return $this->render('SpaFrontendBundle:Default:services.html.twig', array('services' => $services));
     }
-}
+
+    public function showServiceAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $service = $em->getRepository('SpaBackendBundle:Service')
+            ->findOneBy(array('slug' => $slug));  
+            var_dump($service);
+        exit;
+    }
+
+    public function toAscii($str, $replace=array(), $delimiter='-') {
+     if( !empty($replace) ) {
+      $str = str_replace((array)$replace, ' ', $str);
+     }
+
+     $clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+     $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
+     $clean = strtolower(trim($clean, '-'));
+     $clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+
+     return $clean;
+    }
+    }

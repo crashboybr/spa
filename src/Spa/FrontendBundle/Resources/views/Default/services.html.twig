@@ -4,6 +4,20 @@
 {% block body_class %}servicos{% endblock %}
 {% block body %}
 <script>
+$(document).ready(function() {
+    // Get the  current URL
+    var pathname = window.location;
+ 
+   // Create the twitter URL
+    var tweeturl = 'http://twitter.com/share?url='+encodeURI(pathname)+'&text=Spa das Sobrancelhas';
+ 
+    // Place the text on the page. Change body to wherever you want the button placed. 
+    $('.share').prepend('<a class="shareTwitter" target="_blank" href=" '+ tweeturl+' "><span>twitter</span></a>');
+
+
+    var hash = window.location.hash.substring(1);
+    console.log(hash);
+});
 
 
 function showService(id)
@@ -26,7 +40,7 @@ function showService(id)
 				<ul class="submenu-interno">
 					{% for service in services %}
 						<li id="{{ service.id }}">
-							<a href="javascript:void(0)" onclick='showService({{ service.id }})'>{{ service.name }}</a><span></span>
+							<a href="{{ path('spa_frontend_show_service', { slug: service.slug }) }}" onclick='showService({{ service.id }})'>{{ service.name }}</a><span></span>
 						</li>
 					{% endfor %}
 
@@ -41,6 +55,19 @@ function showService(id)
 						<p>{{ service.description|nl2br }}</p>
 						<p class="imgCenter"><img src="{{ asset(service.pic) }}"></p>
 						
+						<div class="rodapeAcoes">
+							<span class="share">
+
+								<a href="#" onclick="
+									window.open(
+									  'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+									  'facebook-share-dialog', 
+									  'width=626,height=436'); 
+									return false;" class="shareFacebook"><span>facebook</span></a>
+								<span class="shareLabel">Compartilhe este serviço</span>
+							</span>
+						</div>
+
 					</div>
 				{% endfor %}
 

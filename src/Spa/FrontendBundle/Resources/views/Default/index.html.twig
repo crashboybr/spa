@@ -132,11 +132,7 @@ $(document).ready(function() {
 				</div>
 			</div>
 			
-			<div class="bannerFranquiaHome">
-				<img src="{{ bannerdireita.pic |  apply_filter('banner_right')}}" />
-				<h4>{{ bannerdireita.title }}<span>Saiba mais</span></h4>
-				<a href="{{ bannerdireita.url }}"><span>Saiba mais</span></a>
-			</div>
+			{{ render(controller('SpaFrontendBundle:Default:bannerRight')) }}
 			
 			<div class="homeVideoDestaque">
 				<h4>Vídeo em Destaque</h4>

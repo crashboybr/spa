@@ -37,10 +37,14 @@ class ServiceController extends Controller
     {
         $entity = new Service();
         $form = $this->createCreateForm($entity);
+        
         $form->handleRequest($request);
 
+
         if ($form->isValid()) {
+            $entity->setSlug($entity->getName());
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($entity);
             $em->flush();
 
@@ -163,6 +167,7 @@ class ServiceController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Service entity.');
         }
+        $entity->setSlug($entity->getName());
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);

@@ -33,3 +33,7 @@ spa_frontend_view_post:
 spa_frontend_services:
     pattern:  /servicos
     defaults: { _controller: SpaFrontendBundle:Default:services }
+
+spa_frontend_show_service:
+    pattern:  /servicos/{slug}
+    defaults: { _controller: SpaFrontendBundle:Default:showService }

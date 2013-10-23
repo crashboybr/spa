@@ -42,6 +42,9 @@ class Service
      */
     private $updatedAt;
 
+    
+    private $slug;
+
     /* begin upload file */
     /**
      * @Assert\File(maxSize="6000000")
@@ -285,6 +288,31 @@ class Service
     {
         return $this->updatedAt;
     }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $this->toAscii($this->name);
+        return $this;
+    }
+
+    public function toAscii($str, $replace=array(), $delimiter='-') {
+     if( !empty($replace) ) {
+      $str = str_replace((array)$replace, ' ', $str);
+     }
+
+     $clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+     $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
+     $clean = strtolower(trim($clean, '-'));
+     $clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+
+     return $clean;
+    }
+
 
     /**
      *
