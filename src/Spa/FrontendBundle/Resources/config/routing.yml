@@ -36,4 +36,14 @@ spa_frontend_services:
 
 spa_frontend_show_service:
     pattern:  /servicos/{slug}
-    defaults: { _controller: SpaFrontendBundle:Default:showService }
+    defaults: { _controller: SpaFrontendBundle:Default:viewService }
+
+spa_frontend_promotion:
+    pattern:  /promocoes
+    defaults: { _controller: SpaFrontendBundle:Default:promotion }
+
+spa_frontend_view_promotion:
+    pattern:  /promocoes/{slug}
+    defaults: { _controller: SpaFrontendBundle:Default:viewPromotion }
+
+

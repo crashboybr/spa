@@ -13,23 +13,8 @@ $(document).ready(function() {
  
     // Place the text on the page. Change body to wherever you want the button placed. 
     $('.share').prepend('<a class="shareTwitter" target="_blank" href=" '+ tweeturl+' "><span>twitter</span></a>');
-
-
-    var hash = window.location.hash.substring(1);
-    console.log(hash);
 });
 
-
-function showService(id)
-{
-	//$("#principal").hide();
-
-	$("li").removeClass("foco");
-	$(".colDescricao").hide();
-	$("#" + id).addClass("foco");
-	$("#desc_" + id).show();
-
-}
 </script>
 
 
@@ -49,27 +34,7 @@ function showService(id)
 				<div class="colDescricao" id="principal">
 					<p>O Spa das Sobrancelhas reúne serviços especialmente desenvolvidos para o cuidado com as sobrancelhas, cílios e face, visando o Embelezamento do Olhar. Aliando técnicas especiais e qualificação, nossos profissionais indicarão os melhores serviços para tornar o seu olhar expressivo e sedutor, aumentando seu poder de comunicação com o mundo.</p>
 				</div>
-				{% for service in services %}
-					<div class="colDescricao" id="desc_{{ service.id }}" style="display:none;">
-						<h3>{{ service.name }}</h3>
-						<p>{{ service.description|nl2br }}</p>
-						<p class="imgCenter"><img src="{{ asset(service.pic) }}"></p>
-						
-						<div class="rodapeAcoes">
-							<span class="share">
-
-								<a href="#" onclick="
-									window.open(
-									  'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
-									  'facebook-share-dialog', 
-									  'width=626,height=436'); 
-									return false;" class="shareFacebook"><span>facebook</span></a>
-								<span class="shareLabel">Compartilhe este serviço</span>
-							</span>
-						</div>
-
-					</div>
-				{% endfor %}
+				
 
 			</div>
 			<hr class="fim" />

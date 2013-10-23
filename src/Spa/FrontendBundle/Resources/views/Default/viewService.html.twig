@@ -1,0 +1,64 @@
+{% extends 'SpaFrontendBundle::layout.html.twig' %}
+
+
+{% block body_class %}servicos{% endblock %}
+{% block body %}
+<script>
+$(document).ready(function() {
+    // Get the  current URL
+    var pathname = window.location;
+ 
+   // Create the twitter URL
+    var tweeturl = 'http://twitter.com/share?url='+encodeURI(pathname)+'&text=Spa das Sobrancelhas';
+ 
+    // Place the text on the page. Change body to wherever you want the button placed. 
+    $('.share').prepend('<a class="shareTwitter" target="_blank" href=" '+ tweeturl+' "><span>twitter</span></a>');
+});
+
+</script>
+
+
+		<h2>Serviços</h2>
+		<hr class="titulo" />
+		<div class="c02">
+			<div class="colConteudo">
+				<ul class="submenu-interno">
+					{% for s in services %}
+						<li {% if (service.id == s.id) %}class="foco"{%endif%}>
+							<a href="{{ path('spa_frontend_show_service', { slug: s.slug }) }}">{{ s.name }}</a><span></span>
+						</li>
+					{% endfor %}
+
+
+				</ul>
+			
+					<div class="colDescricao">
+						<h3>{{ service.name }}</h3>
+						<p>{{ service.description|nl2br }}</p>
+						{% if (service.pic) %}
+						<p class="imgCenter"><img src="{{ asset(service.pic) }}"></p>
+						{% endif %}
+						<div class="rodapeAcoes">
+							<span class="share">
+
+								<a href="#" onclick="
+									window.open(
+									  'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+									  'facebook-share-dialog', 
+									  'width=626,height=436'); 
+									return false;" class="shareFacebook"><span>facebook</span></a>
+								<span class="shareLabel">Compartilhe este serviço</span>
+							</span>
+						</div>
+
+					</div>
+
+
+			</div>
+			<hr class="fim" />
+		</div>
+
+
+{% endblock %}
+
+

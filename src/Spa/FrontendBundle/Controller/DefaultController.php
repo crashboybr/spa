@@ -219,6 +219,12 @@ class DefaultController extends Controller
          return $this->render('SpaFrontendBundle:Default:bannerRight.html.twig', array('bannerdireita' => $bannerdireita));
     }
 
+    public function bannerFindUnityAction()
+    {
+          
+         return $this->render('SpaFrontendBundle:Default:bannerFindUnity.html.twig');
+    }
+
     public function servicesAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -229,14 +235,50 @@ class DefaultController extends Controller
          return $this->render('SpaFrontendBundle:Default:services.html.twig', array('services' => $services));
     }
 
-    public function showServiceAction($slug)
+    public function viewServiceAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
+        $services = $em->getRepository('SpaBackendBundle:Service')
+            ->findAll();  
+
         $service = $em->getRepository('SpaBackendBundle:Service')
             ->findOneBy(array('slug' => $slug));  
-            var_dump($service);
-        exit;
+
+        if (!$service) {
+            throw $this->createNotFoundException('Serviço não encontrado!');
+        }    
+
+        return $this->render('SpaFrontendBundle:Default:viewService.html.twig', array('service' => $service, 'services' => $services));       
     }
+
+    public function promotionAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $fixed_promotions = $em->getRepository('SpaBackendBundle:Promotion')
+            ->findBy(array('fixed' => true));    
+        $sazonal_promotion = $em->getRepository('SpaBackendBundle:Promotion')
+            ->findOneBy(array('fixed' => false));    
+            
+         return $this->render('SpaFrontendBundle:Default:promotion.html.twig', array('sazonal_promotion' => $sazonal_promotion, 'fixed_promotions' => $fixed_promotions));
+    }
+
+    public function viewPromotionAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $fixed_promotions = $em->getRepository('SpaBackendBundle:Promotion')
+            ->findBy(array('fixed' => true));  
+
+        $promotion = $em->getRepository('SpaBackendBundle:Promotion')
+            ->findOneBy(array('slug' => $slug));  
+
+        if (!$promotion) {
+            throw $this->createNotFoundException('Promoção não encontrada!');
+        }    
+
+        return $this->render('SpaFrontendBundle:Default:viewPromotion.html.twig', array('promotion' => $promotion, 'fixed_promotions' => $fixed_promotions));       
+    }
+
 
     public function toAscii($str, $replace=array(), $delimiter='-') {
      if( !empty($replace) ) {

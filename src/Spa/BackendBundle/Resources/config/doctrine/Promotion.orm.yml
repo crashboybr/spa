@@ -1,0 +1,46 @@
+Spa\BackendBundle\Entity\Promotion:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        pic:
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+        fixed:
+            type: boolean
+            nullable: true
+
+        slug:
+                type: string
+                length: 128
+                gedmo:
+                    slug:
+                        separator: -
+                        style: camel
+                        fields:
+                            - name
+    indexes:
+        search_idx:
+            columns: slug
+    lifecycleCallbacks:
+        prePersist: [ preUpload, updatedTimestamps ]
+        preUpdate: [ updatedTimestamps ]
+        postPersist: [ upload ]

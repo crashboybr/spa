@@ -46,3 +46,8 @@ SpaBackendBundle_noticias:
 SpaBackendBundle_servicos:
         resource: "@SpaBackendBundle/Resources/config/routing/service.yml"
         prefix:   /servicos
+
+SpaBackendBundle_promocao:
+        resource: "@SpaBackendBundle/Resources/config/routing/promotion.yml"
+        prefix:   /promocao
+        

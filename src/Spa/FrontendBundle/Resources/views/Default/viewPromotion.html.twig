@@ -1,0 +1,84 @@
+{% extends 'SpaFrontendBundle::layout.html.twig' %}
+
+
+{% block body_class %}promocoes{% endblock %}
+{% block body %}
+<script>
+$(document).ready(function() {
+    // Get the  current URL
+    var pathname = window.location;
+ 
+   // Create the twitter URL
+    var tweeturl = 'http://twitter.com/share?url='+encodeURI(pathname)+'&text=Spa das Sobrancelhas';
+ 
+    // Place the text on the page. Change body to wherever you want the button placed. 
+    $('.share').prepend('<a class="shareTwitter" target="_blank" href=" '+ tweeturl+' "><span>twitter</span></a>');
+});
+
+</script>
+
+
+		<h2>Promoções</h2>
+		<hr class="titulo" />
+		<div class="c02">
+			<div class="colConteudo">
+				<ul class="submenu-interno">
+					<li>
+						<a href="{{ path('spa_frontend_promotion') }}"}>Campanha</a><span></span>
+					</li>
+					{% for p in fixed_promotions %}
+						<li {% if (p.id == promotion.id) %}class="foco"{% endif %}>
+							<a href="{{ path('spa_frontend_view_promotion', { slug: p.slug }) }}">{{ p.name }}</a>
+							<span></span>
+						</li>
+					{% endfor %}
+				</ul>
+				<div class="colDescricao">
+					<h3>{{ promotion.name }}</h3>
+					<p>{{ promotion.description|nl2br }}</p>
+					<p class="imgCenter"><img src="{{ asset(promotion.pic) }}" /></p>
+					
+					<div class="rodapeAcoes">
+						<span class="share">
+
+							<a href="#" onclick="
+								window.open(
+								  'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+								  'facebook-share-dialog', 
+								  'width=626,height=436'); 
+								return false;" class="shareFacebook"><span>facebook</span></a>
+							<span class="shareLabel">Compartilhe este serviço</span>
+							<span class="imprimir"><a href="javascript:void(0)" onclick="printImage('{{ asset(promotion.pic) }}')">Imprimir</a></span>
+						</span>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="colBanners">
+				{{ render(controller('SpaFrontendBundle:Default:bannerFindUnity')) }}
+				
+				{{ render(controller('SpaFrontendBundle:Default:bannerRight')) }}
+
+			</div>
+			<hr class="fim" />
+		</div>
+
+<script>
+function printImage(url)
+{
+	
+   var originalImage = '<img src="' + url + '"/>';
+
+   popup =  window.open('','popup','toolbar=no,menubar=no,width=800,height=600');
+   popup.document.open();
+   popup.document.write("<html><head></head><body onload='print()'>");
+   popup.document.write(originalImage);
+   popup.document.write("</body></html>");
+   popup.document.close();           
+}
+</script>
+
+{% endblock %}
+
+

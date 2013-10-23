@@ -1,0 +1,30 @@
+promocao:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:Promotion:index" }
+
+promocao_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:Promotion:show" }
+
+promocao_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:Promotion:new" }
+
+promocao_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:Promotion:create" }
+    requirements: { _method: post }
+
+promocao_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:Promotion:edit" }
+
+promocao_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:Promotion:update" }
+    requirements: { _method: post|put }
+
+promocao_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:Promotion:delete" }
+    requirements: { _method: post|delete }
