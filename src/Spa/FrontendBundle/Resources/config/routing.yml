@@ -47,3 +47,4 @@ spa_frontend_view_promotion:
     defaults: { _controller: SpaFrontendBundle:Default:viewPromotion }
 
 
+

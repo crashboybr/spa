@@ -6,6 +6,19 @@ spa_backend_upload:
     pattern:  /upload
     defaults: { _controller: SpaBackendBundle:Default:index }
 
+spa_backend_index:
+    pattern:  /
+    defaults: { _controller: SpaBackendBundle:Default:index }
+
+login:
+    pattern:   /login
+    defaults:  { _controller: SpaBackendBundle:Default:login }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    path:   /logout
 
 SpaBackendBundle_produto:
     resource: "@SpaBackendBundle/Resources/config/routing/product.yml"
@@ -50,4 +63,9 @@ SpaBackendBundle_servicos:
 SpaBackendBundle_promocao:
         resource: "@SpaBackendBundle/Resources/config/routing/promotion.yml"
         prefix:   /promocao
-        
+
+SpaBackendBundle_usuarios:
+        resource: "@SpaBackendBundle/Resources/config/routing/user.yml"
+        prefix:   /usuarios
+
+

@@ -1,0 +1,30 @@
+usuarios:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:User:index" }
+
+usuarios_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:User:show" }
+
+usuarios_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:User:new" }
+
+usuarios_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:User:create" }
+    requirements: { _method: post }
+
+usuarios_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:User:edit" }
+
+usuarios_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:User:update" }
+    requirements: { _method: post|put }
+
+usuarios_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:User:delete" }
+    requirements: { _method: post|delete }

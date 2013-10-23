@@ -1,0 +1,34 @@
+Spa\BackendBundle\Entity\User:
+    type: entity
+    table: spa_users
+    repositoryClass: Spa\BackendBundle\Entity\UserRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        username:
+            type: string
+            length: 255
+        salt:
+            type: string
+            length: 255
+        password:
+            type: string
+            length: 255
+        isActive:
+            type: boolean
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+        lastLogin:
+            type: datetime
+            column: last_login
+            nullable: true
+    lifecycleCallbacks:
+        prePersist: [ updatedTimestamps ]
+        preUpdate: [ updatedTimestamps ]

@@ -22,7 +22,135 @@
 
 {% block body_class %}unidades{% endblock %}
 {% block body %}
+<script>
 
+$(document).ready(function (){
+
+
+	var state = window.location.hash.substring(1);
+	if (state)
+	{
+		switch(state)
+		{
+			case "acre":
+				$('#estado option[value=AC]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br1').addClass('active-region')}, 200);
+				break;
+			case "alagoas":
+				$('#estado option[value=AL]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br2').addClass('active-region')}, 200);
+				break;
+			case "amapa":
+				$('#estado option[value=AP]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br3').addClass('active-region')}, 200);
+				break;
+			case "amazonas":
+				$('#estado option[value=AM]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br4').addClass('active-region')}, 200);
+				break;
+			case "bahia":
+				$('#estado option[value=BA]').attr('selected', 'selected');
+				//console.log($('.br5').addClass('active-region'));
+				setTimeout(function(){ $('.br5').addClass('active-region')}, 200);
+				break;
+			case "ceara":
+				$('#estado option[value=CE]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br6').addClass('active-region')}, 200);
+				break;
+			case "distrito-federal":
+				$('#estado option[value=DF]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br7').addClass('active-region')}, 200);
+				break;
+			case "espirito-santo":
+				$('#estado option[value=ES]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br8').addClass('active-region')}, 200);
+				break;
+			case "goias":
+				$('#estado option[value=GO]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br9').addClass('active-region')}, 200);
+				break;
+			case "maranhao":
+				$('#estado option[value=MA]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br10').addClass('active-region')}, 200);
+				break;
+			case "mato-grosso":
+				$('#estado option[value=MT]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br11').addClass('active-region')}, 200);
+				break;
+			case "mato-grosso-do-sul":
+				$('#estado option[value=MS]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br12').addClass('active-region')}, 200);
+				break;
+			case "minas-gerais":
+				$('#estado option[value=MG]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br13').addClass('active-region')}, 200);
+				break;
+			case "para":
+				$('#estado option[value=PA]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br14').addClass('active-region')}, 200);
+				break;
+			case "paraiba":
+				$('#estado option[value=PB]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br15').addClass('active-region')}, 200);
+				break;
+			case "parana":
+				$('#estado option[value=PR]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br16').addClass('active-region')}, 200);
+				break;
+			case "pernambuco":
+				$('#estado option[value=PE]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br17').addClass('active-region')}, 200);
+				break;
+			case "piaui":
+				$('#estado option[value=PI]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br18').addClass('active-region')}, 200);
+				break;
+			case "rio-de-janeiro":
+				$('#estado option[value=RJ]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br19').addClass('active-region')}, 200);
+				break;
+			case "rio-grande-do-norte":
+				$('#estado option[value=RN]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br20').addClass('active-region')}, 200);
+				break;
+			case "rio-grande-do-sul":
+				$('#estado option[value=RS]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br21').addClass('active-region')}, 200);
+				break;
+			case "rondonia":
+				$('#estado option[value=RO]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br22').addClass('active-region')}, 200);
+				break;
+			case "roraima":
+				$('#estado option[value=RR]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br23').addClass('active-region')}, 200);
+				break;
+			case "santa-catarina":
+				$('#estado option[value=SC]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br24').addClass('active-region')}, 200);
+				break;
+			case "sao-paulo":
+				$('#estado option[value=SP]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br25').addClass('active-region')}, 200);
+				break;
+			case "sergipe":
+				$('#estado option[value=SE]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br26').addClass('active-region')}, 200);
+				break;
+			case "tocantins":
+				$('#estado option[value=TO]').attr('selected', 'selected');
+				setTimeout(function(){ $('.br27').addClass('active-region')}, 200);
+				break;
+
+
+		}
+		buscaEstado();
+	}
+
+});
+
+
+</script>
 
 <h2>Unidades</h2>
 	<hr class="titulo" />
