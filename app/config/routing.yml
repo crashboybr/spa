@@ -1,3 +1,4 @@
+
 spa_frontend:
     resource: "@SpaFrontendBundle/Resources/config/routing.yml"
     prefix:   /
@@ -9,3 +10,4 @@ spa_backend:
 _imagine:
     resource: .
     type:     imagine
+

@@ -65,6 +65,8 @@ swiftmailer:
     password:  %mailer_password%
     spool:     { type: memory }
 
+
+
 avalanche_imagine:
     filters:
         my_thumb:
