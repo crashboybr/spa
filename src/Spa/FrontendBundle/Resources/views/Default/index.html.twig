@@ -98,7 +98,18 @@ $(document).ready(function() {
 			<div class="homeVideoDestaque">
 				<h4>Vídeo em Destaque</h4>
 				<div class="boxesContainer">
-					<a class="linkVideo" href="{{ featured_video.url }}"><img src="http://img.youtube.com/vi/{{ youtube_id }}/0.jpg"></a>
+					{% if (featured_video.type == "externa") %}
+						<a class="linkVideo"  href="{{ featured_video.url }}" target=_blank>
+							<img src="{{ asset(featured_video.pic) }}"></a>
+						</a>
+					{% else %}
+					<a class="linkVideo"  href="{{ featured_video.url }}" title="{{ featured_video.description }}">
+						{% if (featured_video.type != "youtube" and featured_video.type != "vimeo") %}
+							<img src="{{ asset(featured_video.pic) }}"></a>
+						{% else %}
+							<img src="{{ featured_video.pic }}"></a>
+						{% endif %}
+					{% endif %}
 					<!--<iframe width="336" height="187" src="{{ featured_video.getUrl | replace({'watch?v=': 'embed/'}) }}" frameborder="0" allowfullscreen></iframe>-->
 					<span>[+]</span> Veja mais vídeos</a></div>
 			</div>

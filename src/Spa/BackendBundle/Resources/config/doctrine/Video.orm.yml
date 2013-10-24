@@ -10,12 +10,23 @@ Spa\BackendBundle\Entity\Video:
         url:
             type: string
             length: 255
-        featured:
-            type: boolean
+        type:
+            type: string
+            length: 255
+        pic:
+            type: string
+            length: 255
+            nullable: true
+        description:
+            type: text
+            nullable: true
         createdAt:
             type: datetime
             column: created_at
         updatedAt:
             type: datetime
             column: updated_at
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ preUpload, updatedTimestamps ]
+        preUpdate: [ updatedTimestamps ]
+        postPersist: [ upload ]

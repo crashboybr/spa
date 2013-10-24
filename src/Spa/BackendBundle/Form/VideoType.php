@@ -16,9 +16,13 @@ class VideoType extends AbstractType
     {
         $builder
             ->add('url')
-            ->add('featured')
-            ->add('createdAt')
-            ->add('updatedAt')
+            ->add('description')
+            ->add('type', 'choice', array(
+                'choices' => array('youtube' => 'Youtube', 'vimeo' => 'Vimeo', 'r7' => 'R7', 'outros' => 'Outros', 'externo' => 'Página Externa'),
+                'attr' => array('onchange' => 'showFile()'),
+                'label' => 'Tipo de Video'
+            ))
+            ->add('file')
         ;
     }
     

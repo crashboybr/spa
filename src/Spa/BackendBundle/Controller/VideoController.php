@@ -40,6 +40,23 @@ class VideoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            if ($entity->getType() == "vimeo")
+            {
+                $vimeo_id = explode('/', $entity->getUrl());
+                
+                $vimeo_id = $vimeo_id[4];
+
+                $json = file_get_contents("http://vimeo.com/api/v2/video/" . $vimeo_id . ".json");
+                $vimeo_arr = json_decode($json);
+                $entity->setPic($vimeo_arr[0]->thumbnail_medium);
+            }
+            else if ($entity->getType() == "youtube")
+            {
+                $youtube_id = explode('/', $entity->getUrl());
+                $youtube_id = $youtube_id[4];
+                $entity->setPic('http://img.youtube.com/vi/' . $youtube_id . '/0.jpg');
+            }
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();

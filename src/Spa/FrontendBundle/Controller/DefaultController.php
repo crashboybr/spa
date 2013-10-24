@@ -13,12 +13,21 @@ class DefaultController extends Controller
     public function indexAction()
     {
     	$em = $this->getDoctrine()->getManager();
-		$featured_video = $em->getRepository('SpaBackendBundle:Video')
-            ->findOneBy(array('featured' => 1));
+		//$featured_video = $em->getRepository('SpaBackendBundle:Video')
+         //   ->findOneBy(array('featured' => 1));
 
-        parse_str( parse_url( $featured_video->getUrl(), PHP_URL_QUERY ), $youtube_id );
+        $query = $em->createQuery(
+            'SELECT p
+            FROM SpaBackendBundle:Video p
+            ORDER BY p.createdAt DESC'
+        )->setMaxResults(1);
 
-        $youtube_id = $youtube_id['v'];
+        $featured_video = $query->getSingleResult();
+        
+
+        //parse_str( parse_url( $featured_video->getUrl(), PHP_URL_QUERY ), $youtube_id );
+
+        //$youtube_id = $youtube_id['v'];
         
         $sliders = $em->getRepository('SpaBackendBundle:Slider')
             ->findAll(); 
@@ -44,7 +53,7 @@ class DefaultController extends Controller
         
         return $this->render('SpaFrontendBundle:Default:index.html.twig', array(
             'featured_video' => $featured_video,
-            'youtube_id' => $youtube_id,
+            //'youtube_id' => $youtube_id,
             'sliders' => $sliders, 
             'bannersimples' => $bannersimples, 
             'bannersduplo' => $bannersduplo,

@@ -1,6 +1,28 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<script src="/assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+<script>
+jQuery(document).ready(function() {       
+           $("#spa_backendbundle_video_file").hide();
+	$('label[for=spa_backendbundle_video_file]').hide();
+        });
+
+function showFile()
+{
+	if ($("#spa_backendbundle_video_type").val() != "vimeo" && $("#spa_backendbundle_video_type").val() != "youtube" )
+	{
+		$("#spa_backendbundle_video_file").show();
+		$('label[for=spa_backendbundle_video_file]').show();
+	}
+	else
+	{
+	
+		$("#spa_backendbundle_video_file").hide();
+		$('label[for=spa_backendbundle_video_file]').hide();
+	}
+}
+</script>
     <h1>Video creation</h1>
 
     {{ form(form) }}
