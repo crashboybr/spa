@@ -6,12 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Spa\BackendBundle\Entity\Unit;
 use Spa\BackendBundle\Entity\Post;
-
+use Symfony\Component\Security\Core\SecurityContext;
 
 class DefaultController extends Controller
 {
     public function indexAction()
     {
+
     	$em = $this->getDoctrine()->getManager();
 		//$featured_video = $em->getRepository('SpaBackendBundle:Video')
          //   ->findOneBy(array('featured' => 1));
@@ -24,7 +25,7 @@ class DefaultController extends Controller
 
         $featured_video = $query->getSingleResult();
         
-
+       
         //parse_str( parse_url( $featured_video->getUrl(), PHP_URL_QUERY ), $youtube_id );
 
         //$youtube_id = $youtube_id['v'];
@@ -60,14 +61,7 @@ class DefaultController extends Controller
             'bannerdireita' => $bannerdireita
         ));
     }
-    public function productAction()
-    {
-    	$em = $this->getDoctrine()->getManager();
-		$products = $em->getRepository('SpaBackendBundle:Product')
-            ->findAll();
-   
-    	return $this->render('SpaFrontendBundle:Default:product.html.twig', array('products' => $products));
-    }
+    
 
     public function unitAction()
     {
@@ -260,6 +254,32 @@ class DefaultController extends Controller
         return $this->render('SpaFrontendBundle:Default:viewService.html.twig', array('service' => $service, 'services' => $services));       
     }
 
+
+    public function productAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('SpaBackendBundle:Product')
+            ->findAll();
+   
+        return $this->render('SpaFrontendBundle:Default:products.html.twig', array('products' => $products));
+    }
+
+   public function viewProductAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('SpaBackendBundle:Product')
+            ->findAll();  
+
+        $product = $em->getRepository('SpaBackendBundle:Product')
+            ->findOneBy(array('slug' => $slug));  
+
+        if (!$product) {
+            throw $this->createNotFoundException('Produto não encontrado!');
+        }    
+
+        return $this->render('SpaFrontendBundle:Default:viewProduct.html.twig', array('products' => $products, 'product' => $product));       
+    }
+
     public function promotionAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -288,6 +308,33 @@ class DefaultController extends Controller
         return $this->render('SpaFrontendBundle:Default:viewPromotion.html.twig', array('promotion' => $promotion, 'fixed_promotions' => $fixed_promotions));       
     }
 
+    public function franqueadoAction()
+    {
+        $units = null;
+        return $this->render('SpaFrontendBundle:Default:viewMap.html.twig', array('units' => $units));
+    }
+
+    public function loginAction()
+    {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+
+        // get the login error if there is one
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(
+                SecurityContext::AUTHENTICATION_ERROR
+            );
+        } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }
+
+        return $this->render('SpaFrontendBundle:Default:login.html.twig', array(
+                // last username entered by the user
+                'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+                'error'         => $error,
+            ));
+    }
 
     public function toAscii($str, $replace=array(), $delimiter='-') {
      if( !empty($replace) ) {

@@ -68,4 +68,6 @@ SpaBackendBundle_usuarios:
         resource: "@SpaBackendBundle/Resources/config/routing/user.yml"
         prefix:   /usuarios
 
-
+SpaBackendBundle_admins:
+        resource: "@SpaBackendBundle/Resources/config/routing/adminuser.yml"
+        prefix:   /admins

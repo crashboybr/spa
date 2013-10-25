@@ -19,7 +19,8 @@ class AppKernel extends Kernel
             new Spa\BackendBundle\SpaBackendBundle(),
             new Spa\FrontendBundle\SpaFrontendBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle()
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Divi\AjaxLoginBundle\DiviAjaxLoginBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

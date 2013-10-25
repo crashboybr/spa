@@ -27,13 +27,27 @@ class Product
     /**
      * @var string
      */
-    private $info;
+    private $description;
 
     /**
      * @var string
      */
-    private $path;
+    private $pic;
 
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    
+    private $slug;
+
+    /* begin upload file */
     /**
      * @Assert\File(maxSize="6000000")
      */
@@ -51,12 +65,12 @@ class Product
         $this->file = $file;
 
         // check if we have an old image path
-        if (isset($this->path)) {
+        if (isset($this->pic)) {
             // store the old name to delete after the update
-            $this->temp = $this->path;
-            $this->path = null;
+            $this->temp = $this->pic;
+            $this->pic = null;
         } else {
-            $this->path = 'initial';
+            $this->pic = 'initial';
         }
     }
 
@@ -67,9 +81,9 @@ class Product
     public function preUpload()
     {
         if (null !== $this->getFile()) {
-            // do whatever you want to generate a unique name
-            $filename = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename.'.'.$this->getFile()->guessExtension();
+            
+            $filename = "image_" . uniqid();
+            $this->pic = $this->getUploadDir() . '/' . $filename.'.'.$this->getFile()->guessExtension();
         }
     }
 
@@ -87,7 +101,7 @@ class Product
         // if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
-        $this->getFile()->move($this->getUploadRootDir(), $this->path);
+        $this->getFile()->move($this->getUploadRootDir(), $this->pic);
 
         // check if we have an old image
         if (isset($this->temp)) {
@@ -121,6 +135,37 @@ class Product
     }
 
 
+    public function getAbsolutePath()
+    {
+        return null === $this->pic
+            ? null
+            : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->pic
+            ? null
+            : $this->getUploadDir().'/'.$this->pic;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesnt screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/produtos';
+    } 
+
+    /* end upload file */
+
+
     /**
      * Get id
      *
@@ -135,7 +180,7 @@ class Product
      * Set name
      *
      * @param string $name
-     * @return Product
+     * @return Service
      */
     public function setName($name)
     {
@@ -155,78 +200,133 @@ class Product
     }
 
     /**
-     * Set info
+     * Set description
      *
-     * @param string $info
-     * @return Product
+     * @param string $description
+     * @return Service
      */
-    public function setInfo($info)
+    public function setDescription($description)
     {
-        $this->info = $info;
+        $this->description = $description;
     
         return $this;
     }
 
     /**
-     * Get info
+     * Get description
      *
      * @return string 
      */
-    public function getInfo()
+    public function getDescription()
     {
-        return $this->info;
+        return $this->description;
     }
-
-    public function getAbsolutePath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadRootDir().'/'.$this->path;
-    }
-
-    public function getWebPath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadDir().'/'.$this->path;
-    }
-
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads/products';
-    } 
-
-    
 
     /**
-     * Set path
+     * Set pic
      *
-     * @param string $path
-     * @return Product
+     * @param string $pic
+     * @return Service
      */
-    public function setPath($path)
+    public function setPic($pic)
     {
-        $this->path = $path;
+        $this->pic = $pic;
     
         return $this;
     }
 
     /**
-     * Get path
+     * Get pic
      *
      * @return string 
      */
-    public function getPath()
+    public function getPic()
     {
-        return $this->path;
+        return $this->pic;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Service
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Service
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $this->toAscii($this->name);
+        return $this;
+    }
+
+    public function toAscii($str, $replace=array(), $delimiter='-') {
+     if( !empty($replace) ) {
+      $str = str_replace((array)$replace, ' ', $str);
+     }
+
+     $clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+     $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
+     $clean = strtolower(trim($clean, '-'));
+     $clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+
+     return $clean;
+    }
+
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 }

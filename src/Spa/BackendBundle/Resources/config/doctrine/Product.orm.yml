@@ -10,11 +10,32 @@ Spa\BackendBundle\Entity\Product:
         name:
             type: string
             length: 255
-        info:
+        description:
             type: text
-        path:
+        pic:
             type: string
             length: 255
+            nullable: TRUE
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+        slug:
+                type: string
+                length: 128
+                gedmo:
+                    slug:
+                        separator: -
+                        style: camel
+                        fields:
+                            - name
+    indexes:
+        search_idx:
+            columns: slug
     lifecycleCallbacks:
-        prePersist: [ preUpload ]
+        prePersist: [ preUpload, updatedTimestamps ]
+        preUpdate: [ updatedTimestamps ]
         postPersist: [ upload ]
+

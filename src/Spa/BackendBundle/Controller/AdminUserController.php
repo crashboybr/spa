@@ -5,66 +5,65 @@ namespace Spa\BackendBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Spa\BackendBundle\Entity\Product;
-use Spa\BackendBundle\Form\ProductType;
+use Spa\BackendBundle\Entity\AdminUser;
+use Spa\BackendBundle\Form\AdminUserType;
 
 /**
- * Product controller.
+ * AdminUser controller.
  *
  */
-class ProductController extends Controller
+class AdminUserController extends Controller
 {
 
     /**
-     * Lists all Product entities.
+     * Lists all AdminUser entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SpaBackendBundle:Product')->findAll();
+        $entities = $em->getRepository('SpaBackendBundle:AdminUser')->findAll();
 
-        return $this->render('SpaBackendBundle:Product:index.html.twig', array(
+        return $this->render('SpaBackendBundle:AdminUser:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Product entity.
+     * Creates a new AdminUser entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Product();
+        $entity = new AdminUser();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $entity->setSlug($entity->getName());
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('produto_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admins_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('SpaBackendBundle:Product:new.html.twig', array(
+        return $this->render('SpaBackendBundle:AdminUser:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-    * Creates a form to create a Product entity.
+    * Creates a form to create a AdminUser entity.
     *
-    * @param Product $entity The entity
+    * @param AdminUser $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Product $entity)
+    private function createCreateForm(AdminUser $entity)
     {
-        $form = $this->createForm(new ProductType(), $entity, array(
-            'action' => $this->generateUrl('produto_create'),
+        $form = $this->createForm(new AdminUserType(), $entity, array(
+            'action' => $this->generateUrl('admins_create'),
             'method' => 'POST',
         ));
 
@@ -74,59 +73,59 @@ class ProductController extends Controller
     }
 
     /**
-     * Displays a form to create a new Product entity.
+     * Displays a form to create a new AdminUser entity.
      *
      */
     public function newAction()
     {
-        $entity = new Product();
+        $entity = new AdminUser();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('SpaBackendBundle:Product:new.html.twig', array(
+        return $this->render('SpaBackendBundle:AdminUser:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Product entity.
+     * Finds and displays a AdminUser entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SpaBackendBundle:Product')->find($id);
+        $entity = $em->getRepository('SpaBackendBundle:AdminUser')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Product entity.');
+            throw $this->createNotFoundException('Unable to find AdminUser entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('SpaBackendBundle:Product:show.html.twig', array(
+        return $this->render('SpaBackendBundle:AdminUser:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
-     * Displays a form to edit an existing Product entity.
+     * Displays a form to edit an existing AdminUser entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SpaBackendBundle:Product')->find($id);
+        $entity = $em->getRepository('SpaBackendBundle:AdminUser')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Product entity.');
+            throw $this->createNotFoundException('Unable to find AdminUser entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('SpaBackendBundle:Product:edit.html.twig', array(
+        return $this->render('SpaBackendBundle:AdminUser:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -134,16 +133,16 @@ class ProductController extends Controller
     }
 
     /**
-    * Creates a form to edit a Product entity.
+    * Creates a form to edit a AdminUser entity.
     *
-    * @param Product $entity The entity
+    * @param AdminUser $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Product $entity)
+    private function createEditForm(AdminUser $entity)
     {
-        $form = $this->createForm(new ProductType(), $entity, array(
-            'action' => $this->generateUrl('produto_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new AdminUserType(), $entity, array(
+            'action' => $this->generateUrl('admins_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -152,19 +151,19 @@ class ProductController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Product entity.
+     * Edits an existing AdminUser entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SpaBackendBundle:Product')->find($id);
+        $entity = $em->getRepository('SpaBackendBundle:AdminUser')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Product entity.');
+            throw $this->createNotFoundException('Unable to find AdminUser entity.');
         }
-        $entity->setSlug($entity->getName());
+
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
@@ -172,17 +171,17 @@ class ProductController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('produto_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admins_edit', array('id' => $id)));
         }
 
-        return $this->render('SpaBackendBundle:Product:edit.html.twig', array(
+        return $this->render('SpaBackendBundle:AdminUser:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Product entity.
+     * Deletes a AdminUser entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -192,21 +191,21 @@ class ProductController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SpaBackendBundle:Product')->find($id);
+            $entity = $em->getRepository('SpaBackendBundle:AdminUser')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Product entity.');
+                throw $this->createNotFoundException('Unable to find AdminUser entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('produto'));
+        return $this->redirect($this->generateUrl('admins'));
     }
 
     /**
-     * Creates a form to delete a Product entity by id.
+     * Creates a form to delete a AdminUser entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -215,7 +214,7 @@ class ProductController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('produto_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admins_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

@@ -1,7 +1,6 @@
-Spa\BackendBundle\Entity\User:
+Spa\BackendBundle\Entity\AdminUser:
     type: entity
-    table: spa_users
-    repositoryClass: Spa\BackendBundle\Entity\UserRepository
+    table: null
     fields:
         id:
             type: integer

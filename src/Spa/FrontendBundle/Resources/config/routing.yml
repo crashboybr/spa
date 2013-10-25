@@ -2,10 +2,6 @@ spa_frontend_homepage:
     pattern:  /
     defaults: { _controller: SpaFrontendBundle:Default:index }
 
-spa_frontend_product:
-    pattern:  /produtos
-    defaults: { _controller: SpaFrontendBundle:Default:product }
-
 spa_frontend_unit:
     pattern:  /unidades
     defaults: { _controller: SpaFrontendBundle:Default:unit }
@@ -45,6 +41,15 @@ spa_frontend_promotion:
 spa_frontend_view_promotion:
     pattern:  /promocoes/{slug}
     defaults: { _controller: SpaFrontendBundle:Default:viewPromotion }
+
+spa_frontend_product:
+    pattern:  /produtos
+    defaults: { _controller: SpaFrontendBundle:Default:product }
+
+spa_frontend_view_product:
+    pattern:  /produtos/{slug}
+    defaults: { _controller: SpaFrontendBundle:Default:viewProduct }
+
 
 
 

@@ -82,7 +82,7 @@ class Video
     {
         if (null !== $this->getFile()) {
             // do whatever you want to generate a unique name
-            $filename = sha1(uniqid(mt_rand(), true));
+            $filename = "image_" . uniqid();
             $this->pic = $this->getUploadDir() . '/' . $filename.'.'.$this->getFile()->guessExtension();
         }
     }
@@ -160,7 +160,7 @@ class Video
     {
         // get rid of the __DIR__ so it doesnt screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/banners';
+        return 'uploads/videos';
     } 
 
     /* end upload file */

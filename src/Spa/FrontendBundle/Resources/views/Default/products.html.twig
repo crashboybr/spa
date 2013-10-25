@@ -1,7 +1,7 @@
 {% extends 'SpaFrontendBundle::layout.html.twig' %}
 
 
-{% block body_class %}servicos{% endblock %}
+{% block body_class %}produtos{% endblock %}
 {% block body %}
 <script>
 $(document).ready(function() {
@@ -17,31 +17,29 @@ $(document).ready(function() {
 
 </script>
 
-
-		<h2>Servicos</h2>
+		<h2>Produtos</h2>
 		<hr class="titulo" />
 		<div class="c02">
 			<div class="colConteudo">
 				<ul class="submenu-interno">
-					{% for service in services %}
-						<li id="{{ service.id }}">
-							<a href="{{ path('spa_frontend_show_service', { slug: service.slug }) }}">
-								{{ service.name }}
+					{% for product in products %}
+						<li id="{{ product.id }}">
+							<a href="{{ path('spa_frontend_view_product', { slug: product.slug }) }}">
+								{{ product.name }}
 							</a>
 							<span></span>
 						</li>
 					{% endfor %}
-
-
 				</ul>
-				<div class="colDescricao" id="principal">
-					<p>O Spa das Sobrancelhas reúne serviços especialmente desenvolvidos para o cuidado com as sobrancelhas, cílios e face, visando o Embelezamento do Olhar. Aliando técnicas especiais e qualificação, nossos profissionais indicarão os melhores serviços para tornar o seu olhar expressivo e sedutor, aumentando seu poder de comunicação com o mundo.</p>
+				<div class="colDescricao">
+					<p>Além de produtos exclusivos para manter a beleza do seu olhar, desenvolvemos uma linha especial para o cuidado diário com sua pele. Com linhas específicas para cuidados faciais e corporais, nossos produtos são de fabricação exclusiva e vendidos somente nas Unidades Spa das Sobrancelhas.</p>
+					<p class="destaque">Vá até a unidade Spa das Sobrancelhas mais próxima para adquirir estes produtos exclusivos.</p>
 				</div>
-				
-
 			</div>
 			<hr class="fim" />
 		</div>
+
+
 
 
 {% endblock %}

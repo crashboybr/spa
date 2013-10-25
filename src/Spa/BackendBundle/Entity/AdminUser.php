@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
- * User
+ * AdminUser
  */
-class User implements AdvancedUserInterface, \Serializable
+class AdminUser implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var integer
@@ -50,7 +50,6 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $lastLogin;
 
-
     public function __construct()
     {
         $this->isActive = true;
@@ -62,7 +61,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array('ROLE_ADMIN');
     }
 
     /**
@@ -92,6 +91,7 @@ class User implements AdvancedUserInterface, \Serializable
         ) = unserialize($serialized);
     }
 
+
     /**
      * Get id
      *
@@ -106,7 +106,7 @@ class User implements AdvancedUserInterface, \Serializable
      * Set username
      *
      * @param string $username
-     * @return User
+     * @return AdminUser
      */
     public function setUsername($username)
     {
@@ -129,7 +129,7 @@ class User implements AdvancedUserInterface, \Serializable
      * Set salt
      *
      * @param string $salt
-     * @return User
+     * @return AdminUser
      */
     public function setSalt($salt)
     {
@@ -152,7 +152,7 @@ class User implements AdvancedUserInterface, \Serializable
      * Set password
      *
      * @param string $password
-     * @return User
+     * @return AdminUser
      */
     public function setPassword($password)
     {
@@ -198,7 +198,7 @@ class User implements AdvancedUserInterface, \Serializable
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return User
+     * @return AdminUser
      */
     public function setCreatedAt($createdAt)
     {
@@ -221,7 +221,7 @@ class User implements AdvancedUserInterface, \Serializable
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
-     * @return User
+     * @return AdminUser
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -243,8 +243,8 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * Set lastLogin
      *
-     * @param \DateTime $updatedAt
-     * @return User
+     * @param \DateTime $lastLogin
+     * @return AdminUser
      */
     public function setLastLogin($lastLogin)
     {

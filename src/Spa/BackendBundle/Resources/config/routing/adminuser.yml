@@ -1,0 +1,30 @@
+admins:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:AdminUser:index" }
+
+admins_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:AdminUser:show" }
+
+admins_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:AdminUser:new" }
+
+admins_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:AdminUser:create" }
+    requirements: { _method: post }
+
+admins_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:AdminUser:edit" }
+
+admins_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:AdminUser:update" }
+    requirements: { _method: post|put }
+
+admins_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:AdminUser:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,19 @@
+spa_members_homepage:
+    pattern:  /
+    defaults: { _controller: SpaFrontendBundle:Members:index }
+
+
+
+spa_members_login:
+    pattern:  /login
+    defaults: { _controller: SpaFrontendBundle:Members:login }
+
+spa_members_login_check:
+    pattern:  /login_check
+
+spa_members_logout:
+    pattern:  /logout
+
+
+
+

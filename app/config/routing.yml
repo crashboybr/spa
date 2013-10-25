@@ -11,3 +11,7 @@ _imagine:
     resource: .
     type:     imagine
 
+spa_members:
+    resource: "@SpaFrontendBundle/Resources/config/members/routing.yml"
+    prefix:   /franqueado
+
