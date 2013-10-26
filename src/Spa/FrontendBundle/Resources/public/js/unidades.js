@@ -1,5 +1,5 @@
 $(function($){
-    $('#map-brazil').cssMap({'size' : 500,loadingText : 'Carregando mapa...'});
+    $('#map-brazil').cssMap({'size' : 340,loadingText : 'Carregando mapa...'});
     
 
     $('#map-brazil li').on('click', function(){

@@ -1,0 +1,18 @@
+
+			
+			<li class="servicos"><a href="{{ path('spa_frontend_services') }}">Serviços</a>
+				<ul>
+					{% for s in services %}
+						<li><a href="{{ path('spa_frontend_show_service', { slug: s.slug }) }}">{{ s.name }}</a><span></span></li>
+					{% endfor %}
+				</ul>
+			</li>
+			
+			<li class="produtos"><a href="{{ path('spa_frontend_product') }}">Produtos</a>
+				<ul>
+					{% for p in products %}
+						<li><a href="{{ path('spa_frontend_view_product', { slug: p.slug }) }}">{{ p.name }}</a><span></span></li>
+					{% endfor %}
+				</ul>
+			</li>
+			

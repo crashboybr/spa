@@ -1,53 +1,25 @@
 <ul class="nav">
-			<li class="promocoes"><a href="/promocoes">Promoções</a></li>
-			<li class="unidades"><a href="/unidades">Unidades</a></li>
-			<li class="servicos"><a href="/servicos">Serviços</a>
-				<!-- TODO: class="foco" -->
-				<ul>
-					<li><a href="/servicos/avaliacao">Avaliação</a><span></span></li>
-					<li><a href="/servicos/design">Design de sobrancelhas</a><span></span></li>
-					<li><a href="/servicos/manutencao">Manutenção de design</a><span></span></li>
-					<li><a href="/servicos/coloracao_henna_sobrancelhas">Coloração com Henna para sobrancelhas</a><span></span></li>
-					<li><a href="/servicos/coloracao_sobrancelhas_cilios">Coloração de pelos de sobrancelhas e cílios</a><span></span></li>
-					<li><a href="/servicos/desondulacao">Desondulaçao de sobrancelhas</a><span></span></li>
-					<li><a href="/servicos/dermopigmentacao">Dermopigmentação de sobrancelhas</a><span></span></li>
-					<li><a href="/servicos/retoque_revisao">Retoque e Revisão</a><span></span></li>
-					<li><a href="/servicos/permanente_cilios">Permanente de cílios</a><span></span></li>
-					<li><a href="/servicos/renov">Renov</a><span></span></li>
-					<li><a href="/servicos/revitale">Revitale</a><span></span></li>
-				</ul>
-			</li>
-			<li class="produtos"><a href="/produtos">Produtos</a>
-				<ul>
-					<!-- TODO: class="foco" -->
-					<li><a href="/produtos/sabonete_liq_facial">Sabonete Líquido Facial</a><span></span></li>
-					<li><a href="/produtos/locao_adstringente">Loção Adstringente</a><span></span></li>
-					<li><a href="/produtos/demaquilante">Demaquilante</a><span></span></li>
-					<li><a href="/produtos/primer_facial">Primer Facial</a><span></span></li>
-					<li><a href="/produtos/mousse_corretiva">Mousse Corretiva</a><span></span></li>
-					<li><a href="/produtos/nutrifix">Nutrifix</a><span></span></li>
-					<li><a href="/produtos/lapis">Lapis Spa das Sobrancelhas</a><span></span></li>
-					<li><a href="/produtos/gel_emoliente">Gel Emoliente</a><span></span></li>
-					<li><a href="/produtos/creme_maos">Creme para as Mãos</a><span></span></li>
-					<li><a href="/produtos/creme_pes">Creme para os Pés</a><span></span></li>
-					<li><a href="/produtos/gel_calmante">Gel Calmante</a><span></span></li>
-				</ul>
-			</li>
-			<li class="noticias"><a href="/noticias">Notícias</a></li>
-			<li class="sejaFranqueado"><a href="/sejafranqueado">Seja um Franqueado</a></li>
-		</ul>
+	<li class="promocoes"><a href="{{ path('spa_frontend_promotion') }}">Promoções</a></li>
+	<li class="unidades"><a href="{{ path('spa_frontend_unit') }}">Unidades</a></li>
+	
+	{{ render(controller('SpaFrontendBundle:Default:renderMenu')) }}
+	
+	<li class="noticias"><a href="{{ path('spa_frontend_news') }}">Notícias</a></li>
+	<li class="sejaFranqueado"><a href="{{ path('spa_frontend_sejafranqueado') }}">Seja um Franqueado</a></li>
+</ul>
 
 
-		<ul class="navSec">
-			<li class="institucional"><a href="/institucional">institucional</a></li>
-			<li class="faleconosco"><a href="/faleconosco">fale conosco</a></li>
-			<li class="siga">
-				siga-nos 
-				<span class="sigaIcones">
-					<a id="navTwitter" class="navSigaItem" href="https://twitter.com/SdaSobrancelhas" target="_blank" title="Twitter"><span>twitter</span></a>
-					<a id="navFacebook" class="navSigaItem" href="https://www.facebook.com/spadassobrancelhas" target="_blank" title="Facebook"><span>facebook</span></a>
-					<a id="navYoutube" class="navSigaItem" href="http://www.youtube.com/user/spasobrancelhas" target="_blank" title="Youtube"><span>youtube</span></a>
-				</span>
-			</li>
-			<li class="areaFranqueado"><a href="javascript:void(0)" onclick="$('#areafranqueado').show()">área do franqueado</a></li>
-		</ul>
+<ul class="navSec">
+	<li class="institucional"><a href="{{ path('spa_frontend_institucional') }}">institucional</a></li>
+	<li class="faleconosco"><a href="{{ path('spa_frontend_contact') }}">fale conosco</a></li>
+	<li class="siga">
+		siga-nos 
+		<span class="sigaIcones">
+			<a id="navTwitter" class="navSigaItem" href="https://twitter.com/SdaSobrancelhas" target="_blank" title="Twitter"><span>twitter</span></a>
+			<a id="navFacebook" class="navSigaItem" href="https://www.facebook.com/SdaSobrancelhas" target="_blank" title="Facebook"><span>facebook</span></a>
+			<a id="navYoutube" class="navSigaItem" href="http://www.youtube.com/user/spasobrancelhas" target="_blank" title="Youtube"><span>youtube</span></a>
+		</span>
+	</li>
+	<li class="areaFranqueado"><a href="javascript:void(0)" onclick="$('#areafranqueado').show()">área do franqueado</a></li>
+</ul>
+

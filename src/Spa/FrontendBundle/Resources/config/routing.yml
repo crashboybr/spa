@@ -50,6 +50,16 @@ spa_frontend_view_product:
     pattern:  /produtos/{slug}
     defaults: { _controller: SpaFrontendBundle:Default:viewProduct }
 
+spa_frontend_sejafranqueado:
+    pattern:  /sejafranqueado
+    defaults: { _controller: SpaFrontendBundle:Default:sejaFranqueado }
 
+spa_frontend_institucional:
+    pattern:  /institucional
+    defaults: { _controller: SpaFrontendBundle:Default:institucional }
+
+spa_frontend_contact:
+    pattern:  /faleconosco
+    defaults: { _controller: SpaFrontendBundle:Default:contact }
 
 

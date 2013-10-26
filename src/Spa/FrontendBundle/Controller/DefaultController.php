@@ -287,7 +287,10 @@ class DefaultController extends Controller
         $fixed_promotions = $em->getRepository('SpaBackendBundle:Promotion')
             ->findBy(array('fixed' => true));    
         $sazonal_promotion = $em->getRepository('SpaBackendBundle:Promotion')
-            ->findOneBy(array('fixed' => false));    
+            ->findOneBy(
+                array('fixed' => false),
+                array('createdAt' => 'DESC')
+            );    
             
          return $this->render('SpaFrontendBundle:Default:promotion.html.twig', array('sazonal_promotion' => $sazonal_promotion, 'fixed_promotions' => $fixed_promotions));
     }
@@ -335,6 +338,24 @@ class DefaultController extends Controller
                 'error'         => $error,
             ));
     }
+
+
+
+    public function renderMenuAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('SpaBackendBundle:Product')
+            ->findAll();
+
+        $services = $em->getRepository('SpaBackendBundle:Service')
+            ->findAll();
+        return $this->render('SpaFrontendBundle::menu.html.twig', array(
+                // last username entered by the user
+                'products' => $products,
+                'services' => $services,
+            ));
+    }
+
 
     public function toAscii($str, $replace=array(), $delimiter='-') {
      if( !empty($replace) ) {
