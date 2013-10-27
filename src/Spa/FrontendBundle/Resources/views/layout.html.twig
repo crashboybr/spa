@@ -34,7 +34,7 @@ filter='cssrewrite' %}
 	<div id="cabecalho">
 		<h1><a href="/" title="Home"><span>Spa das Sobrancelhas</span></a></h1>
 
-		{{ include('SpaFrontendBundle::nav.html.twig') }}
+		{{ render(controller('SpaFrontendBundle:Default:renderMenu')) }}
 
 
 	</div>

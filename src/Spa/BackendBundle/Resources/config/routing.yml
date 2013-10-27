@@ -71,3 +71,11 @@ SpaBackendBundle_usuarios:
 SpaBackendBundle_admins:
         resource: "@SpaBackendBundle/Resources/config/routing/adminuser.yml"
         prefix:   /admins
+
+SpaBackendBundle_menu:
+        resource: "@SpaBackendBundle/Resources/config/routing/menu.yml"
+        prefix:   /menu
+
+SpaBackendBundle_submenu:
+        resource: "@SpaBackendBundle/Resources/config/routing/submenu.yml"
+        prefix:   /submenu

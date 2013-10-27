@@ -1,0 +1,52 @@
+{% extends 'SpaFrontendBundle::layout.html.twig' %}
+
+
+{% block body_class %}institucional{% endblock %}
+{% block body %}
+<div class="slider"><img src="{{ asset('bundles/spafrontend/images/institucional-slider-01.jpg') }}" /></div>
+		<h2>A Rede Spa das Sobrancelhas</h2>
+		<div class="c02 banner">
+			<div class="colConteudo">
+				<p>O Spa das Sobrancelhas, centro especializado em &ldquo;Embelezamento do Olhar&rdquo;, foi fundado em 2007 a partir da visão empreendedora do jovem casal Marko Porto e Jane Muniz. Entrou para a rede de franchising em 2011 e saltou de 11 franquias neste ano para 160 no final de 2012. Atualmente, a rede conta com mais de 270 unidades espalhadas por todo o Brasil.</p>
+				<p>Com uma equipe altamente qualificada e treinada em processos seletivos promovidos em seu próprio Centro Técnico, o Spa das Sobrancelhas desenvolve trabalhos surpreendentes através de técnicas exclusivas, com o objetivo de dar (prover) às mulheres um novo olhar.</p><br />
+				<h4>Missão</h4>
+				<p>Garantir a excelência na entrega de produtos e serviços para o Embelezamento do Olhar aos nossos clientes, maximizando os resultados para os franqueados e colaboradores.</p>
+				<h4>Visão</h4>
+				<p>Ser a maior e a melhor Rede especializada no Embelezamento do Olhar do Brasil, com participação em mercados internacionais.</p>
+				<h4>Valores</h4>
+				<ul>
+					<li>Competência e inovação;</li>
+					<li>Estratégia e ética;</li>
+					<li>Trabalho em equipe com foco em resultados;</li>
+					<li>Relacionamento transparente com o público, franqueados e colaboradores, baseado na responsabilidade e na confiança entre as partes;</li>
+					<li>Crer no encadeamento das relações;</li>
+					<li>Buscar permanentemente o aperfeiçoamento das técnicas e dos comportamentos;</li>
+					<li>O compromisso com a verdade como garantia da qualidade nas relações.</li>
+				</ul>
+			</div>
+			<div class="colBanners">
+				{{ render(controller('SpaFrontendBundle:Default:bannerUnity')) }}
+			
+				{{ render(controller('SpaFrontendBundle:Default:bannerRight')) }}
+			</div>
+			<hr class="fim" />
+		</div>
+		<hr class="video" />
+		<h3 class="box">Confira nosso vídeo de apresentação e conheça um pouco de nossa história de sucesso.</h3>
+		<p class="video-institucional-thumb"><video controls="controls" poster="{{ asset('bundles/spafrontend/images/institucional-video.jpg') }}" width="100%">
+							<source src="http://www.spadassobrancelhas.com.br/newsletter/2013maio/1/video/video-1.mp4" type="video/mp4" />
+							<source src="http://www.spadassobrancelhas.com.br/newsletter/2013maio/1/video/video-1.webm" type="video/webm" />
+							<source src="http://www.spadassobrancelhas.com.br/newsletter/2013maio/1/video/video-1.ogv" type="video/ogg" />
+							<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="100%">
+								<param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+								<param name="allowFullScreen" value="true" />
+								<param name="wmode" value="transparent" />
+								<param name="flashVars" value="config={'playlist':['http%3A%2F%2Fwww.spadassobrancelhas.com.br%2Fnewsletter%2F2013maio%2F1%2Fimg%2Fbg-video-1.jpg',{'url':'http%3A%2F%2Fwww.spadassobrancelhas.com.br%2Fnewsletter%2F2013maio%2F1%2Fvideo%2Fvideo-1.mp4','autoPlay':false}]}" />
+								<img src="{{ asset('bundles/spafrontend/images/institucional-video.jpg') }}" />
+							</object>
+						</video><!--<a href="#"><img src="/_imgs/institucional-video.jpg" /></a>--></p>
+		<hr class="fim" />
+
+{% endblock %}
+
+

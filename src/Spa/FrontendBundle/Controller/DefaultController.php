@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Spa\BackendBundle\Entity\Unit;
 use Spa\BackendBundle\Entity\Post;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -344,18 +345,178 @@ class DefaultController extends Controller
     public function renderMenuAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $products = $em->getRepository('SpaBackendBundle:Product')
-            ->findAll();
 
-        $services = $em->getRepository('SpaBackendBundle:Service')
-            ->findAll();
+
+        $menus = $em->getRepository('SpaBackendBundle:Menu')
+            ->findAll(); 
+        /*echo "<pre>";
+        foreach ($menus as $menu)
+        {
+            \Doctrine\Common\Util\Debug::dump($menu->getSubMenus());
+        }
+        exit;*/
         return $this->render('SpaFrontendBundle::menu.html.twig', array(
-                // last username entered by the user
-                'products' => $products,
-                'services' => $services,
+                'menus' => $menus,
             ));
     }
 
+    public function sendMailAction()
+    {
+        $request = $this->getRequest();
+        $dados['nome'] = $request->request->get('nome');
+        $dados['email'] = $request->request->get('email');
+        $dados['re_email'] = $request->request->get('re_email');
+        $dados['email_alternativo'] = $request->request->get('email_alternativo');
+        $dados['telefone_fixo_ddd'] = $request->request->get('telefone_fixo_ddd');
+        $dados['telefone_fixo'] = $request->request->get('telefone_fixo');
+        $dados['celular_1_ddd'] = $request->request->get('celular_1_ddd');
+        $dados['celular_1'] = $request->request->get('celular_1');
+        $dados['celular_2_ddd'] = $request->request->get('celular_2_ddd');
+        $dados['celular_2'] = $request->request->get('celular_2');
+        $dados['estado'] = $request->request->get('estado');
+        $dados['cidade'] = $request->request->get('cidade');
+        $dados['investimento_pretendido'] = $request->request->get('investimento_pretendido');
+        $dados['inicio_franquia'] = $request->request->get('inicio_franquia');
+        $dados['observacoes'] = $request->request->get('observacoes');
+
+      
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Contato Franquia')
+        ->setFrom($dados['email'])
+        ->setTo('bernardo.d.alves@gmail.com')
+        ->setBody(
+            $this->renderView(
+                'SpaFrontendBundle:Default:email.txt.twig',
+                array('dados' => $dados)
+            )
+        )
+        ;
+        $this->get('mailer')->send($message);
+        
+        return $this->redirect($this->generateUrl('spa_frontend_sejafranqueado', array('obrigado' => true)));
+        //return $this->render('SpaFrontendBundle:Default:sejafranqueado.html.twig', array('obrigado' => true));
+    }
+
+    public function sendMailFaleConoscoAction()
+    {
+        $request = $this->getRequest();
+        $dados['nome'] = $request->request->get('nome');
+        $dados['sobrenome'] = $request->request->get('sobrenome');
+        $dados['email'] = $request->request->get('email');
+        $dados['assunto'] = $request->request->get('assunto');
+        $dados['telefone'] = $request->request->get('telefone');
+        $dados['celular'] = $request->request->get('celular');
+        $dados['mensagem'] = $request->request->get('mensagem');
+        $dados['anexo'] = $request->request->get('anexo');
+        
+        //var_dump($_FILES);exit;
+
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Contato Fale Conosco')
+        ->setFrom($dados['email'])
+        ->setTo('bernardo.d.alves@gmail.com')
+        ->setBody(
+            $this->renderView(
+                'SpaFrontendBundle:Default:emailfaleconosco.txt.twig',
+                array('dados' => $dados)
+            )
+        )
+        //->attach(\Swift_Attachment::fromPath($dados['anexo']))
+        ;
+        $this->get('mailer')->send($message);
+        
+        return $this->redirect($this->generateUrl('spa_frontend_faleconosco', array('obrigado' => true)));
+        //return $this->render('SpaFrontendBundle:Default:sejafranqueado.html.twig', array('obrigado' => true));
+    }
+
+    public function sejaFranqueadoAction()
+    {
+        $obrigado = false;
+        $request = $this->getRequest();
+        if ($request->query->get('obrigado'))
+            $obrigado = true;
+        
+
+        return $this->render('SpaFrontendBundle:Default:sejafranqueado.html.twig', array('obrigado' => $obrigado));
+    }
+
+    public function institucionalAction()
+    {
+        return $this->render('SpaFrontendBundle:Default:institucional.html.twig');
+    }
+
+    public function faleConoscoAction()
+    {
+        $obrigado = false;
+        $request = $this->getRequest();
+        if ($request->query->get('obrigado'))
+            $obrigado = true;
+        return $this->render('SpaFrontendBundle:Default:faleconosco.html.twig', array('obrigado' => $obrigado));
+    }
+
+    public function menuAction($slug)
+    {
+        switch ($slug)
+        {
+            case "promocoes":
+                return $this->promotionAction();
+
+            case "unidades":
+                return $this->unitAction();
+
+            case "servicos":
+                return $this->servicesAction();
+
+            case "produtos":
+                return $this->productAction();
+
+            case "noticias":
+                return $this->newsAction();
+
+            case "seja-um-franqueado":
+                return $this->sejaFranqueadoAction();
+
+            case "institucional":
+                return $this->institucionalAction();
+
+            case "faleconosco":
+                return $this->faleConoscoAction();
+
+            default:
+                throw new NotFoundHttpException("Page not found");
+
+        }
+        
+    }
+
+    public function subMenuAction($slug, $subslug)
+    {
+        switch ($slug)
+        {
+            case "promocoes":
+                return $this->promotionAction();
+
+            case "unidades":
+                return $this->unitAction();
+
+            case "servicos":
+                return $this->viewServiceAction($subslug);
+
+            case "produtos":
+                return $this->viewProductAction($subslug);
+
+            case "noticias":
+                return $this->newsAction();
+
+            case "seja-um-franqueado":
+                return $this->sejaFranqueadoAction();
+
+            default:
+                throw new NotFoundHttpException("Page not found");
+
+        }
+        
+    }
 
     public function toAscii($str, $replace=array(), $delimiter='-') {
      if( !empty($replace) ) {

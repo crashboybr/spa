@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Spa das Sobrancelhas {% block title %}{% endblock %}</title>
+<link href="{{ asset('/bundles/spafrontend/images/favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
+{% block javascripts %}
+{% javascripts
+	'@SpaFrontendBundle/Resources/public/js/jquery.min.js'
+	'@SpaFrontendBundle/Resources/public/js/jquery.fancybox.js'
+	'@SpaFrontendBundle/Resources/public/js/jquery.fancybox-media.js'
+    	  
+ %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+{% stylesheets 
+	'bundles/spafrontend/css/default.css'
+	'bundles/spafrontend/css/jquery.fancybox.css' 
+
+filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+</head>
+<script>
+
+</script>
+<body class="{% block body_class %}{% endblock %}">
+
+<div id="container">
+	<div id="cabecalho">
+		<h1><a href="/" title="Home"><span>Spa das Sobrancelhas</span></a></h1>
+
+		{{ include('SpaFrontendBundle::nav.html.twig') }}
+
+
+	</div>
+	<div id="conteudo">
+	<div class="margem">
+		{% block body %}{% endblock %}
+	</div>
+	</div>
+	<div id="rodape">
+		<div id="rodapeNav">
+			<h1><a href="/" title="Home"><img src="{{ asset('bundles/spafrontend/images/rodape-spadassobrancelhas-logotipo.png') }}" /></a></h1>
+			
+			{{ include('SpaFrontendBundle::nav.html.twig') }}
+
+			<ul class="logos">
+				<li id="abfLogo"><img src="{{ asset('bundles/spafrontend/images/rodape-abf-logotipo.png') }}" /></li>
+				<li id="abfSelo"><img src="{{ asset('bundles/spafrontend/images/rodape-selo-excelencia-abf.png') }}" /></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<span id="areafranqueado" style="display:none;">
+	{% include 'DiviAjaxLoginBundle:Javascript:init.html.twig' with {'form_selector': '#form-login'} %}
+	<div style="position:fixed; height:100%; width:100%; background:rgba(255,255,255,.8); top:0; left:0; z-index:101;"></div>
+	<div style="display:table; position:fixed; height:288px; width:676px; background:#7f3f98 url(/_imgs/fraqueado-bkg.png) center center no-repeat; top:50%; left:50%; margin-top:-144px; margin-left:-338px; z-index:102;">
+		<div style="display:table-cell; height:100%; vertical-align:middle; width:50%; text-align:center;">
+			<h2 style="color:#fff;font-weight:400;text-transform:uppercase;font-size:1.35em;line-height:1em;">Área do Franqueado<br /><br />
+				<img src="{{ asset('bundles/spafrontend/images/spadassobrancelhas-logotipo.png') }}" style="width:205px;" />
+			</h2>
+		</div>
+		<div id="divlogin" style="display:table-cell; height:100%; vertical-align:middle; width:50%; text-align:left; color:#000;">
+			<div id="loginresponse" style="text-align: center; color: red; height: 30px;"></div>
+			<form action="{{ path('spa_members_login_check') }}" method="post" id="form-login" style="display:block; width:70%; margin:auto;">
+				<p style="margin-bottom:1em;">
+					<label for="username">Login</label><br />
+    				<input type="text" id="username" style="width:100%;padding:.25em 0;" name="_username" />
+				</p>
+				<p style="margin-bottom:1em;">
+				    <label for="password">Senha</label>
+				    <input type="password" id="password" name="_password" style="width:100%;padding:.25em 0;" />
+				</p>
+				<p style="text-align:right;">
+				   
+				   <input type="hidden" name="_target_path" value="/" />
+				   
+					<input value="entrar" type="submit" style="border:0; padding:.5em 1em; background:#7f3f98;color:#fff;margin:0;cursor:pointer;" />
+				</p>
+			</form>
+			
+		</div>
+		<div id="divlogin2"></div>
+		<a href="javascript:void(0)" style="position:absolute;top:10px;right:10px;display:block;background:#fff;color:#7f3f98;font-size:.75em;font-weight:700;padding:0 .5em .25em .5em;" onclick='$("#areafranqueado").hide()'>x</a>
+	</div>
+</span>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+{% extends 'SpaFrontendBundle::layout.html.twig' %}
+
+{% block javascripts %}
+
+    {% javascripts
+    	'@SpaFrontendBundle/Resources/public/js/jquery-1.6.2.min.js'
+    	'@SpaFrontendBundle/Resources/public/js/functions.js'
+    	'@SpaFrontendBundle/Resources/public/js/validations.js'
+    	'@SpaFrontendBundle/Resources/public/js/jquery.maskedinput-1.3.min.js'
+    	'@SpaFrontendBundle/Resources/public/js/jquery.validate.min.js'
+    	'@SpaFrontendBundle/Resources/public/js/jquery.keyfilter-1.7.js'
+    	'@SpaFrontendBundle/Resources/public/js/cidades-estados-1.2-utf8.js'
+    	
+
+ 	%}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+
+{% block body_class %}sejafranqueado{% endblock %}
+{% block body %}
+
+<script>
+	/*
+	jQuery(document).ready(function(){
+		jQuery("#telefone_fixo").mask("(99)9999-9999");
+	});
+	jQuery(document).ready(function(){
+		jQuery("#celular_1").mask("(99)9999-9999");
+	});
+	jQuery(document).ready(function(){
+		jQuery("#celular_2").mask("(99)9999-9999");
+	});
+	*/
+	jQuery(document).ready(function(){
+		  new dgCidadesEstados({
+  cidade: document.getElementById('cidade'),
+  estado: document.getElementById('estado')
+})
+
+		jQuery("#telefone_fixo").keyfilter(/[0-9]/i);
+		jQuery("#celular_1").keyfilter(/[0-9]/i);
+		jQuery("#celular_2").keyfilter(/[0-9]/i);
+		jQuery("#telefone_fixo_ddd").keyfilter(/[0-9]/i);
+		jQuery("#celular_1_ddd").keyfilter(/[0-9]/i);
+		jQuery("#celular_2_ddd").keyfilter(/[0-9]/i);
+		
+		
+		jQuery('#celular_1_ddd').blur(function(){
+			if(jQuery('#celular_1_ddd').val() == '11')
+			{
+				jQuery('#celular_1').val('9');
+				document.form_franquia.celular_1.selectionStart = 2;
+				document.form_franquia.celular_1.selectionEnd = 2;
+			}
+		});
+		jQuery('#celular_2_ddd').blur(function(){
+			if(jQuery('#celular_2_ddd').val() == '11')
+			{
+				jQuery('#celular_2').val('9');
+				document.form_franquia.celular_2.selectionStart = 2;
+				document.form_franquia.celular_2.selectionEnd = 2;
+			}
+		});
+		jQuery('#estado').change(function(){
+			jQuery('#cidade:first-child').attr('disabled','disabled');
+		});
+		jQuery('#estado:first-child').attr('disabled','disabled');
+
+		
+		
+	});
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	// Seta as regras de validação 
+	var options = 
+	{
+		rules: 
+		{
+			nome: 
+			{
+				required: true,
+				minlength: 5
+			},
+			telefone_fixo: 
+			{
+				required: true		
+			},
+			celular_1: 
+			{
+				required: true
+			},
+			email: 
+			{
+				required: true,
+				email: true
+			},
+			re_email:
+			{
+				required: true,
+				equalTo:"#email",
+				
+			},
+			cidade: 
+			{
+				required: true,
+			},
+			estado:
+			{
+				required: true,
+			},
+			investimento_pretendido:
+			{
+				required: true,
+			},
+			inicio_franquia:
+			{
+				required: true,
+			}
+		},
+	
+		
+		messages: 
+		{
+			nome: 
+			{
+				required: "Favor informar seu nome",
+				minlength: "Insira um nome válido"
+			},			
+			telefone_fixo:  
+			{
+				required: "Telefone necessário",
+			},
+			celular_1: 
+			{
+				required: "Celular necessário",
+			},
+			email: 
+			{
+				required: "E-mail necess&aacute;rio",
+				email: "Insira um e-mail válido"
+			},
+			re_email: 
+			{
+				required: "",
+				equalTo: "E-mails não coencidem."
+			},
+			cidade: 
+			{
+				required: "Insira uma Cidade",
+			},
+			estado:
+			{
+				required: "Selecione um Estado",
+			},
+			investimento_pretendido:
+			{
+				required: "Selecione o investimento pretendido",
+			},
+			inicio_franquia:
+			{
+				required: "Selecione o início pretendido para a franquia",
+			}
+		}
+	};
+	var validator = jQuery("#form_franquia").validate(options);
+	validator.showErrors("Preencha");
+});
+
+</script>
+
+
+		<h2>Seja um Franqueado</h2>
+		<hr class="titulo" />
+		<div class="c02">
+			<div class="colConteudo">
+				<p>O grande diferencial do Spa das Sobrancelhas é a pouca estrutura necessária para operação. Com um espaço físico mínimo de 25m² será possível montar sua Unidade Spa das Sobrancelhas, e o melhor, não precisa ser necessariamente em um ponto comercial de rua. É possível instalar a Franquia em uma sala comercial. Para operar sua unidade são necessários somente 02 consultores de beleza, reduzindo dessa forma, os gastos com pessoal.</p>
+				<div class="box-dados-franquia">
+					<p><span>Ano de fundação</span><br />2007</p>
+					<p><span>Início de franshising</span><br />2010</p>
+					<p><span>unidades próprias</span><br />01</p>
+					<p><span>Unidades franqueadas</span><br />240</p>
+					<p><span>faturamento mensal</span><br />R$ 35.000,00</p>
+					<p><span>retorno*</span><br />08 a 10 meses</p>
+					<p class="final"><span>taxa de propaganda</span><br />R$ 300,00</p>
+					<p class="final"><span>taxa de royalties</span><br />R$ 970,00</p>
+					<br style="clear:both;" />
+				</div>
+				<h4>VANTAGENS:</h4>
+				<ul>
+					<li>Baixo Investimento : R$ 49.900,00.</li>
+					<li>Suporte completo.</li>
+					<li>Alta rentabilidade:10 a 15 mil liquidos por mês*.</li>
+					<li>Rápido retorno: 8 meses*.</li>
+					<li>Fácil operação a partir de 2 funcionários.</li>
+					<li>Baixos custos operacionais a partir de 25m².</li>
+				</ul>
+				<p class="nota-rodape">*O retorno depende da gestão e características de cada unidade</p>
+			</div>
+			<div class="colForm">
+				<h3>FAÇA SEU CADASTRO</h3>
+				{% if (obrigado) %}<p class='formSucesso'>Sua mensagem foi enviada com <em>sucesso</em>.</p>{% endif %}
+				
+				<form method="post" action="{{ path('spa_frontend_sendmail') }}" class="fichaInscricao" onsubmit="return validateFicha();" id="form_franquia" name="form_franquia">
+				
+					<div id="info-franquias1">
+						<label for="nome" class="produtos-lat">Nome*</label>
+						<input name="nome" type="text" class="noticias" id="nome" onblur="validateField(this, 'erroNome')" value="" size="35" />
+					</div>
+					<div id="info-franquias1">
+						<label for="email" class="produtos-lat">E-mail*</label>
+						<input name="email" type="text" class="noticias" id="email" value="" size="35" />    
+					</div>
+					<div id="info-franquias1">
+						<label for="re_email" class="produtos-lat">Repita o E-mail*</label>
+						<input name="re_email" type="text" class="noticias" id="re_email" value="" size="35" /> 
+					</div>
+					<div id="info-franquias1">
+						<label for="email_alternativo" class="produtos-lat">E-mail Alternativo</label>
+						<input name="email_alternativo" type="text" class="noticias" id="email_alternativo" value="" size="35" />                 
+					</div>
+					<div id="info-franquias">
+						<label for="telefone_fixo" class="produtos-lat">Telefone Fixo:*</label>
+						<input type="text" name="telefone_fixo_ddd" id="telefone_fixo_ddd" value="" class="noticias" maxlength="2" /><input name="telefone_fixo" type="text" class="noticias" id="telefone_fixo" value="" size="20" maxlength="9" />
+					</div>
+					<div id="info-franquias">
+						<label for="celular_1" class="produtos-lat">Celular 1:*</label>
+						<input type="text" name="celular_1_ddd" id="celular_1_ddd" value="" class="noticias" maxlength="2" /><input name="celular_1" type="text" class="noticias" id="celular_1" value="" size="20" maxlength="9"/>                     
+					</div>
+					<div id="info-franquias">
+						<label for="celular_2" class="produtos-lat">Celular 2:</label>
+						<input type="text" name="celular_2_ddd" id="celular_2_ddd" value="" class="noticias" maxlength="2" /><input name="celular_2" type="text" class="noticias" id="celular_2" value="" size="20" maxlength="9"/>             
+					</div>
+					<div id="info-franquias">
+						<label for="estado" class="produtos-lat">Estado*</label>
+						<select class="noticias" id="estado" name="estado"></select>
+					</div>
+					<div id="info-franquias">
+						<label for="cidade" class="produtos-lat">Cidade de Interesse*</label>
+						<select name="cidade" class="noticias" id="cidade"></select>
+					</div>
+					<div id="info-franquias2" >
+						<label for="investimento_pretendido" class="produtos-lat">Investimento Pretendido*</label>
+						<select name="investimento_pretendido" id="investimento_pretendido" class="noticias">  
+							<option value="50mil">50 mil</option>  
+							<option value="50 a 100mil">50 a 100 mil</option>  
+							<option value="Acima de 100mil">Acima de 100mil</option>
+						</select>
+					</div>
+					<div id="info-franquias1">
+						<label for="column double" class="produtos-lat">Quando Inicia a Operação*</label>
+						<select name="inicio_franquia" id="inicio_franquia" class="noticias" >
+							<option value="Em ate 3 meses" selected="selected">Em até 3 meses</option>  
+							<option value="De 3 a 6 meses">De 3 a 6 meses</option>  
+							<option value="De 6 meses a 1 ano">De 6 meses a 1 ano</option>
+							<option value="De 1 a 2 anos">De 1 a 2 anos</option>
+							<option value="Apos 2 anos">Após 2 anos</option>
+						</select>
+					</div>
+					<div id="info-franquias1">
+						<label for="observacoes" class="produtos-lat">Observações</label>
+						<textarea name="observacoes" id="observacoes" cols="40" rows="10" class="noticias"></textarea>
+					</div>
+					<div id="info-franquias1">
+						<input type="submit" value="Enviar cadastro" class="produtos-lat" id="form_enviar"/>
+					</div>
+				</form>
+
+			</div>
+			<hr class="fim" />
+		</div>
+
+
+<script>
+			/*
+			jQuery(document).ready(function(){
+				jQuery("#telefone_fixo").mask("(99)9999-9999");
+			});
+			jQuery(document).ready(function(){
+				jQuery("#celular_1").mask("(99)9999-9999");
+			});
+			jQuery(document).ready(function(){
+				jQuery("#celular_2").mask("(99)9999-9999");
+			});
+			*/
+			jQuery(document).ready(function(){
+				  new dgCidadesEstados({
+          cidade: document.getElementById('cidade'),
+          estado: document.getElementById('estado')
+        })
+		
+				jQuery("#telefone_fixo").keyfilter(/[0-9]/i);
+				jQuery("#celular_1").keyfilter(/[0-9]/i);
+				jQuery("#celular_2").keyfilter(/[0-9]/i);
+				jQuery("#telefone_fixo_ddd").keyfilter(/[0-9]/i);
+				jQuery("#celular_1_ddd").keyfilter(/[0-9]/i);
+				jQuery("#celular_2_ddd").keyfilter(/[0-9]/i);
+				
+				
+				jQuery('#celular_1_ddd').blur(function(){
+					if(jQuery('#celular_1_ddd').val() == '11')
+					{
+						jQuery('#celular_1').val('9');
+						document.form_franquia.celular_1.selectionStart = 2;
+						document.form_franquia.celular_1.selectionEnd = 2;
+					}
+				});
+				jQuery('#celular_2_ddd').blur(function(){
+					if(jQuery('#celular_2_ddd').val() == '11')
+					{
+						jQuery('#celular_2').val('9');
+						document.form_franquia.celular_2.selectionStart = 2;
+						document.form_franquia.celular_2.selectionEnd = 2;
+					}
+				});
+				jQuery('#estado').change(function(){
+					jQuery('#cidade:first-child').attr('disabled','disabled');
+				});
+				jQuery('#estado:first-child').attr('disabled','disabled');
+
+				
+				
+			});
+</script>
+
+
+{% endblock %}
+
+

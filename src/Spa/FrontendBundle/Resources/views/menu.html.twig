@@ -1,18 +1,34 @@
+<ul class="nav">
+	{% for menu in menus %}
+	
+		<li class="{{ menu.slug }}">
+			<a href="{{ path('spa_frontend_menu', { slug: menu.slug }) }}">{{ menu.name }}</a>
+			{% if (menu.submenus|length > 0) %}
+			<ul>
+				{% for s in menu.submenus %}
+					<li><a href="{{ path('spa_frontend_submenu', { slug: menu.slug, subslug: s.slug }) }}">{{ s.name }}</a><span></span></li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+		</li>
+	
+	{% endfor %}
+		
+</ul>	
+			
+<ul class="navSec">
+	<li class="institucional"><a href="{{ path('spa_frontend_institucional') }}">institucional</a></li>
+	<li class="faleconosco"><a href="{{ path('spa_frontend_contact') }}">fale conosco</a></li>
+	<li class="siga">
+		siga-nos 
+		<span class="sigaIcones">
+			<a id="navTwitter" class="navSigaItem" href="https://twitter.com/SdaSobrancelhas" target="_blank" title="Twitter"><span>twitter</span></a>
+			<a id="navFacebook" class="navSigaItem" href="https://www.facebook.com/SdaSobrancelhas" target="_blank" title="Facebook"><span>facebook</span></a>
+			<a id="navYoutube" class="navSigaItem" href="http://www.youtube.com/user/spasobrancelhas" target="_blank" title="Youtube"><span>youtube</span></a>
+		</span>
+	</li>
+	<li class="areaFranqueado"><a href="javascript:void(0)" onclick="$('#areafranqueado').show()">área do franqueado</a></li>
+</ul>
 
-			
-			<li class="servicos"><a href="{{ path('spa_frontend_services') }}">Serviços</a>
-				<ul>
-					{% for s in services %}
-						<li><a href="{{ path('spa_frontend_show_service', { slug: s.slug }) }}">{{ s.name }}</a><span></span></li>
-					{% endfor %}
-				</ul>
-			</li>
-			
-			<li class="produtos"><a href="{{ path('spa_frontend_product') }}">Produtos</a>
-				<ul>
-					{% for p in products %}
-						<li><a href="{{ path('spa_frontend_view_product', { slug: p.slug }) }}">{{ p.name }}</a><span></span></li>
-					{% endfor %}
-				</ul>
-			</li>
+
 			

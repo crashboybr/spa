@@ -1,0 +1,30 @@
+submenu:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:SubMenu:index" }
+
+submenu_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:SubMenu:show" }
+
+submenu_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:SubMenu:new" }
+
+submenu_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:SubMenu:create" }
+    requirements: { _method: post }
+
+submenu_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:SubMenu:edit" }
+
+submenu_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:SubMenu:update" }
+    requirements: { _method: post|put }
+
+submenu_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:SubMenu:delete" }
+    requirements: { _method: post|delete }

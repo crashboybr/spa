@@ -2,6 +2,25 @@ spa_frontend_homepage:
     pattern:  /
     defaults: { _controller: SpaFrontendBundle:Default:index }
 
+spa_frontend_sendmail:
+    pattern:  /sendmail
+    defaults: { _controller: SpaFrontendBundle:Default:sendMail }
+    methods:  [POST]
+
+spa_frontend_sendmailfaleconosco:
+    pattern:  /sendmailfaleconosco
+    defaults: { _controller: SpaFrontendBundle:Default:sendMailFaleConosco }
+    methods:  [POST]
+
+
+spa_frontend_menu:
+    pattern:  /{slug}
+    defaults: { _controller: SpaFrontendBundle:Default:menu }
+
+spa_frontend_submenu:
+    pattern:  /{slug}/{subslug}
+    defaults: { _controller: SpaFrontendBundle:Default:subMenu }
+
 spa_frontend_unit:
     pattern:  /unidades
     defaults: { _controller: SpaFrontendBundle:Default:unit }
@@ -51,7 +70,11 @@ spa_frontend_view_product:
     defaults: { _controller: SpaFrontendBundle:Default:viewProduct }
 
 spa_frontend_sejafranqueado:
-    pattern:  /sejafranqueado
+    pattern:  /seja-um-franqueado
+    defaults: { _controller: SpaFrontendBundle:Default:sejaFranqueado }
+
+spa_frontend_faleconosco:
+    pattern:  /faleconosco
     defaults: { _controller: SpaFrontendBundle:Default:sejaFranqueado }
 
 spa_frontend_institucional:

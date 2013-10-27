@@ -1,0 +1,23 @@
+Spa\BackendBundle\Entity\SubMenu:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+        menuId:
+            type: integer
+            column: menu_id
+        slug:
+            type: string
+            length: 255
+    manyToOne:
+        menu:
+          targetEntity: Menu
+          inversedBy: submenus
+    lifecycleCallbacks: {  }
