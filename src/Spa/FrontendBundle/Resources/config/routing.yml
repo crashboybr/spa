@@ -12,6 +12,10 @@ spa_frontend_sendmailfaleconosco:
     defaults: { _controller: SpaFrontendBundle:Default:sendMailFaleConosco }
     methods:  [POST]
 
+spa_frontend_view_post:
+    pattern:  /noticia/{post}
+    defaults: { _controller: SpaFrontendBundle:Default:viewPost }
+
 
 spa_frontend_menu:
     pattern:  /{slug}
@@ -41,9 +45,7 @@ spa_frontend_news:
     pattern:  /noticias
     defaults: { _controller: SpaFrontendBundle:Default:news }
 
-spa_frontend_view_post:
-    pattern:  /noticia/{post}
-    defaults: { _controller: SpaFrontendBundle:Default:viewPost }
+
 
 spa_frontend_services:
     pattern:  /servicos
