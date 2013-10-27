@@ -98,9 +98,11 @@ class Menu
         $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
 
         $string = utf8_decode($text);
-        $string = strtr($string, $a, $b);
+        $string = strtr($string, utf8_decode($a), $b);
        // $string = str_replace('', $type,$string);
         $text = strtolower($string);
+
+        
   // replace non letter or digits by -
   $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
 
