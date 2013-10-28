@@ -242,17 +242,8 @@ $(document).ready(function (){
 		</div>
 		<div class="colBanners">
 			{{ render(controller('SpaFrontendBundle:Default:bannerUnity')) }}
-				
-
 			
-
-			{% for banner in bannersdireita %}
-				<div class="bannerInterno">
-					<img src="{{ banner.pic |  apply_filter('banner_right')}}" />
-					<a href="{{ banner.url }}"><span>Saiba mais</span></a>
-					<h4>{{ banner.title }}<span>Saiba mais</span></h4>
-				</div>
-			{% endfor %}
+			{{ render(controller('SpaFrontendBundle:Default:bannerRight')) }}
 		
 		</div>
 	

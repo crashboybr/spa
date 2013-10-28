@@ -494,7 +494,7 @@ class DefaultController extends Controller
         switch ($slug)
         {
             case "promocoes":
-                return $this->promotionAction();
+                return $this->viewPromotionAction($subslug);
 
             case "unidades":
                 return $this->unitAction();
