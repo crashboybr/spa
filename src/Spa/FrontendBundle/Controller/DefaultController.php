@@ -407,10 +407,11 @@ class DefaultController extends Controller
         $dados['telefone'] = $request->request->get('telefone');
         $dados['celular'] = $request->request->get('celular');
         $dados['mensagem'] = $request->request->get('mensagem');
-        $dados['anexo'] = $request->request->get('anexo');
-        
-        //var_dump($_FILES);exit;
+        $dados['anexo'] = $request->files->get('anexo');
 
+        if (!$dados['nome'] || !$dados['sobrenome'] || !$dados['email'])
+            return $this->redirect($this->generateUrl('spa_frontend_faleconosco'));
+        
         $message = \Swift_Message::newInstance()
         ->setSubject('Contato Fale Conosco')
         ->setFrom($dados['email'])
@@ -420,9 +421,17 @@ class DefaultController extends Controller
                 'SpaFrontendBundle:Default:emailfaleconosco.txt.twig',
                 array('dados' => $dados)
             )
-        )
-        //->attach(\Swift_Attachment::fromPath($dados['anexo']))
-        ;
+        );
+        if ($dados['anexo'])
+        {
+            $file = $dados['anexo'];
+           
+            $file->move('/tmp/', $file->getClientOriginalName());
+
+            $message->attach(\Swift_Attachment::fromPath('/tmp/' . $file->getClientOriginalName()));
+        }
+       
+        
         $this->get('mailer')->send($message);
         
         return $this->redirect($this->generateUrl('spa_frontend_faleconosco', array('obrigado' => true)));
