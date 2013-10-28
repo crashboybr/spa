@@ -298,7 +298,7 @@ $(function($){
     
 	}
 
-	$.getJSON( "/app_dev.php/buscaUnidade/" + uf, function( data ) {
+	$.getJSON( "/buscaUnidade/" + uf, function( data ) {
 		if (!Array.isArray(data.units))
 		{
 			
@@ -336,7 +336,7 @@ $(function($){
   	uf = $("#estado").val();
   	city = $("#cidades").val();
 
-	$.getJSON( "/app_dev.php/buscaUnidade/" + uf + "/" + city, function( data ) {
+	$.getJSON( "/buscaUnidade/" + uf + "/" + city, function( data ) {
 		populaUnidades(data, 1);
 		$('#div_carregando').hide();
 		$("#cidades").val(city);
