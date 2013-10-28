@@ -1,6 +1,14 @@
+<script>
+$(document).ready(function(){
+	if (window.location.pathname != "/app_dev.php/") $('#saibamais').hide();
+else $("#saibamais").show();
+})
+
+</script>
 
 <div class="bannerFranquiaHome">
 	<img src="{{ bannerdireita.pic |  apply_filter('banner_right')}}" />
-	<h4>{{ bannerdireita.title }}<span>Saiba mais</span></h4>
+	<h4>{{ bannerdireita.title }}<span id="saibamais">Saiba mais</span></h4>
+
 	<a href="{{ bannerdireita.url }}"><span>Saiba mais</span></a>
 </div>

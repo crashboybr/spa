@@ -59,7 +59,7 @@ filter='cssrewrite' %}
 <span id="areafranqueado" style="display:none;">
 	{% include 'DiviAjaxLoginBundle:Javascript:init.html.twig' with {'form_selector': '#form-login'} %}
 	<div style="position:fixed; height:100%; width:100%; background:rgba(255,255,255,.8); top:0; left:0; z-index:101;"></div>
-	<div style="display:table; position:fixed; height:288px; width:676px; background:#7f3f98 url(/_imgs/fraqueado-bkg.png) center center no-repeat; top:50%; left:50%; margin-top:-144px; margin-left:-338px; z-index:102;">
+	<div style="display:table; position:fixed; height:288px; width:676px; background:#7f3f98 url({{ asset('bundles/spafrontend/images/fraqueado-bkg.png') }}) center center no-repeat; top:50%; left:50%; margin-top:-144px; margin-left:-338px; z-index:102;">
 		<div style="display:table-cell; height:100%; vertical-align:middle; width:50%; text-align:center;">
 			<h2 style="color:#fff;font-weight:400;text-transform:uppercase;font-size:1.35em;line-height:1em;">Área do Franqueado<br /><br />
 				<img src="{{ asset('bundles/spafrontend/images/spadassobrancelhas-logotipo.png') }}" style="width:205px;" />
