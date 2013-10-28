@@ -17,6 +17,10 @@ spa_frontend_view_post:
     defaults: { _controller: SpaFrontendBundle:Default:viewPost }
 
 
+spa_frontend_find_unit:
+    pattern:  /buscaUnidade/{uf}/{city}
+    defaults: { _controller: SpaFrontendBundle:Default:findUnit, city: '' }
+
 spa_frontend_menu:
     pattern:  /{slug}
     defaults: { _controller: SpaFrontendBundle:Default:menu }
@@ -29,9 +33,6 @@ spa_frontend_unit:
     pattern:  /unidades
     defaults: { _controller: SpaFrontendBundle:Default:unit }
 
-spa_frontend_find_unit:
-    pattern:  /buscaUnidade/{uf}/{city}
-    defaults: { _controller: SpaFrontendBundle:Default:findUnit, city: '' }
 
 spa_frontend_addunit:
     pattern:  /vai

@@ -47,7 +47,7 @@ filter='cssrewrite' %}
 		<div id="rodapeNav">
 			<h1><a href="/" title="Home"><img src="{{ asset('bundles/spafrontend/images/rodape-spadassobrancelhas-logotipo.png') }}" /></a></h1>
 			
-			{{ include('SpaFrontendBundle::nav.html.twig') }}
+			{{ render(controller('SpaFrontendBundle:Default:renderMenu')) }}
 
 			<ul class="logos">
 				<li id="abfLogo"><img src="{{ asset('bundles/spafrontend/images/rodape-abf-logotipo.png') }}" /></li>

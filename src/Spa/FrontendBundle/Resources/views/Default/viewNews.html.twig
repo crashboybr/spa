@@ -14,7 +14,7 @@ $(document).ready(function() {
     $('#twitter').append('<a target=_blank class="shareTwitter" href=" '+ tweeturl+' "><span>twitter</span></a>')
 });
 </script>
-		<h2><a href="/noticias/">Notícias</a></h2>
+		<h2><a href="{{ path('spa_frontend_news') }}">Notícias</a></h2>
 		<hr class="titulo" />
 		<div class="c02">
 			<div class="colConteudo">
@@ -40,22 +40,24 @@ $(document).ready(function() {
 					<p class="imgCenter">
 						<img src="{{ asset(post.pic) }}" />
 					</p>
+					<!--
 					<div class="leiatb">
 						<h6>Leia também</h6>
 						<ul>
 							<li><a href="#"><img src="/_imgs/noticia-20130926-001.jpg" /><span class="texto"><span class="titulo">Maquiagem com gloss nos olhos é tendência internacional</span><span class="descricao">Especialistas afirmam que a nova tendência de maquiagem é o gloss nos olhos.</span></span><hr class="fim" /></a></li>
 							<li><a href="#"><img src="/_imgs/noticia-20130926-001.jpg" /><span class="texto"><span class="titulo">Maquiagem com gloss nos olhos é tendência internacional</span><span class="descricao">Especialistas afirmam que a nova tendência de maquiagem é o gloss nos olhos.</span></span><hr class="fim" /></a></li>
 						</ul>
-					</div>
+					</div>-->
 				</div>
 			</div>
 			<div class="colBanners">
 				{{ render(controller('SpaFrontendBundle:Default:bannerUnity')) }}
-				<br><br><br><br><br><br><br><br><br><br>
+				
 				{{ render(controller('SpaFrontendBundle:Default:bannerRight')) }}
 				
 			</div>
 			<hr class="fim" />
+		</div>
 
 {% endblock %}
 

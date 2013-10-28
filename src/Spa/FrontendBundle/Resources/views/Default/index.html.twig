@@ -63,7 +63,7 @@ $(document).ready(function() {
 							{% for banner in bannersduplo %}
 							<li>
 								<a href="{{ banner.url }}">
-									<img src="{{ banner.pic | apply_filter('banner_double') }}" />
+									<img src="{{ asset(banner.pic) }}" />
 									<span class="texto">
 										<span class="titulo">{{ banner.title }}</span>
 										<span class="descricao">{{ banner.description }}</span>
@@ -103,7 +103,7 @@ $(document).ready(function() {
 							<img src="{{ asset(featured_video.pic) }}"></a>
 						</a>
 					{% else %}
-					<a class="linkVideo"  href="{{ featured_video.url }}" title="{{ featured_video.description }}">
+					<a class="linkVideo"  data-fancybox-type="iframe" href="{{ featured_video.url }}" title="{{ featured_video.description }}">
 						{% if (featured_video.type != "youtube" and featured_video.type != "vimeo") %}
 							<img src="{{ asset(featured_video.pic) }}"></a>
 						{% else %}
