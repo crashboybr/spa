@@ -2,6 +2,10 @@ spa_backend:
     resource: "@SpaBackendBundle/Resources/config/routing.yml"
     prefix:   /admin
 
+spa_members:
+    resource: "@SpaFrontendBundle/Resources/config/members/routing.yml"
+    prefix:   /franqueado
+
 spa_frontend:
     resource: "@SpaFrontendBundle/Resources/config/routing.yml"
     prefix:   /
@@ -12,7 +16,5 @@ _imagine:
     resource: .
     type:     imagine
 
-spa_members:
-    resource: "@SpaFrontendBundle/Resources/config/members/routing.yml"
-    prefix:   /franqueado
+
 

@@ -8,13 +8,26 @@ use Spa\BackendBundle\Entity\Unit;
 use Spa\BackendBundle\Entity\Post;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
     public function indexAction()
     {
 
-    	$em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
+
+        $session = $this->getRequest()->getSession();
+        $user = null;
+        $user_id = $session->get('user_id');
+        $user_salt = $session->get('user_salt');
+        if ($user_salt)
+        {
+            $user = $em->getRepository('SpaBackendBundle:User')
+            ->findOneBy(array('salt' => $user_salt));
+            //var_dump($user);exit;
+        }
+    	
 		//$featured_video = $em->getRepository('SpaBackendBundle:Video')
          //   ->findOneBy(array('featured' => 1));
 
@@ -59,7 +72,9 @@ class DefaultController extends Controller
             'sliders' => $sliders, 
             'bannersimples' => $bannersimples, 
             'bannersduplo' => $bannersduplo,
-            'bannerdireita' => $bannerdireita
+            'bannerdireita' => $bannerdireita,
+            'user' => $user,
+            'user_id' => $user_id
         ));
     }
     
@@ -491,6 +506,9 @@ class DefaultController extends Controller
             case "faleconosco":
                 return $this->faleConoscoAction();
 
+            case "mudarsenha":
+                return $this->changePassAction();
+
             default:
                 throw new NotFoundHttpException("Page not found");
 
@@ -520,6 +538,9 @@ class DefaultController extends Controller
             case "seja-um-franqueado":
                 return $this->sejaFranqueadoAction();
 
+             case "primeiroacesso":
+                return $this->firstAccessAction($subslug);
+
             default:
                 throw new NotFoundHttpException("Page not found");
 
@@ -527,16 +548,76 @@ class DefaultController extends Controller
         
     }
 
-    public function toAscii($str, $replace=array(), $delimiter='-') {
-     if( !empty($replace) ) {
-      $str = str_replace((array)$replace, ' ', $str);
-     }
+    public function firstAccessAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('SpaBackendBundle:User')->findOneBy(array('salt' => $slug));
+        if (!$user)
+            throw new NotFoundHttpException("Page not found");
 
-     $clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
-     $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
-     $clean = strtolower(trim($clean, '-'));
-     $clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+        $session = $this->getRequest()->getSession();
 
-     return $clean;
+        $session->set('user_salt', $user->getSalt());
+        //$name = $session->get('user');
+        //var_dump($name);exit;
+        return $this->indexAction();
+        
+    }   
+
+    public function changePassAction()
+    {
+        $session = $this->getRequest()->getSession();
+        $request = $this->getRequest();
+
+        $em = $this->getDoctrine()->getManager();
+        $user = null;
+        $user_salt = $session->get('user_salt');
+        if ($user_salt)
+        {
+            $user = $em->getRepository('SpaBackendBundle:User')
+            ->findOneBy(array('salt' => $user_salt));
+            
+        }
+        if ($request->request->get('_pass') == '' || $request->request->get('_pass2') == '') $return = -10;
+        else
+        {
+            if ($user)
+            {    
+                $pass1 = $request->request->get('_pass');
+                $pass2 = $request->request->get('_pass2');
+
+
+                if ($pass1 == $pass2)
+                {
+                    
+                    $user->setPassword($pass1);
+                    $user->setSalt(null);
+
+                    $em->persist($user);
+                    $em->flush();
+
+                    $session->set('user_salt', null);
+                    $session->set('user_id', $user->getId());
+
+                    $return = 1;
+                }
+                else
+                    $return = 0;
+            }
+            else $return = -1;
+        }
+        $response = new JsonResponse();
+
+        $response->setData(array(
+            'return' => $return
+        ));
+        return $response;
+
+
+
+
+
+
     }
-    }
+   
+}

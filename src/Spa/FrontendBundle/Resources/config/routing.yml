@@ -46,6 +46,9 @@ spa_frontend_news:
     pattern:  /noticias
     defaults: { _controller: SpaFrontendBundle:Default:news }
 
+spa_frontend_changepassword:
+    pattern:  /mudarsenha
+    defaults: { _controller: SpaFrontendBundle:Default:changePass }
 
 
 spa_frontend_services:

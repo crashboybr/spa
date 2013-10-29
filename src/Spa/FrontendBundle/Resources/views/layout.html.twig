@@ -65,31 +65,113 @@ filter='cssrewrite' %}
 				<img src="{{ asset('bundles/spafrontend/images/spadassobrancelhas-logotipo.png') }}" style="width:205px;" />
 			</h2>
 		</div>
-		<div id="divlogin" style="display:table-cell; height:100%; vertical-align:middle; width:50%; text-align:left; color:#000;">
-			<div id="loginresponse" style="text-align: center; color: red; height: 30px;"></div>
-			<form action="{{ path('spa_members_login_check') }}" method="post" id="form-login" style="display:block; width:70%; margin:auto;">
+
+			<div id="divlogin" style="display:table-cell; height:100%; vertical-align:middle; width:50%; text-align:left; color:#000;">
+				<div id="loginresponse" style="text-align: center; color: red; height: 30px;"></div>
+				<form action="{{ path('spa_members_login_check') }}" method="post" id="form-login" style="display:block; width:70%; margin:auto;">
+					<p style="margin-bottom:1em;">
+						<label for="username">Login</label><br />
+	    				<input type="text" id="username" style="width:100%;padding:.25em 0;" name="_username" />
+					</p>
+					<p style="margin-bottom:1em;">
+					    <label for="password">Senha</label>
+					    <input type="password" id="password" name="_password" style="width:100%;padding:.25em 0;" />
+					</p>
+					<p style="text-align:right;">
+					   
+					   <input type="hidden" name="_target_path" value="/" />
+					   
+						<input value="entrar" type="submit" style="border:0; padding:.5em 1em; background:#7f3f98;color:#fff;margin:0;cursor:pointer;" />
+					</p>
+				</form>
+				
+			</div>
+
+		<div id="divlogin2"></div>
+		<a href="javascript:void(0)" style="position:absolute;top:10px;right:10px;display:block;background:#fff;color:#7f3f98;font-size:.75em;font-weight:700;padding:0 .5em .25em .5em;" onclick='$("#areafranqueado").hide()'>x</a>
+	</div>
+</span>
+{% if (user) %}
+
+<script>
+// Attach a submit handler to the form
+$(document).ready(function() {
+
+
+	$( "#form-pass" ).submit(function( event ) {
+	 
+	  event.preventDefault();
+
+	  $('#divpass').hide();
+	  $('#divpassloading').show();
+	 
+	  var posting = $.post($(this).attr( "action" ), $(this).serialize())
+	 
+	  posting.done(function( data ) {
+	    console.log(data);
+	    var content = $( data ).find( "#content" );
+
+	   	
+
+		$('#divpass').show();
+		$('#divpassloading').hide();
+
+	    $.each(data, function(i, success){
+	      
+	      if (success == 0) $("#passresponse").html('<p>Senhas não combinam!</p>');
+	      else if (success == -1) $("#passresponse").html('<p>ERRO!</p>');
+	      else if (success == -10) $("#passresponse").html('<p>Não deixe os campos em branco!</p>');
+	      else if (success == 1)
+	      {
+	      	$('#divpass').html('<h3 style="text-align: center; font-size: 15px;">Senha alterada com sucesso!<br /><Br /><a href="{{ path('spa_frontend_homepage') }}">Voltar</a></h3>');
+	      	
+	      }
+
+	    });
+		
+		
+
+	  });
+	});
+});
+</script>
+ 
+
+<span id="areafranqueado" style="display:block;">
+	
+	<div style="position:fixed; height:100%; width:100%; background:rgba(255,255,255,.8); top:0; left:0; z-index:101;"></div>
+	<div style="display:table; position:fixed; height:288px; width:676px; background:#7f3f98 url({{ asset('bundles/spafrontend/images/fraqueado-bkg.png') }}) center center no-repeat; top:50%; left:50%; margin-top:-144px; margin-left:-338px; z-index:102;">
+		<div style="display:table-cell; height:100%; vertical-align:middle; width:50%; text-align:center;">
+			<h2 style="color:#fff;font-weight:400;text-transform:uppercase;font-size:1.35em;line-height:1em;">Área do Franqueado<br /><br />
+				<img src="{{ asset('bundles/spafrontend/images/spadassobrancelhas-logotipo.png') }}" style="width:205px;" />
+			</h2>
+		</div>
+		<div id="divpass" style="display:table-cell; height:100%; vertical-align:middle; width:50%; text-align:left; color:#000;">
+			<div id="passresponse" style="text-align: center; color: red; height: 30px;"></div>
+			<h3 style="text-align: center;">Digite sua nova senha</h3>
+			<form action="{{ path('spa_frontend_changepassword') }}" method="post" id="form-pass" style="display:block; width:70%; margin:auto;">
 				<p style="margin-bottom:1em;">
-					<label for="username">Login</label><br />
-    				<input type="text" id="username" style="width:100%;padding:.25em 0;" name="_username" />
+					<label for="pass">Senha</label><br />
+    				<input type="password" id="pass" style="width:100%;padding:.25em 0;" name="_pass" />
 				</p>
 				<p style="margin-bottom:1em;">
-				    <label for="password">Senha</label>
-				    <input type="password" id="password" name="_password" style="width:100%;padding:.25em 0;" />
+				    <label for="pass2">Confirmar Senha</label>
+				    <input type="password" id="pass2" name="_pass2" style="width:100%;padding:.25em 0;" />
 				</p>
 				<p style="text-align:right;">
 				   
 				   <input type="hidden" name="_target_path" value="/" />
 				   
-					<input value="entrar" type="submit" style="border:0; padding:.5em 1em; background:#7f3f98;color:#fff;margin:0;cursor:pointer;" />
+					<input value="Trocar" type="submit" style="border:0; padding:.5em 1em; background:#7f3f98;color:#fff;margin:0;cursor:pointer;" />
 				</p>
 			</form>
 			
 		</div>
-		<div id="divlogin2"></div>
-		<a href="javascript:void(0)" style="position:absolute;top:10px;right:10px;display:block;background:#fff;color:#7f3f98;font-size:.75em;font-weight:700;padding:0 .5em .25em .5em;" onclick='$("#areafranqueado").hide()'>x</a>
+		<div id="divpassloading" style="vertical-align:middle; text-align: center; color:#000; display: none; margin-top: 40%;"><img src="{{ asset('bundles/spafrontend/images/carregando.gif') }}" /></div>
+		
 	</div>
 </span>
-
+{% endif %}
 
 
 
