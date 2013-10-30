@@ -1,0 +1,45 @@
+<script type="text/javascript">
+	// Check if jQuery is loaded
+	if (typeof jQuery != 'function') {
+		document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"><\/script>');
+	}
+</script>
+<script type="text/javascript">
+	$(function ()
+	{
+		$('{{ form_selector }}').submit(function (e) {
+			e.preventDefault();
+
+			var $this = $(e.currentTarget),
+				inputs = {};
+
+			// Send all form's inputs
+			$.each($this.find('input'), function (i, item) {
+				var $item = $(item);
+				inputs[$item.attr('name')] = $item.val();
+			});
+			$("#loginresponse").html('<p style="text-align:center;"><img src="/bundles/spafrontend/images/carregando.gif"</p>');
+			$("#form-login").hide();
+			// Send form into ajax
+			$.ajax({
+				url: $this.attr('action'),
+				type: 'POST',
+				dataType: 'json',
+				data: inputs,
+				success: function (data) {
+					if (data.has_error) {
+						// Insert your error process
+						$("#loginresponse").html("Login ou senha incorreto");
+						$("#form-login").show();
+					}
+					else {
+						// Insert your success process
+						$("#divlogin").html('<div style="display:table-cell; height:100%; vertical-align:middle; width:50%; text-align:left; color:#000;"><h3 style="text-align:center;font-size:1.5em;padding-bottom:.5em;margin-bottom:1em;background:url(/_imgs/lbox-franqueado-link-bkg.png) center bottom no-repeat;"><a href="http://spadassobrancelhas.lojavirtualfc.com.br/" target="_blank" style="color:#fff;">Loja Virtual</a></h3><h3 style="text-align:center;font-size:1.5em;padding-bottom:.5em;margin-bottom:1em;background:url(/_imgs/lbox-franqueado-link-bkg.png) center bottom no-repeat;"><a href="http://spadassobrancelhas.mysuite1.com.br/central.php" target="_blank" style="color:#fff;">MySuite</a></h3><p style="text-align: center;"><a href="/app_dev.php/franqueado/logout" style="color: white;">Sair</a></p></div>');
+						
+						//window.location = data.target_path;
+					}
+				}
+			});
+		});
+	});
+</script>
