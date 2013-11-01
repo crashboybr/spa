@@ -28,6 +28,8 @@
     <link href="/assets/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" >
     <!-- END:File Upload Plugin CSS files-->     
     <link href="/assets/css/pages/inbox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/cms.css" rel="stylesheet" type="text/css" />
+
     <!-- END PAGE LEVEL STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
@@ -72,104 +74,148 @@
                     <div class="sidebar-toggler hidden-phone"></div>
                     <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
                 </li>
-               
-                <li class="start ">
-                    <a href="index.html">
-                    <i class="icon-home"></i> 
-                    <span class="title">Inicio</span>
-                    </a>
-                </li>
-                
-               
+
                 <li>
                     <a href="javascript:;">
-                    <i class="icon-cogs"></i> 
-                    <span class="title">Banners</span>
-                    <span class="arrow "></span>
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Home</span>
+                    <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu">
-                        <li >
-                            <a href="{{ path('bannerduplo') }}">
-                            <span></span>Banners Duplo</a>
-                        </li>
-                        <li >
-                            <a href="{{ path('bannerunidades') }}">
-                            Banners Unidade</a>
-                        </li>
-                        <li >
-                            <a href="{{ path('bannerdireita') }}">
-                            Banners Direita</a>
-                        </li>
-                        <li >
+                    <ul class="sub-menu" style="display: none;">
+                        <li>
                             <a href="{{ path('slider') }}">
-                            Banners Sliders</a>
+                            Slider</a>
                         </li>
-                        <li >
-                            <a href="{{ path('bannersimples') }}">
-                            Banners Simples</a>
+                        <li>
+                            <a href="spa-cms-home-destaque_principal.html">
+                            Destaque Principal</a>
+                        </li>
+                        <li>
+                            <a href="spa-cms-home-destaque_sec01.html">
+                            Destaque Secundário 01</a>
+                        </li>
+                        <li>
+                            <a href="spa-cms-home-destaque_sec02.html">
+                            Destaque Secundário 02</a>
+                        </li>
+                        <li>
+                            <a href="spa-cms-home-banners.html">
+                            Banners</a>
+                        </li>
+
+                        <li>
+                            <a href="spa-cms-home-video.html">
+                            Vídeo</a>
                         </li>
                     </ul>
                 </li>
-                <li >
-                    <a href="{{ path('produto') }}">
-                    <i class="icon-cogs"></i> 
-                    <span class="title">Produtos</span>
+                <li>
+                    <a href="javascript:;">
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Promoções</span>
+                    <span class="arrow"></span>
                     </a>
+                    <ul class="sub-menu" style="display: none;">
+                        <li>
+                            <a href="spa-cms-promo.html">
+                            Promoções</a>
+                        </li>
+                        <li>
+                            <a href="spa-cms-promo-banners.html">
+                            Banners</a>
+                        </li>
+                    </ul>
                 </li>
-                <li >
-                    <a href="{{ path('video') }}">
-                    <i class="icon-cogs"></i> 
-                    <span class="title">Videos</span>
-                    </a>
-                </li>
-                <li >
-                    <a href="{{ path('unidades') }}">
-                    <i class="icon-cogs"></i> 
+                <li>
+                    <a href="javascript:;">
+                    <i class="icon-file-text"></i> 
                     <span class="title">Unidades</span>
+                    <span class="arrow"></span>
                     </a>
+                    <ul class="sub-menu" style="display: none;">
+                        <li>
+                            <a href="spa-cms-unidades-unidades.html">
+                            Unidades</a>
+                        </li>
+                        <li>
+                            <a href="spa-cms-unidades-banners.html">
+                            Banners</a>
+                        </li>
+                    </ul>
                 </li>
-                <li >
-                    <a href="{{ path('noticias') }}">
-                    <i class="icon-cogs"></i> 
-                    <span class="title">Notícias</span>
-                    </a>
-                </li>
-                <li >
-                    <a href="{{ path('servicos') }}">
-                    <i class="icon-cogs"></i> 
+                <li>
+                    <a href="spa-cms-servicos.html">
+                    <i class="icon-file-text"></i> 
                     <span class="title">Serviços</span>
                     </a>
                 </li>
-                <li >
-                    <a href="{{ path('usuarios') }}">
-                    <i class="icon-cogs"></i> 
-                    <span class="title">Franqueados</span>
+                <li>
+                    <a href="javascript:;">
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Produtos</span>
+                    <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" style="display: none;">
+                        <li>
+                            <a href="spa-cms-prod-linhas.html">
+                            Linhas de Produtos</a>
+                        </li>
+                        <li>
+                            <a href="spa-cms-prod-prod.html">
+                            Produtos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="spa-cms-noticias.html">
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Notícias</span>
                     </a>
                 </li>
-                 <li >
-                    <a href="{{ path('admins') }}">
-                    <i class="icon-cogs"></i> 
-                    <span class="title">Administradores</span>
+                <li>
+                    <a href="spa-cms-seja_franqueado.html">
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Seja um Franqueado</span>
                     </a>
                 </li>
-                <li >
-                    <a href="{{ path('menu') }}">
-                    <i class="icon-cogs"></i> 
-                    <span class="title">Menu</span>
+                <li>
+                    <a href="javascript:;">
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Institucional</span>
+                    <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" style="display: none;">
+                        <li>
+                            <a href="spa-cms-institucional-conteudo.html">
+                            Conteúdo</a>
+                        </li>
+                        <li>
+                            <a href="spa-cms-institucional-video.html">
+                            Vídeo</a>
+                        </li>
+                        <li>
+                            <a href="spa-cms-institucional-banners.html">
+                            Banners</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="spa-cms-fale_conosco.html">
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Fale Conosco</span>
                     </a>
                 </li>
-                <li >
-                    <a href="{{ path('submenu') }}">
-                    <i class="icon-cogs"></i> 
-                    <span class="title">SubMenu</span>
-                    </a>
-                </li>
-                <li >
-                    <a href="{{ path('promocao') }}">
-                    <i class="icon-cogs"></i> 
-                    <span class="title">Promoções</span>
-                    </a>
-                </li>
+            
+                <ul class="page-sidebar-menu" style="margin-top:2em;">
+                    <li class="start">
+                        <a href="spa-cms-franqueados.html">
+                        <i class="icon-user"></i> 
+                        <span class="title">Franqueados</span>
+                        </a>
+                    </li>
+                </ul>
+               
+                
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>
@@ -188,7 +234,9 @@
             </div>
             <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <!-- BEGIN PAGE CONTAINER-->
+
             <div class="container-fluid">
+
                 <!-- BEGIN PAGE HEADER-->
                 {% block body %}{% endblock %}
             </div>

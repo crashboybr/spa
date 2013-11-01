@@ -23,12 +23,26 @@ class SliderController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SpaBackendBundle:Slider')->findAll();
+        $entities = $em->getRepository('SpaBackendBundle:Slider')->findBy(array(), array('position'=>'asc'));
 
         return $this->render('SpaBackendBundle:Slider:index.html.twig', array(
             'entities' => $entities,
         ));
     }
+
+
+    public function changePositionAction($id, $position)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('SpaBackendBundle:Slider')->find($id);
+        $entity->setPosition($position);
+        $em->persist($entity);
+        $em->flush();
+        exit;
+        return 1;
+    }
+
     /**
      * Creates a new Slider entity.
      *
@@ -41,10 +55,23 @@ class SliderController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $query = 'SELECT MAX(position) as position FROM Slider';
+            $stmt = $em->getConnection()->prepare($query);
+            $stmt->execute();
+            $position = $stmt->fetch();
+            $position = $position['position'];
+            
+            $entity->setPosition($position + 1);
+            if ($form->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
+            
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('slider_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('slider'));
         }
 
         return $this->render('SpaBackendBundle:Slider:new.html.twig', array(
@@ -67,7 +94,7 @@ class SliderController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        //$form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
@@ -146,7 +173,7 @@ class SliderController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        //$form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
@@ -169,9 +196,14 @@ class SliderController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            if ($editForm->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('slider_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('slider'));
         }
 
         return $this->render('SpaBackendBundle:Slider:edit.html.twig', array(
@@ -186,23 +218,38 @@ class SliderController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SpaBackendBundle:Slider')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SpaBackendBundle:Slider')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Slider entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Slider entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
+        
 
         return $this->redirect($this->generateUrl('slider'));
     }
+
+    public function hideAction($id, $hide)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SpaBackendBundle:Slider')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Slider entity.');
+        }
+        $entity->setHided($hide);
+        $em->persist($entity);
+        $em->flush();
+        
+
+        return $this->redirect($this->generateUrl('slider'));
+    }
+
 
     /**
      * Creates a form to delete a Slider entity by id.

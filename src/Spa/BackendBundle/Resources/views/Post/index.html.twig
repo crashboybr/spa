@@ -1,49 +1,44 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Post list</h1>
-
+    <h1>Notícias › Itens</h1>
+    <ul class="botoes">
+            <li><a href="{{ path('noticias_new') }}" class="botaoCriar"><i class="icon-plus"></i> Criar novo item</a></li>
+        </li>
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Pic</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Actions</th>
+                <th>Ações</th>
+                <th>Título</th>
+                <th>Imagem</th>
+                <th>Criado</th>
+                
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('noticias_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.title }}</td>
-                <td>{{ entity.content }}</td>
-                <td>{{ entity.pic }}</td>
-                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('noticias_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('noticias_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <ul class="ordenacao">
+                        <li><i class="icon-arrow-up disabled"></i></li>
+                        <li><a href="#" title="mover para baixo"><i class="icon-arrow-down"></i></a></li>
+                        <li><a href="{{ path('noticias_show', { 'id': entity.id }) }}" title="visualizar"><i class="icon-eye-open"></i></a></li>
+                        <li><a href="{{ path('noticias_edit', { 'id': entity.id }) }}" title="editar"><i class="icon-edit"></i></a></li>
+                        <li><a href="#" title="apagar"><i class="icon-trash"></i></a></li>
+
+                    </ul>
+                
                 </td>
+                <td><a href="{{ path('noticias_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                <td><img src='{{ asset(entity.pic) }}' style="width: 44px;" /></td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('d/m/Y') }}{% endif %}</td>
+                
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('noticias_new') }}">
-                Create a new entry
-            </a>
+        <ul class="botoes">
+            <li><a href="{{ path('noticias_new') }}" class="botaoCriar"><i class="icon-plus"></i> Criar novo item</a></li>
         </li>
     </ul>
     {% endblock %}

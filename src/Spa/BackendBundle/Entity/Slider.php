@@ -27,6 +27,21 @@ class Slider
      */
     private $url;
 
+    /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var integer
+     */
+    private $position;
+
+    /**
+     * @var boolean
+     */
+    private $hided;
+
     /* begin upload file */
     /**
      * @Assert\File(maxSize="6000000")
@@ -199,5 +214,46 @@ class Slider
     public function getUrl()
     {
         return $this->url;
+    }
+
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    
+        return $this;
+    }
+
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+
+    public function setHided($hided)
+    {
+        $this->hided = $hided;
+    
+        return $this;
+    }
+
+
+    public function getHided()
+    {
+        return $this->hided;
     }
 }

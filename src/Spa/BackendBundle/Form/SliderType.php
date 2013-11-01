@@ -15,8 +15,11 @@ class SliderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title')
             ->add('file')
             ->add('url')
+            ->add('save', 'submit', array('label' => '<i class="icon-download-alt"></i> Salvar'))
+            ->add('save_and_publish', 'submit', array('label' => '<i class="icon-ok"></i> Salvar e Publicar' ))
         ;
     }
     

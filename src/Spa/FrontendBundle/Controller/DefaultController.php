@@ -45,7 +45,7 @@ class DefaultController extends Controller
         //$youtube_id = $youtube_id['v'];
         
         $sliders = $em->getRepository('SpaBackendBundle:Slider')
-            ->findAll(); 
+            ->findBy(array(), array('position' => 'ASC')); 
 
         $repo = $this->getDoctrine()->getRepository('SpaBackendBundle:SimpleBanner');
 

@@ -27,4 +27,14 @@ slider_update:
 slider_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SpaBackendBundle:Slider:delete" }
-    requirements: { _method: post|delete }
+    #requirements: { _method: post|delete }
+
+slider_hide:
+    pattern:  /{id}/hide/{hide}
+    defaults: { _controller: "SpaBackendBundle:Slider:hide" }
+    #requirements: { _method: post|delete }
+
+slider_changepos:
+    pattern:  /{id}/changeposition/{position}
+    defaults: { _controller: "SpaBackendBundle:Slider:changePosition" }
+    #requirements: { _method: post|delete }
