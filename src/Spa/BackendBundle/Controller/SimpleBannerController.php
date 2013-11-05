@@ -25,9 +25,16 @@ class SimpleBannerController extends Controller
 
         $entities = $em->getRepository('SpaBackendBundle:SimpleBanner')->findAll();
 
-        return $this->render('SpaBackendBundle:SimpleBanner:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        if (count($entities) >= 1)
+        {    
+            return $this->editAction($entities[0]->getId());
+        }
+        else
+            return $this->newAction();
+        //return $this->editAction($entities[0]->getId())
+        //return $this->render('SpaBackendBundle:SimpleBanner:index.html.twig', array(
+        //    'entities' => $entities,
+        //));
     }
     /**
      * Creates a new SimpleBanner entity.
@@ -145,6 +152,7 @@ class SimpleBannerController extends Controller
             'action' => $this->generateUrl('bannersimples_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
+        
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
@@ -166,10 +174,23 @@ class SimpleBannerController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
+        //var_dump($editForm);exit;
         $editForm->handleRequest($request);
 
+        
+        //var_dump($editForm);exit;
         if ($editForm->isValid()) {
+            
+            //var_dump($entity);
+            if ($editForm->get('file')->getData() != NULL) {//user have uploaded a new file
+                $file = $editForm->get('file')->getData();//get 'UploadedFile' object
+               // $entity->setFile($file);//change field that holds file's path in db to a temporary value,i.e original file name uploaded by user
+            }
+            //var_dump($entity);exit;
+            //$em->persist($entity);
             $em->flush();
+
+            //var_dump($entity);exit;
 
             return $this->redirect($this->generateUrl('bannersimples_edit', array('id' => $id)));
         }

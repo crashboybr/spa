@@ -1,0 +1,30 @@
+banners:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:Banner:index" }
+
+banners_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:Banner:show" }
+
+banners_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:Banner:new" }
+
+banners_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:Banner:create" }
+    requirements: { _method: post }
+
+banners_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:Banner:edit" }
+
+banners_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:Banner:update" }
+    requirements: { _method: post|put }
+
+banners_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:Banner:delete" }
+    requirements: { _method: post|delete }

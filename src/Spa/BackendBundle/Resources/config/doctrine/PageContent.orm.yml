@@ -1,22 +1,19 @@
-Spa\BackendBundle\Entity\SimpleBanner:
+Spa\BackendBundle\Entity\PageContent:
     type: entity
     table: null
-    change-tracking-policy: "DEFERRED_EXPLICIT"
     fields:
         id:
             type: integer
             id: true
             generator:
                 strategy: AUTO
-        pic:
+        page:
             type: string
             length: 255
-        title:
-            type: string
-            length: 255
-        url:
-            type: string
-            length: 255
+        content:
+            type: text
+        form:
+            type: text
         createdAt:
             type: datetime
             column: created_at
@@ -24,6 +21,5 @@ Spa\BackendBundle\Entity\SimpleBanner:
             type: datetime
             column: updated_at
     lifecycleCallbacks:
-        prePersist: [ preUpload, updatedTimestamps ]
+        prePersist: [ updatedTimestamps ]
         preUpdate: [ updatedTimestamps ]
-        postPersist: [ upload ]

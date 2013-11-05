@@ -15,8 +15,8 @@ class SimpleBannerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file')
             ->add('title')
+            ->add('file')
             ->add('url')
         ;
     }

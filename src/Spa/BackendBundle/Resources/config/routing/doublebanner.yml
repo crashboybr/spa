@@ -1,5 +1,5 @@
 bannerduplo:
-    pattern:  /
+    pattern:  /{position}
     defaults: { _controller: "SpaBackendBundle:DoubleBanner:index" }
 
 bannerduplo_show:

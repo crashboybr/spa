@@ -25,6 +25,11 @@ class VideoController extends Controller
 
         $entities = $em->getRepository('SpaBackendBundle:Video')->findAll();
 
+        if (count($entities) > 0)
+            return $this->editAction($entities[0]->getId());
+        else
+            return $this->newAction();
+
         return $this->render('SpaBackendBundle:Video:index.html.twig', array(
             'entities' => $entities,
         ));
@@ -186,6 +191,25 @@ class VideoController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            if ($entity->getType() == "vimeo")
+            {
+                $vimeo_id = explode('/', $entity->getUrl());
+                
+                $vimeo_id = $vimeo_id[4];
+
+                $json = file_get_contents("http://vimeo.com/api/v2/video/" . $vimeo_id . ".json");
+                $vimeo_arr = json_decode($json);
+                $entity->setPic($vimeo_arr[0]->thumbnail_medium);
+            }
+            else if ($entity->getType() == "youtube")
+            {
+                $youtube_id = explode('/', $entity->getUrl());
+                $youtube_id = $youtube_id[4];
+                $entity->setPic('http://img.youtube.com/vi/' . $youtube_id . '/0.jpg');
+            }
+
+            $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('video_edit', array('id' => $id)));

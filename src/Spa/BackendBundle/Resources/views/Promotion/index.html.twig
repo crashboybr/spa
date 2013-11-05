@@ -1,51 +1,41 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Promotion list</h1>
-
+   <h1>Promoções</h1>
+    <ul class="botoes">
+        <li><a href="spa-cms-promo-novo.html" class="botaoCriar"><i class="icon-plus"></i> Criar nova Promoção</a></li>
+    </ul>
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Pic</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Fixed</th>
-                <th>Actions</th>
+                <th>Ações</th>
+                <th>Título</th>
+                <th>Imagem</th>
+                <th>Link</th>
+                <th>Fixa</th>
             </tr>
         </thead>
         <tbody>
+                        
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('promocao_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.description }}</td>
-                <td>{{ entity.pic }}</td>
-                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.fixed }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('promocao_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('promocao_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <ul class="ordenacao">
+                        <li><i class="icon-arrow-up disabled"></i></li>
+                        <li><i class="icon-arrow-down disabled"></i></li>
+                        <li><i class="icon-eye-open"></i></li>
+                        <li><a href="{{ path('promocao_edit', { 'id': entity.id }) }}" title="editar"><i class="icon-edit"></i></a></li>
+                        <li><i class="icon-trash disabled"></i></li></ul>
                 </td>
+                <td><a href="{{ path('promocao_edit', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                <td><img src="{{ asset(entity.pic) }}" style="width: 98px" /></td>
+                <td>{{ entity.slug }}</td>
+                <td>{{ entity.fixed }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('promocao_new') }}">
-                Create a new entry
-            </a>
-        </li>
+    <ul class="botoes">
+        <li><a href="spa-cms-promo-novo.html" class="botaoCriar"><i class="icon-plus"></i> Criar nova Promoção</a></li>
     </ul>
     {% endblock %}

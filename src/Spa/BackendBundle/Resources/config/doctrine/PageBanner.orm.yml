@@ -1,25 +1,20 @@
-Spa\BackendBundle\Entity\DoubleBanner:
+Spa\BackendBundle\Entity\PageBanner:
     type: entity
     table: null
-    repositoryClass: Spa\BackendBundle\Entity\DoubleBannerRepository
     fields:
         id:
             type: integer
             id: true
             generator:
                 strategy: AUTO
-        pic:
+        page:
             type: string
             length: 255
-        title:
-            type: string
-            length: 255
-        description:
-            type: string
-            length: 255
-        url:
-            type: string
-            length: 255
+        bannerId:
+            type: integer
+            column: banner_id
+        hided:
+            type: boolean
         position:
             type: integer
         createdAt:
@@ -28,7 +23,10 @@ Spa\BackendBundle\Entity\DoubleBanner:
         updatedAt:
             type: datetime
             column: updated_at
+    manyToOne:
+        banner:
+          targetEntity: Banner
+          inversedBy: banners
     lifecycleCallbacks:
-        prePersist: [ preUpload, updatedTimestamps ]
+        prePersist: [ updatedTimestamps ]
         preUpdate: [ updatedTimestamps ]
-        postPersist: [ upload ]

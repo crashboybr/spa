@@ -8,9 +8,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * DoubleBanner
+ * Banner
  */
-class DoubleBanner
+class Banner
 {
     /**
      * @var integer
@@ -20,17 +20,12 @@ class DoubleBanner
     /**
      * @var string
      */
-    private $pic;
-
-    /**
-     * @var string
-     */
     private $title;
 
     /**
      * @var string
      */
-    private $description;
+    private $pic;
 
     /**
      * @var string
@@ -38,9 +33,9 @@ class DoubleBanner
     private $url;
 
     /**
-     * @var integer
+     * @var string
      */
-    private $position;
+    private $type;
 
     /**
      * @var \DateTime
@@ -51,6 +46,13 @@ class DoubleBanner
      * @var \DateTime
      */
     private $updatedAt;
+
+
+    public function __construct()
+    {
+        $this->pagebanners = new ArrayCollection();
+    }
+
 
     /* begin upload file */
     /**
@@ -182,33 +184,10 @@ class DoubleBanner
     }
 
     /**
-     * Set pic
-     *
-     * @param string $pic
-     * @return DoubleBanner
-     */
-    public function setPic($pic)
-    {
-        $this->pic = $pic;
-    
-        return $this;
-    }
-
-    /**
-     * Get pic
-     *
-     * @return string 
-     */
-    public function getPic()
-    {
-        return $this->pic;
-    }
-
-    /**
      * Set title
      *
      * @param string $title
-     * @return DoubleBanner
+     * @return Banner
      */
     public function setTitle($title)
     {
@@ -228,33 +207,33 @@ class DoubleBanner
     }
 
     /**
-     * Set description
+     * Set pic
      *
-     * @param string $description
-     * @return DoubleBanner
+     * @param string $pic
+     * @return Banner
      */
-    public function setDescription($description)
+    public function setPic($pic)
     {
-        $this->description = $description;
+        $this->pic = $pic;
     
         return $this;
     }
 
     /**
-     * Get description
+     * Get pic
      *
      * @return string 
      */
-    public function getDescription()
+    public function getPic()
     {
-        return $this->description;
+        return $this->pic;
     }
 
     /**
      * Set url
      *
      * @param string $url
-     * @return DoubleBanner
+     * @return Banner
      */
     public function setUrl($url)
     {
@@ -273,36 +252,34 @@ class DoubleBanner
         return $this->url;
     }
 
-
     /**
-     * Set position
+     * Set type
      *
-     * @param string $position
-     * @return DoubleBanner
+     * @param string $type
+     * @return Banner
      */
-    public function setPosition($position)
+    public function setType($type)
     {
-        $this->position = $position;
+        $this->type = $type;
     
         return $this;
     }
 
     /**
-     * Get position
+     * Get type
      *
      * @return string 
      */
-    public function getPosition()
+    public function getType()
     {
-        return $this->position;
+        return $this->type;
     }
-
 
     /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return DoubleBanner
+     * @return Banner
      */
     public function setCreatedAt($createdAt)
     {
@@ -325,7 +302,7 @@ class DoubleBanner
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
-     * @return DoubleBanner
+     * @return Banner
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -363,5 +340,49 @@ class DoubleBanner
         if ($this->getCreatedAt() == null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $pagebanners;
+
+
+    /**
+     * Add pagebanners
+     *
+     * @param \Spa\BackendBundle\Entity\PageBanner $pagebanners
+     * @return Banner
+     */
+    public function addPagebanner(\Spa\BackendBundle\Entity\PageBanner $pagebanners)
+    {
+        $this->pagebanners[] = $pagebanners;
+    
+        return $this;
+    }
+
+    /**
+     * Remove pagebanners
+     *
+     * @param \Spa\BackendBundle\Entity\PageBanner $pagebanners
+     */
+    public function removePagebanner(\Spa\BackendBundle\Entity\PageBanner $pagebanners)
+    {
+        $this->pagebanners->removeElement($pagebanners);
+    }
+
+    /**
+     * Get pagebanners
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPagebanners()
+    {
+        return $this->pagebanners;
     }
 }

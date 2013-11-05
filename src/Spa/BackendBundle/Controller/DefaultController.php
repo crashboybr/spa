@@ -4,6 +4,8 @@ namespace Spa\BackendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
+use Spa\BackendBundle\Entity\PageBanner;
+use Spa\BackendBundle\Entity\Banner;
 
 class DefaultController extends Controller
 {
@@ -32,6 +34,59 @@ class DefaultController extends Controller
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
                 'error'         => $error,
             ));
+    }
+
+    public function pageBannerAction($page)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $banners = $em->getRepository('SpaBackendBundle:Banner')
+            ->findAll();
+        
+        $pagebanners = $em->getRepository('SpaBackendBundle:PageBanner')
+            ->findBy(array('page' => $page));
+
+
+        return $this->render('SpaBackendBundle:Default:pagebanner.html.twig', 
+            array('banners' => $banners, 
+                'pagebanners' => $pagebanners,
+                'page' => $page
+            )
+        );
+
+    }
+
+    public function addPageBannerAction(Banner $banner, $page)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pagebanner = $em->getRepository('SpaBackendBundle:PageBanner')
+            ->findBy(array('page' => $page, 'banner' => $banner));
+
+        if (!$pagebanner)
+        {
+            $pagebanner = new PageBanner();
+            $pagebanner->setBanner($banner);
+            $pagebanner->setHided(false);
+            $pagebanner->setPage($page);
+
+            
+            
+            $query = "SELECT MAX(position) as position FROM PageBanner where page = '$page'";
+            $stmt = $em->getConnection()->prepare($query);
+            $stmt->execute();
+            $position = $stmt->fetch();
+            $position = $position['position'];
+            
+            $pagebanner->setPosition($position + 1);
+
+            $em->persist($pagebanner);
+            $em->flush();
+        }
+
+        
+        echo "<pre>";
+        \Doctrine\Common\Util\Debug::dump($pagebanner);
+        //print_r($pagebanner);
+        exit;//var_dump($banner_id, $page);exit;
     }
 
 }

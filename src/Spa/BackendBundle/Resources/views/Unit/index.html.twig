@@ -1,27 +1,76 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Unidades</h1>
+<script type="text/javascript">
 
+
+
+function filterRows(word){
+  $('.records_list>tbody>tr').show()
+    .find('td:nth-child(6):not(:contains("'+word+'"))').parent().hide();
+}
+</script>
+    <h1>Unidades</h1>
+    <ul class="botoes">
+        <li><a href="spa-cms-unidades-novo.html" class="botaoCriar"><i class="icon-plus"></i> Inserir nova Unidade</a></li>
+    </ul>
+    <form style="margin-bottom:.5em;">
+        <label for="uf"><i class="icon-search"></i> Filtre por estado:</label>
+        <select name="uf" id="uf" class="uf" onchange="filterRows($('#uf').val())">
+            <option value=""></option>
+            <option value="AC">AC</option>
+            <option value="AL">AL</option>
+            <option value="AM">AM</option>
+            <option value="AP">AP</option>
+            <option value="BA">BA</option>
+            <option value="CE">CE</option>
+            <option value="DF">DF</option>
+            <option value="ES">ES</option>
+            <option value="GO">GO</option>
+            <option value="MA">MA</option>
+            <option value="MG">MG</option>
+            <option value="MS">MS</option>
+            <option value="MT">MT</option>
+            <option value="PA">PA</option>
+            <option value="PB">PB</option>
+            <option value="PE">PE</option>
+            <option value="PI">PI</option>
+            <option value="PR">PR</option>
+            <option value="RJ">RJ</option>
+            <option value="RN">RN</option>
+            <option value="RS">RS</option>
+            <option value="RO">RO</option>
+            <option value="RR">RR</option>
+            <option value="SC">SC</option>
+            <option value="SE">SE</option>
+            <option value="SP">SP</option>
+            <option value="TO">TO</option>
+        </select>
+    </form>
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Email</th>
+                <th>Ações</th>
+                <th>Unidade</th>
+                <th>E-mail</th>
                 <th>Endereço</th>
                 <th>Cidade</th>
                 <th>UF</th>
                 <th>Telefone 1</th>
                 <th>Telefone 2</th>
-                <th>Status</th>
-                <th>Ações</th>
+                <th>Inaugurada</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('unidades_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>
+                    <ul class="ordenacao">
+                        <li><a href="#" title="ocultar"><i class="icon-eye-open"></i></a></li>
+                        <li><a href="{{ path('unidades_show', { 'id': entity.id }) }}" title="editar"><i class="icon-edit"></i></a></li>
+                        <li><a href="#" title="apagar"><i class="icon-trash"></i></a></li>
+                    </ul>
+                </td>
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.email }}</td>
                 <td>{{ entity.address }}</td>
@@ -29,17 +78,8 @@
                 <td>{{ entity.state }}</td>
                 <td>{{ entity.phone1 }}</td>
                 <td>{{ entity.phone2 }}</td>
-                <td>{{ entity.status }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('unidades_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('unidades_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
+                <td>{% if (entity.status == 1) %}<i class="icon-ok"></i>{% else %}<i class="icon-remove"></i>{% endif %}</td>
+
             </tr>
         {% endfor %}
         </tbody>

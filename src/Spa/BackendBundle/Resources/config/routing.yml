@@ -20,6 +20,16 @@ login_check:
 logout:
     path:   /logout
 
+
+
+page_banners:
+    pattern:   /banners/{page}
+    defaults:  { _controller: SpaBackendBundle:Default:pageBanner }
+
+add_page_banner:
+    pattern:  /{banner}/addpagebanner/{page}
+    defaults: { _controller: "SpaBackendBundle:Default:addPageBanner" }
+
 SpaBackendBundle_produto:
     resource: "@SpaBackendBundle/Resources/config/routing/product.yml"
     prefix:   /produto
@@ -38,7 +48,7 @@ SpaBackendBundle_slider:
 
 SpaBackendBundle_bannersimples:
         resource: "@SpaBackendBundle/Resources/config/routing/simplebanner.yml"
-        prefix:   /bannersimples
+        prefix:   /destaqueprincipal
 
 SpaBackendBundle_bannerduplo:
         resource: "@SpaBackendBundle/Resources/config/routing/doublebanner.yml"
@@ -79,3 +89,12 @@ SpaBackendBundle_menu:
 SpaBackendBundle_submenu:
         resource: "@SpaBackendBundle/Resources/config/routing/submenu.yml"
         prefix:   /submenu
+
+SpaBackendBundle_banners:
+        resource: "@SpaBackendBundle/Resources/config/routing/banner.yml"
+        prefix:   /banner
+
+SpaBackendBundle_pagecontent:
+        resource: "@SpaBackendBundle/Resources/config/routing/pagecontent.yml"
+        prefix:   /content
+

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DoubleBannerType extends AbstractType
+class PageContentType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,13 +15,9 @@ class DoubleBannerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            
-            ->add('title')
-            ->add('description')
-            ->add('file')
-            ->add('url')
-            
-            
+            ->add('page','hidden')
+            ->add('content')
+            ->add('form')
         ;
     }
     
@@ -31,7 +27,7 @@ class DoubleBannerType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Spa\BackendBundle\Entity\DoubleBanner'
+            'data_class' => 'Spa\BackendBundle\Entity\PageContent'
         ));
     }
 
@@ -40,6 +36,6 @@ class DoubleBannerType extends AbstractType
      */
     public function getName()
     {
-        return 'spa_backendbundle_doublebanner';
+        return 'spa_backendbundle_pagecontent';
     }
 }

@@ -49,8 +49,13 @@ class DefaultController extends Controller
 
         $repo = $this->getDoctrine()->getRepository('SpaBackendBundle:SimpleBanner');
 
-        $bannersimples = $repo->createQueryBuilder('p')
-        ->getQuery()->getSingleResult();
+        $query = $em->createQuery(
+            'SELECT p
+            FROM SpaBackendBundle:SimpleBanner p
+            ORDER BY p.createdAt DESC'
+        )->setMaxResults(1);
+
+        $bannersimples = $query->getSingleResult();
 
         $query = $em->createQuery(
             'SELECT p
@@ -455,13 +460,16 @@ class DefaultController extends Controller
 
     public function sejaFranqueadoAction()
     {
+        $em = $this->getDoctrine()->getManager();
         $obrigado = false;
         $request = $this->getRequest();
         if ($request->query->get('obrigado'))
             $obrigado = true;
         
+        $pagecontent  = $em->getRepository('SpaBackendBundle:PageContent')
+            ->findOneBy(array('page' => 'seja-um-franqueado')); 
 
-        return $this->render('SpaFrontendBundle:Default:sejafranqueado.html.twig', array('obrigado' => $obrigado));
+        return $this->render('SpaFrontendBundle:Default:sejafranqueado.html.twig', array('obrigado' => $obrigado, 'pagecontent' => $pagecontent));
     }
 
     public function institucionalAction()
@@ -471,11 +479,14 @@ class DefaultController extends Controller
 
     public function faleConoscoAction()
     {
+        $em = $this->getDoctrine()->getManager();
         $obrigado = false;
         $request = $this->getRequest();
         if ($request->query->get('obrigado'))
             $obrigado = true;
-        return $this->render('SpaFrontendBundle:Default:faleconosco.html.twig', array('obrigado' => $obrigado));
+        $pagecontent  = $em->getRepository('SpaBackendBundle:PageContent')
+            ->findOneBy(array('page' => 'faleconosco')); 
+        return $this->render('SpaFrontendBundle:Default:faleconosco.html.twig', array('obrigado' => $obrigado, 'pagecontent' => $pagecontent));
     }
 
     public function menuAction($slug)

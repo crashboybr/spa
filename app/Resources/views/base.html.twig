@@ -87,24 +87,24 @@
                             Slider</a>
                         </li>
                         <li>
-                            <a href="spa-cms-home-destaque_principal.html">
+                            <a href="{{ path('bannersimples') }}">
                             Destaque Principal</a>
                         </li>
                         <li>
-                            <a href="spa-cms-home-destaque_sec01.html">
+                            <a href="{{ path('bannerduplo', { position: 1 }) }}">
                             Destaque Secundário 01</a>
                         </li>
                         <li>
-                            <a href="spa-cms-home-destaque_sec02.html">
+                            <a href="{{ path('bannerduplo', { position: 2 }) }}">
                             Destaque Secundário 02</a>
                         </li>
                         <li>
-                            <a href="spa-cms-home-banners.html">
+                            <a href="{{ path('page_banners', { page: 'home' }) }}">
                             Banners</a>
                         </li>
 
                         <li>
-                            <a href="spa-cms-home-video.html">
+                            <a href="{{ path('video') }}">
                             Vídeo</a>
                         </li>
                     </ul>
@@ -117,11 +117,11 @@
                     </a>
                     <ul class="sub-menu" style="display: none;">
                         <li>
-                            <a href="spa-cms-promo.html">
+                            <a href="{{ path('promocao') }}">
                             Promoções</a>
                         </li>
                         <li>
-                            <a href="spa-cms-promo-banners.html">
+                            <a href="{{ path('page_banners', { page: 'promocoes' }) }}">
                             Banners</a>
                         </li>
                     </ul>
@@ -134,11 +134,11 @@
                     </a>
                     <ul class="sub-menu" style="display: none;">
                         <li>
-                            <a href="spa-cms-unidades-unidades.html">
+                            <a href="{{ path('unidades') }}">
                             Unidades</a>
                         </li>
                         <li>
-                            <a href="spa-cms-unidades-banners.html">
+                            <a href="{{ path('page_banners', { page: 'unidades' }) }}">
                             Banners</a>
                         </li>
                     </ul>
@@ -147,6 +147,18 @@
                     <a href="spa-cms-servicos.html">
                     <i class="icon-file-text"></i> 
                     <span class="title">Serviços</span>
+                    <span class="arrow open"></span>
+                    </a>
+                    <ul class="sub-menu" style="display: block;">
+                        <li>
+                            <a href="spa-cms-servicos-inicial.html">
+                            Página inicial</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('servicos') }}">
+                            Serviços</a>
+                        </li>
+                    </ul>
                     </a>
                 </li>
                 <li>
@@ -173,7 +185,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="spa-cms-seja_franqueado.html">
+                    <a href="{{ path('content', { 'page': 'seja-um-franqueado' }) }}">
                     <i class="icon-file-text"></i> 
                     <span class="title">Seja um Franqueado</span>
                     </a>
@@ -194,13 +206,13 @@
                             Vídeo</a>
                         </li>
                         <li>
-                            <a href="spa-cms-institucional-banners.html">
+                            <a href="{{ path('page_banners', { page: 'institucional' }) }}">
                             Banners</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="spa-cms-fale_conosco.html">
+                    <a href="{{ path('content', { 'page': 'faleconosco' }) }}">
                     <i class="icon-file-text"></i> 
                     <span class="title">Fale Conosco</span>
                     </a>
@@ -208,7 +220,7 @@
             
                 <ul class="page-sidebar-menu" style="margin-top:2em;">
                     <li class="start">
-                        <a href="spa-cms-franqueados.html">
+                        <a href="{{ path('usuarios') }}">
                         <i class="icon-user"></i> 
                         <span class="title">Franqueados</span>
                         </a>
@@ -248,7 +260,7 @@
     <!-- BEGIN FOOTER -->
     <div class="footer">
         <div class="footer-inner">
-            2013 &copy; Metronic by keenthemes.
+            
         </div>
         <div class="footer-tools">
             <span class="go-top">

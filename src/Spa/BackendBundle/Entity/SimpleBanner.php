@@ -58,6 +58,7 @@ class SimpleBanner
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
+        
 
         // check if we have an old image path
         if (isset($this->pic)) {
@@ -67,6 +68,7 @@ class SimpleBanner
         } else {
             $this->pic = 'initial';
         }
+
     }
 
     /**
@@ -294,6 +296,13 @@ class SimpleBanner
     public function updatedTimestamps()
     {
         $this->setUpdatedAt(new \DateTime('now'));
+        if ($this->file)
+        {
+            $this->preUpload();
+            $this->temp = null;
+            $this->upload();
+        }
+        
 
         if ($this->getCreatedAt() == null) {
             $this->setCreatedAt(new \DateTime('now'));

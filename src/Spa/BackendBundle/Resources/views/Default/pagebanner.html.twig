@@ -1,0 +1,53 @@
+
+{% extends '::base.html.twig' %}
+
+
+{% block body -%}
+<script type="text/javascript">
+function addPageBanner(banner_id)
+{
+	$.ajax({
+      type: "POST",
+      url: "/app_dev.php/admin/" + banner_id + "/addpagebanner/{{ page }}" ,
+      
+    })
+    
+}
+</script>
+<h1> Banners - {{ page }}</h1>
+<div style="margin-top: 30px;">
+{% for banner in banners %}
+	<div style="width: 150px;float: left;height: 150px;">
+		<img src="{{ asset(banner.pic) }}" style="width: 70%" />
+		
+		<button type="button" onclick="addPageBanner({{ banner.id }})">Adicionar</button>
+	</div>
+{% endfor %}
+</div>
+
+
+<table class="records_list">
+	<thead>
+		<tr>
+			<th>Ações</th>
+			<th>Título</th>
+			<th>Imagem</th>
+			<th>Tipo</th>
+			<th>Link</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for pagebanner in pagebanners %}
+			<tr>
+				<td><ul class="ordenacao"><li><i class="icon-arrow-up disabled"></i></li><li><a href="#" title="mover para baixo"><i class="icon-arrow-down"></i></a></li><li><a href="#" title="ocultar"><i class="icon-eye-open"></i></a></li><li><a href="spa-cms-banner-simples-editar.html" title="editar"><i class="icon-edit"></i></a></li><li><a href="#" title="apagar"><i class="icon-trash"></i></a></li></ul></td>
+
+				<td><a href="{{ path('banners_edit', { id: pagebanner.banner.id }) }}">{{ pagebanner.banner.title }}</a></td>
+				<td><img src="{{ asset(pagebanner.banner.pic) }}" style="width: 44px;" /></td>
+				<td>{{ pagebanner.banner.type }}</td>
+				<td><a href="{{ pagebanner.banner.url }}">{{ pagebanner.banner.url }}</a></td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

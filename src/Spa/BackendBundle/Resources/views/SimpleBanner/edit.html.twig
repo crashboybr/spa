@@ -1,16 +1,39 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>SimpleBanner edit</h1>
+    <h1>Home › Destaque Principal</h1>
 
-    {{ form(edit_form) }}
+ 
+	{{ form_start(edit_form, { attr: { 'novalidate': 'novalidate' }}) }}
+	    <div>
+			{{ form_label(edit_form.title,'Título') }}
+			{{ form_errors(edit_form.title) }}
+			{{ form_widget(edit_form.title) }}
+		</div>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('bannersimples') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+		<div>
+			{{ form_label(edit_form.file, 'Imagem') }}
+
+			<span class="boxImagem"><img src="{{ asset(entity.pic) }}" style="width: 98px;"><a href="#" class="alterarImagem"></span>
+
+			{{ form_errors(edit_form.file) }}
+			{{ form_widget(edit_form.file) }}
+		</div>
+
+		<div>
+			{{ form_label(edit_form.url,'Link') }}
+			{{ form_errors(edit_form.url) }}
+			{{ form_widget(edit_form.url) }}
+		</div>
+
+
+		<ul class="botoes">
+			<li>
+				{{ form_widget(edit_form.submit, { label: 'Atualizar' })}}
+				
+			</li>
+			
+		</ul>
+	{{ form_end(edit_form) }}
+	
 {% endblock %}

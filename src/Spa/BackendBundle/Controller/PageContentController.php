@@ -5,69 +5,72 @@ namespace Spa\BackendBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Spa\BackendBundle\Entity\DoubleBanner;
-use Spa\BackendBundle\Form\DoubleBannerType;
+use Spa\BackendBundle\Entity\PageContent;
+use Spa\BackendBundle\Form\PageContentType;
 
 /**
- * DoubleBanner controller.
+ * PageContent controller.
  *
  */
-class DoubleBannerController extends Controller
+class PageContentController extends Controller
 {
 
     /**
-     * Lists all DoubleBanner entities.
+     * Lists all PageContent entities.
      *
      */
-    public function indexAction($position)
+    public function indexAction($page)
     {
         $em = $this->getDoctrine()->getManager();
 
-        //$entities = $em->getRepository('SpaBackendBundle:DoubleBanner')->findAll();
+        $entity = $em->getRepository('SpaBackendBundle:PageContent')->findOneBy(array('page' => $page));
+        
+        if (count($entity) > 0)
+            return $this->editAction($entity->getId());
+        else
+            return $this->newAction($page);
 
-        $entity = $em->getRepository('SpaBackendBundle:DoubleBanner')->findOneBy(array('position' => $position));
-
-        return $this->editAction($entity->getId());
-
-        /*return $this->render('SpaBackendBundle:DoubleBanner:index.html.twig', array(
+        return $this->render('SpaBackendBundle:PageContent:index.html.twig', array(
             'entities' => $entities,
-        ));*/
+        ));
     }
     /**
-     * Creates a new DoubleBanner entity.
+     * Creates a new PageContent entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new DoubleBanner();
+        $entity = new PageContent();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('bannerduplo_show', array('id' => $entity->getId())));
+            return $this->editAction($entity->getId());
+
         }
 
-        return $this->render('SpaBackendBundle:DoubleBanner:new.html.twig', array(
+        return $this->render('SpaBackendBundle:PageContent:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-    * Creates a form to create a DoubleBanner entity.
+    * Creates a form to create a PageContent entity.
     *
-    * @param DoubleBanner $entity The entity
+    * @param PageContent $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(DoubleBanner $entity)
+    private function createCreateForm(PageContent $entity)
     {
-        $form = $this->createForm(new DoubleBannerType(), $entity, array(
-            'action' => $this->generateUrl('bannerduplo_create'),
+        $form = $this->createForm(new PageContentType(), $entity, array(
+            'action' => $this->generateUrl('content_create'),
             'method' => 'POST',
         ));
 
@@ -77,59 +80,60 @@ class DoubleBannerController extends Controller
     }
 
     /**
-     * Displays a form to create a new DoubleBanner entity.
+     * Displays a form to create a new PageContent entity.
      *
      */
-    public function newAction()
+    public function newAction($page)
     {
-        $entity = new DoubleBanner();
+        $entity = new PageContent();
+        $entity->setPage($page);
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('SpaBackendBundle:DoubleBanner:new.html.twig', array(
+        return $this->render('SpaBackendBundle:PageContent:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a DoubleBanner entity.
+     * Finds and displays a PageContent entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SpaBackendBundle:DoubleBanner')->find($id);
+        $entity = $em->getRepository('SpaBackendBundle:PageContent')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find DoubleBanner entity.');
+            throw $this->createNotFoundException('Unable to find PageContent entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('SpaBackendBundle:DoubleBanner:show.html.twig', array(
+        return $this->render('SpaBackendBundle:PageContent:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
-     * Displays a form to edit an existing DoubleBanner entity.
+     * Displays a form to edit an existing PageContent entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SpaBackendBundle:DoubleBanner')->find($id);
+        $entity = $em->getRepository('SpaBackendBundle:PageContent')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find DoubleBanner entity.');
+            throw $this->createNotFoundException('Unable to find PageContent entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('SpaBackendBundle:DoubleBanner:edit.html.twig', array(
+        return $this->render('SpaBackendBundle:PageContent:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -137,16 +141,16 @@ class DoubleBannerController extends Controller
     }
 
     /**
-    * Creates a form to edit a DoubleBanner entity.
+    * Creates a form to edit a PageContent entity.
     *
-    * @param DoubleBanner $entity The entity
+    * @param PageContent $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(DoubleBanner $entity)
+    private function createEditForm(PageContent $entity)
     {
-        $form = $this->createForm(new DoubleBannerType(), $entity, array(
-            'action' => $this->generateUrl('bannerduplo_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new PageContentType(), $entity, array(
+            'action' => $this->generateUrl('content_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -155,17 +159,17 @@ class DoubleBannerController extends Controller
         return $form;
     }
     /**
-     * Edits an existing DoubleBanner entity.
+     * Edits an existing PageContent entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('SpaBackendBundle:DoubleBanner')->find($id);
+        $entity = $em->getRepository('SpaBackendBundle:PageContent')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find DoubleBanner entity.');
+            throw $this->createNotFoundException('Unable to find PageContent entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -175,17 +179,17 @@ class DoubleBannerController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('bannerduplo_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('content_edit', array('id' => $id)));
         }
 
-        return $this->render('SpaBackendBundle:DoubleBanner:edit.html.twig', array(
+        return $this->render('SpaBackendBundle:PageContent:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a DoubleBanner entity.
+     * Deletes a PageContent entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -195,21 +199,21 @@ class DoubleBannerController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SpaBackendBundle:DoubleBanner')->find($id);
+            $entity = $em->getRepository('SpaBackendBundle:PageContent')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find DoubleBanner entity.');
+                throw $this->createNotFoundException('Unable to find PageContent entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('bannerduplo'));
+        return $this->redirect($this->generateUrl('content'));
     }
 
     /**
-     * Creates a form to delete a DoubleBanner entity by id.
+     * Creates a form to delete a PageContent entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -218,7 +222,7 @@ class DoubleBannerController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('bannerduplo_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('content_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

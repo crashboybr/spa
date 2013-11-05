@@ -1,0 +1,32 @@
+content_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:PageContent:create" }
+    requirements: { _method: post }
+
+content:
+    pattern:  /{page}
+    defaults: { _controller: "SpaBackendBundle:PageContent:index" }
+
+content_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:PageContent:show" }
+
+content_new:
+    pattern:  /new/{page}
+    defaults: { _controller: "SpaBackendBundle:PageContent:new" }
+
+
+
+content_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:PageContent:edit" }
+
+content_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:PageContent:update" }
+    requirements: { _method: post|put }
+
+content_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:PageContent:delete" }
+    requirements: { _method: post|delete }
