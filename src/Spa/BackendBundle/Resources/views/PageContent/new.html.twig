@@ -1,8 +1,17 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-  
-    <h1>{% if entity.page == 'faleconosco' %}Fale Conosco{% else %}Seja Franqueado{% endif %}</h1>
+
+    <h1>{% if entity.page == 'faleconosco' %}
+    		Fale Conosco
+    	{% elseif (entity.page == 'seja-um-franqueado') %}
+    		Seja Franqueado
+		{% elseif (entity.page == 'servicos') %}
+			Serviços
+		{% elseif (entity.page == 'institucional') %}
+			Institucional	
+    	{% endif %}
+    </h1>
 
  
 	{{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
@@ -11,13 +20,16 @@
 			{{ form_errors(form.content) }}
 			{{ form_widget(form.content) }}
 		</div>
-
+		
+     	
+	
 		<div>
 			{{ form_label(form.form, 'Formulário') }}
 			<span class="explicacao">Este campo é para usuários avançados, qualquer alteração pode comprometer o funcionamento do formulário.</span>
 			{{ form_errors(form.form) }}
 			{{ form_widget(form.form) }}
 		</div>
+		
 
 		<ul class="botoes">
 			<li>

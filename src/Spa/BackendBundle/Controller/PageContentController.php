@@ -89,6 +89,8 @@ class PageContentController extends Controller
         $entity->setPage($page);
         $form   = $this->createCreateForm($entity);
 
+        
+
         return $this->render('SpaBackendBundle:PageContent:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),

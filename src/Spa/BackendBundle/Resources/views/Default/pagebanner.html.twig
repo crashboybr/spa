@@ -15,18 +15,54 @@ function addPageBanner(banner_id)
 }
 </script>
 <h1> Banners - {{ page }}</h1>
-<div style="margin-top: 30px;">
-{% for banner in banners %}
-	<div style="width: 150px;float: left;height: 150px;">
-		<img src="{{ asset(banner.pic) }}" style="width: 70%" />
+
+<table class="bannerLista">
+	<tbody>
+		<tr>
+			<td class="bannerCriar" colspan="2"><ul class="botoes"><li><a href="{{ path('banners_new') }}" class="botaoCriar"><i class="icon-plus"></i> Criar novo banner</a></li></ul></td>
+		</tr>
+
+
 		
-		<button type="button" onclick="addPageBanner({{ banner.id }})">Adicionar</button>
-	</div>
+
+{% for type, banner in banners %}
+	{% if type == 'simples' %}
+		{% for simple in banner %}
+		<tr>
+			<td class="bannerImagem" rowspan="2"><img src="{{ asset(simple.pic) }}" /></td>
+			<td class="bannerTitulo">{{ simple.title }}<span> [{{ simple.type }}]</span></td>
+		</tr>
+		<tr>
+			<td class="bannerAcoes"><ul class="ordenacao"><li><a href="{{ path('banners_edit', { id: simple.id }) }}" title="editar"><i class="icon-edit"></i></a></li><li><a href="#" title="apagar"><i class="icon-trash"></i></a></li><li><a href="#" class="botaoCriar" onclick="addPageBanner({{ simple.id }})">Inserir na página&nbsp;&nbsp;<i class="icon-arrow-right"></i></a></li></ul></td>
+		</tr>
+
+		<tr>
+			<td class="bannerEspacejador" colspan="2">&nbsp;</td>
+		</tr>
+		{% endfor %}
+	
+	{% else %}
+		<tr>
+			<td class="bannerImagem" rowspan="2"><img src="{{ asset(banner.pic) }}" /></td>
+			<td class="bannerTitulo">{{ banner.title }}<span> [{{ banner.type }}]</span></td>
+		</tr>
+		<tr>
+			<td class="bannerAcoes"><ul class="ordenacao"><li><a href="{{ path('banners_edit', { id: banner.id }) }}" title="editar"><i class="icon-edit"></i></a></li><li><a href="#" title="apagar"><i class="icon-trash"></i></a></li><li><a href="#" class="botaoCriar" onclick="addPageBanner({{ banner.id }})">Inserir na página&nbsp;&nbsp;<i class="icon-arrow-right"></i></a></li></ul></td>
+		</tr>
+
+		<tr>
+			<td class="bannerEspacejador" colspan="2">&nbsp;</td>
+		</tr>
+	{% endif %}
 {% endfor %}
-</div>
 
+		<tr>
+			<td class="bannerCriar" colspan="2"><ul class="botoes"><li><a href="{{ path('banners_new') }}" class="botaoCriar"><i class="icon-plus"></i> Criar novo banner</a></li></ul></td>
+		</tr>
+	</tbody>
+</table>	
 
-<table class="records_list">
+<table class="records_list listaBanner">
 	<thead>
 		<tr>
 			<th>Ações</th>
@@ -39,7 +75,7 @@ function addPageBanner(banner_id)
 	<tbody>
 		{% for pagebanner in pagebanners %}
 			<tr>
-				<td><ul class="ordenacao"><li><i class="icon-arrow-up disabled"></i></li><li><a href="#" title="mover para baixo"><i class="icon-arrow-down"></i></a></li><li><a href="#" title="ocultar"><i class="icon-eye-open"></i></a></li><li><a href="spa-cms-banner-simples-editar.html" title="editar"><i class="icon-edit"></i></a></li><li><a href="#" title="apagar"><i class="icon-trash"></i></a></li></ul></td>
+				<td><ul class="ordenacao"><li><i class="icon-arrow-up disabled"></i></li><li><a href="#" title="mover para baixo"><i class="icon-arrow-down"></i></a></li><li><a href="#" title="ocultar"><i class="icon-eye-open"></i></a></li><li><a href="{{ path('banners_edit', { id: pagebanner.banner.id }) }}" title="editar"><i class="icon-edit"></i></a></li><li><a href="#" title="apagar"><i class="icon-trash"></i></a></li></ul></td>
 
 				<td><a href="{{ path('banners_edit', { id: pagebanner.banner.id }) }}">{{ pagebanner.banner.title }}</a></td>
 				<td><img src="{{ asset(pagebanner.banner.pic) }}" style="width: 44px;" /></td>

@@ -18,12 +18,13 @@ class BannerType extends AbstractType
             
             ->add('type', 'choice', array(
                 'choices' => array('Simples' => 'Simples', 'Galeria' => 'Galeria'),
-                'attr' => array('onchange' => 'showFile()'),
+                'attr' => array('onchange' => 'changeType()'),
                 'label' => 'Tipo'
             ))
-            ->add('title')
-            ->add('file')
-            ->add('url')
+            ->add('title', 'text', array('label' => 'Título'))
+            ->add('file', 'file', array('label' => 'Imagem'))
+            ->add('url', 'text', array('label' => 'Link'))
+
             
         ;
     }

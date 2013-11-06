@@ -47,6 +47,7 @@ class DefaultController extends Controller
         $sliders = $em->getRepository('SpaBackendBundle:Slider')
             ->findBy(array(), array('position' => 'ASC')); 
 
+
         $repo = $this->getDoctrine()->getRepository('SpaBackendBundle:SimpleBanner');
 
         $query = $em->createQuery(
@@ -227,16 +228,48 @@ class DefaultController extends Controller
     
     }
 
-    public function bannerUnityAction()
+ 
+
+    public function showBannerAction($page)
     {
+        
         $em = $this->getDoctrine()->getManager();
-        $bannersunity = $em->getRepository('SpaBackendBundle:BannerUnity')
-            ->findAll();    
-         return $this->render('SpaFrontendBundle:Default:bannerUnity.html.twig', array('bannersunity' => $bannersunity));
+        $banners = $em->getRepository('SpaBackendBundle:PageBanner')
+            ->findBy(array('page' => $page), array('position' => 'ASC'));
+
+        foreach ($banners as $banner)
+        {
+             
+            if ($banner->getBanner()->getType() == 'Galeria')
+            {
+                $galeria = $em->getRepository('SpaBackendBundle:Banner')
+                ->findBy(array('type' => 'Galeria'), array('createdAt' => 'ASC'));
+                //var_dump($galeria);exit;
+                $arr_banner[$banner->getPosition()] = $galeria;
+            }
+            else
+                $arr_banner[$banner->getPosition()] = $banner;
+
+
+        }
+        
+         //\Doctrine\Common\Util\Debug::Dump($arr_banner[3]);exit; 
+        /*    echo "<pre>";
+        foreach ($banners as $banner)
+        {
+            if ($banner->getBanner()->getType() == 'Simples')
+            {
+                \Doctrine\Common\Util\Debug::Dump($banner->getBanner());exit;     
+            }
+        }*/
+            
+           
+         return $this->render('SpaFrontendBundle:Default:showBanners.html.twig', array('banners' => $arr_banner));
     }
 
-    public function bannerRightAction()
+    public function bannerRightAction($page)
     {
+        var_dump($page);exit;
         $repo = $this->getDoctrine()->getRepository('SpaBackendBundle:RightBanner');
         $bannerdireita = $repo->createQueryBuilder('p')
         ->getQuery()->getSingleResult();   
@@ -253,10 +286,13 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $services = $em->getRepository('SpaBackendBundle:Service')
-            ->findAll();    
+            ->findAll();
+
+        $content = $em->getRepository('SpaBackendBundle:PageContent')
+            ->findOneBy(array('page' => 'servicos'));      
 
             
-         return $this->render('SpaFrontendBundle:Default:services.html.twig', array('services' => $services));
+         return $this->render('SpaFrontendBundle:Default:services.html.twig', array('services' => $services, 'content' => $content));
     }
 
     public function viewServiceAction($slug)
@@ -474,7 +510,10 @@ class DefaultController extends Controller
 
     public function institucionalAction()
     {
-        return $this->render('SpaFrontendBundle:Default:institucional.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $content = $em->getRepository('SpaBackendBundle:PageContent')
+            ->findOneBy(array('page' => 'institucional'));  
+        return $this->render('SpaFrontendBundle:Default:institucional.html.twig', array('content' => $content));
     }
 
     public function faleConoscoAction()

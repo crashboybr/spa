@@ -1,15 +1,74 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>PageBanner creation</h1>
+<script src="/assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+<script>
+jQuery(document).ready(function() {       
+           
 
-    {{ form(form) }}
+});
+function changeType()
+{
+	if ($("#spa_backendbundle_banner_type").val() == "Simples")
+	{
+		$("#spa_backendbundle_banner_url").show();
+		$('label[for=spa_backendbundle_banner_url]').show();
+		$('#spa_backendbundle_banner_file').removeAttr('multiple');
+		$('#spa_backendbundle_banner_file').attr('name', 'spa_backendbundle_banner[file]');
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('banners') }}">
-            Back to the list
-        </a>
-    </li>
+	}
+	else
+	{
+	
+		$('#spa_backendbundle_banner_file').attr('multiple', 'multiple');
+		$("#spa_backendbundle_banner_url").hide();
+		$('label[for=spa_backendbundle_banner_url]').hide();
+		$('#spa_backendbundle_banner_file').attr('name', 'spa_backendbundle_banner[file][]');
+	}
+}
+</script>
+    <h1>Banners › Novo</h1>
+
+	<ul class="record_actions">
+		<li><a href="javascript:history.back()"><i class="icon-arrow-left"></i> Voltar</a></li>
+	</ul>
+
+	{{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
+	    <div>
+			{{ form_label(form.type,'Tipo') }}
+			{{ form_errors(form.type) }}
+			{{ form_widget(form.type, { 'onclick': 'changeType()'}) }}
+		</div>
+
+		<div>
+			{{ form_label(form.title,'Título') }}
+			{{ form_errors(form.title) }}
+			{{ form_widget(form.title) }}
+		</div>
+
+		<div>
+			{{ form_label(form.file,'Imagem') }}
+			{{ form_errors(form.file) }}
+			{{ form_widget(form.file) }}
+		</div>
+
+		<div>
+			{{ form_label(form.url,'Link') }}
+			{{ form_errors(form.url) }}
+			{{ form_widget(form.url) }}
+		</div>
+    <ul class="botoes">
+		<li>
+			{{ form_widget(form.submit, { label: 'Criar' })}}
+			
+		</li>
+		
+	</ul>
+	{{ form_end(form) }}
+
+
+     <ul class="record_actions">
+		<li><a href="javascript:history.back()"><i class="icon-arrow-left"></i> Voltar</a></li>
+	</ul>
 </ul>
 {% endblock %}

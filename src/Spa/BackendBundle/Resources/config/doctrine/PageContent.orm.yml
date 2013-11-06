@@ -14,6 +14,7 @@ Spa\BackendBundle\Entity\PageContent:
             type: text
         form:
             type: text
+            nullable: true
         createdAt:
             type: datetime
             column: created_at

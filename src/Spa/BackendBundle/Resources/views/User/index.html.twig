@@ -1,53 +1,81 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>User list</h1>
+<script type="text/javascript">
 
+
+
+function filterRows(word){
+  $('.records_list>tbody>tr').show()
+    .find('td:nth-child(4):not(:contains("'+word+'"))').parent().hide();
+}
+</script>
+    <h1>Franqueados</h1>
+    <ul class="botoes">
+        <li><a href="{{ path('usuarios_new') }}" class="botaoCriar"><i class="icon-plus"></i> Criar novo usuário</a></li>
+    </ul>
+    <form style="margin-bottom:.5em;">
+        <label for="uf"><i class="icon-search"></i> Filtre por estado:</label>
+        <select name="uf" id="uf" class="uf" onchange="filterRows($('#uf').val())">
+            <option value=""></option>
+            <option value="AC">AC</option>
+            <option value="AL">AL</option>
+            <option value="AM">AM</option>
+            <option value="AP">AP</option>
+            <option value="BA">BA</option>
+            <option value="CE">CE</option>
+            <option value="DF">DF</option>
+            <option value="ES">ES</option>
+            <option value="GO">GO</option>
+            <option value="MA">MA</option>
+            <option value="MG">MG</option>
+            <option value="MS">MS</option>
+            <option value="MT">MT</option>
+            <option value="PA">PA</option>
+            <option value="PB">PB</option>
+            <option value="PE">PE</option>
+            <option value="PI">PI</option>
+            <option value="PR">PR</option>
+            <option value="RJ">RJ</option>
+            <option value="RN">RN</option>
+            <option value="RS">RS</option>
+            <option value="RO">RO</option>
+            <option value="RR">RR</option>
+            <option value="SC">SC</option>
+            <option value="SE">SE</option>
+            <option value="SP">SP</option>
+            <option value="TO">TO</option>
+        </select>
+    </form>
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Salt</th>
-                <th>Password</th>
-                <th>Isactive</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Lastlogin</th>
-                <th>Actions</th>
+                <th>Ações</th>
+                <th>Login (e-mail)</th>
+                <th>Unidade</th>
+                <th>UF</th>
             </tr>
         </thead>
         <tbody>
+            
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('usuarios_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.username }}</td>
-                <td>{{ entity.salt }}</td>
-                <td>{{ entity.password }}</td>
-                <td>{{ entity.isActive }}</td>
-                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('usuarios_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('usuarios_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <ul class="ordenacao">
+                        <li><a href="#" title="enviar nova senha"><i class="icon-asterisk"></i></a></li>
+                        <li><a href="#" title="apagar"><i class="icon-trash"></i></a></li>
+                    </ul>
                 </td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.state }}</td>
             </tr>
+            
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('usuarios_new') }}">
-                Create a new entry
-            </a>
-        </li>
+    <ul class="botoes">
+        <li><a href="{{ path('usuarios_new') }}" class="botaoCriar"><i class="icon-plus"></i> Criar novo usuário</a></li>
     </ul>
     {% endblock %}

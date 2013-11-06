@@ -11,7 +11,8 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SpaBackendBundle:Default:index.html.twig');
+         return $this->forward('SpaBackendBundle:Slider:index');
+        //return $this->render('SpaBackendBundle:Default:index.html.twig');
     }
 
     public function loginAction()
@@ -41,13 +42,24 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $banners = $em->getRepository('SpaBackendBundle:Banner')
             ->findAll();
+           
+        foreach ($banners as $banner)
+        {
+            if ($banner->getType() == 'Galeria')
+                $arr_banner['galeria'] = $banner;
+            else
+                $arr_banner['simples'][] = $banner;
+
+
+        }
         
+        //var_dump($arr_banner);exit;
         $pagebanners = $em->getRepository('SpaBackendBundle:PageBanner')
             ->findBy(array('page' => $page));
 
 
         return $this->render('SpaBackendBundle:Default:pagebanner.html.twig', 
-            array('banners' => $banners, 
+            array('banners' => $arr_banner, 
                 'pagebanners' => $pagebanners,
                 'page' => $page
             )

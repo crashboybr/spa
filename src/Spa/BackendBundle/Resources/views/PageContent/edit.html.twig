@@ -2,7 +2,16 @@
 
 {% block body -%}
   
-    <h1>{% if entity.page == 'faleconosco' %}Fale Conosco{% else %}Seja Franqueado{% endif %}</h1>
+    <h1>{% if entity.page == 'faleconosco' %}
+    		Fale Conosco
+    	{% elseif (entity.page == 'seja-um-franqueado') %}
+    		Seja Franqueado
+		{% elseif (entity.page == 'servicos') %}
+			Serviços
+		{% elseif (entity.page == 'institucional') %}
+			Institucional
+    	{% endif %}
+    </h1>
 
  
 	{{ form_start(edit_form, { attr: { 'novalidate': 'novalidate' }}) }}
@@ -11,13 +20,16 @@
 			{{ form_errors(edit_form.content) }}
 			{{ form_widget(edit_form.content) }}
 		</div>
-
+		{% if (entity.page == 'faleconosco' or entity.page == 'seja-um-franqueado') %}
+     	
+	
 		<div>
 			{{ form_label(edit_form.form, 'Formulário') }}
 			<span class="explicacao">Este campo é para usuários avançados, qualquer alteração pode comprometer o funcionamento do formulário.</span>
 			{{ form_errors(edit_form.form) }}
 			{{ form_widget(edit_form.form) }}
 		</div>
+		{% endif %}
 
 		<ul class="botoes">
 			<li>

@@ -1,0 +1,41 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+	$(".fancybox").fancybox({
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+</script>
+
+{% for banner in banners %}
+	{% if banner is iterable %}
+
+	    <div class="bannerInterno">
+
+		
+		{% for gallery in banner %}
+			{% if loop.first %}
+				<img src="{{ asset(gallery.pic) }}">
+				<h4 style="z-index: 1;">{{ gallery.title }}</h4>
+			{% endif %}
+
+			<a class="fancybox" rel="gallery1" href="/{{ gallery.pic  }}" {% if not loop.first %} style="display: none; " {% endif %}>
+				<img src="{{ asset(gallery.pic)  }}"/>
+			</a>
+		{% endfor %}
+
+	</div>  
+	{% else %}
+	<div class="bannerInterno">
+	<div class="bannerFranquiaHome">
+		<img src="{{ banner.banner.pic |  apply_filter('banner_right')}}" />
+		<h4>{{ banner.banner.title }}<span id="saibamais">Saiba mais</span></h4>
+
+		<a href="{{ banner.banner.url }}"><span>Saiba mais</span></a>
+	</div>
+	</div>
+
+
+
+	{% endif %} 
+{% endfor %}

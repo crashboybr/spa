@@ -54,7 +54,7 @@ $(document).ready(function() {
 			<div class="colBanners">
 				{{ render(controller('SpaFrontendBundle:Default:bannerFindUnity')) }}
 				
-				{{ render(controller('SpaFrontendBundle:Default:bannerRight')) }}
+				{{ render(controller('SpaFrontendBundle:Default:showBanner', { 'page': 'promocoes' })) }}
 
 			</div>
 			<hr class="fim" />

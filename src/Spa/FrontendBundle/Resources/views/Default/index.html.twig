@@ -93,7 +93,7 @@ $(document).ready(function() {
 		<div class="home col2">
 			{{ render(controller('SpaFrontendBundle:Default:bannerFindUnity')) }}
 			
-			{{ render(controller('SpaFrontendBundle:Default:bannerRight')) }}
+			{{ render(controller('SpaFrontendBundle:Default:showBanner', { 'page': 'home' })) }}
 			
 			<div class="homeVideoDestaque">
 				<h4>Vídeo em Destaque</h4>

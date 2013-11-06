@@ -23,7 +23,21 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SpaBackendBundle:User')->findAll();
+        //$entities = $em->getRepository('SpaBackendBundle:User')->findAll();
+
+        $entities = $em->getRepository('SpaBackendBundle:Unit')->findAll();
+
+        $query = $em->createQuery(
+            'SELECT p, u
+            FROM SpaBackendBundle:User p, SpaBackendBundle:Unit u
+            WHERE p.username = u.email
+            '
+        );
+
+        //$entities = $query->getResult();
+
+        //var_dump($entities);exit;
+
 
         return $this->render('SpaBackendBundle:User:index.html.twig', array(
             'entities' => $entities,

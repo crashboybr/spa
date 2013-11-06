@@ -242,9 +242,8 @@ $(document).ready(function (){
 			</div>
 		</div>
 		<div class="colBanners">
-			{{ render(controller('SpaFrontendBundle:Default:bannerUnity')) }}
 
-			{{ render(controller('SpaFrontendBundle:Default:bannerRight')) }}
+			{{ render(controller('SpaFrontendBundle:Default:showBanner', { 'page': 'unidades' })) }}
 		
 		</div>
 	

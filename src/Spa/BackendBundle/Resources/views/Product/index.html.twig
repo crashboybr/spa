@@ -1,45 +1,46 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Product list</h1>
-
+    <h1>Produtos</h1>
+    <ul class="botoes">
+        <li><a href="{{ path('produto_new') }}" class="botaoCriar"><i class="icon-plus"></i> Inserir novo produto</a></li>
+    </ul>
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Desc</th>
-                <th>Pic</th>
-                <th>Actions</th>
+                <th>Ações</th>
+                <th>Produto</th>
+                <th>Linha</th>
+                <th>Imagem</th>
+                <th>URL</th>
             </tr>
         </thead>
         <tbody>
+            
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('produto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.description }}</td>
-                <td>{{ entity.pic }}</td>
+                
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('produto_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('produto_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <ul class="ordenacao">
+                        <li><i class="icon-arrow-up disabled"></i></li>
+                        <li><a href="#" title="mover para baixo"><i class="icon-arrow-down"></i></a></li>
+                        <li><a href="#" title="ocultar"><i class="icon-eye-open"></i></a></li>
+                        <li><a href="{{ path('produto_edit', { 'id': entity.id }) }}" title="editar"><i class="icon-edit"></i></a></li>
+                        <li><a href="#" title="apagar"><i class="icon-trash"></i></a></li>
+                    </ul>
                 </td>
+                <td><a href="{{ path('produto_edit', { 'id': entity.id }) }}">Avaliação</a></td>
+                <td>&nbsp;</td>
+                <td><img src="{{ asset(entity.pic) }}" style="width: 50px;" /></td>
+                <td><a href="/produtos/{{ entity.slug }}" target="_blank">/produtos/{{ entity.slug }}</a></td>
+            
+        
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('produto_new') }}">
-                Create a new entry
-            </a>
-        </li>
+    <ul class="botoes">
+        <li><a href="{{ path('produto_new') }}" class="botaoCriar"><i class="icon-plus"></i> Inserir novo produto</a></li>
     </ul>
     {% endblock %}

@@ -35,16 +35,50 @@ class BannerController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Banner();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        
 
-        if ($form->isValid()) {
+        
+        
+        $banner = $request->request->get('spa_backendbundle_banner');
+
+        if ($banner['type'] == 'Galeria')
+        {
+            $files = $request->files->get('spa_backendbundle_banner');
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            foreach ($files['file'] as $file)
+            {
+                $entity = new Banner();
+                $entity->setTitle($banner['title']);
+                $entity->setType($banner['type']);        
+                $entity->setFile($file);
+                $entity->setUrl('/');
+            
+               
+                $em->persist($entity);
+                $em->flush();
+                
 
-            return $this->redirect($this->generateUrl('banners_show', array('id' => $entity->getId())));
+            }
+            return $this->redirect($this->generateUrl('banners' ));
+            
+        }
+        else
+        {
+            
+            $entity = new Banner();
+            $form = $this->createCreateForm($entity);
+            
+            
+            $form->handleRequest($request);
+
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('banners'));
+            }
         }
 
         return $this->render('SpaBackendBundle:Banner:new.html.twig', array(

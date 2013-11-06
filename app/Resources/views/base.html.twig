@@ -151,7 +151,7 @@
                     </a>
                     <ul class="sub-menu" style="display: block;">
                         <li>
-                            <a href="spa-cms-servicos-inicial.html">
+                            <a href="{{ path('content', { 'page': 'servicos' }) }}">
                             Página inicial</a>
                         </li>
                         <li>
@@ -173,17 +173,29 @@
                             Linhas de Produtos</a>
                         </li>
                         <li>
-                            <a href="spa-cms-prod-prod.html">
+                            <a href="{{ path('produto') }}">
                             Produtos</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ path('noticias') }}">
+                    <a href="javascript:;">
                     <i class="icon-file-text"></i> 
                     <span class="title">Notícias</span>
+                    <span class="arrow"></span>
                     </a>
+                    <ul class="sub-menu" style="display: none;">
+                        <li>
+                            <a href="{{ path('noticias') }}">
+                            Notícias</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('page_banners', { page: 'noticias' }) }}">
+                            Banners</a>
+                        </li>
+                    </ul>
                 </li>
+
                 <li>
                     <a href="{{ path('content', { 'page': 'seja-um-franqueado' }) }}">
                     <i class="icon-file-text"></i> 
@@ -198,7 +210,7 @@
                     </a>
                     <ul class="sub-menu" style="display: none;">
                         <li>
-                            <a href="spa-cms-institucional-conteudo.html">
+                            <a href="{{ path('content', { 'page': 'institucional' }) }}">
                             Conteúdo</a>
                         </li>
                         <li>
