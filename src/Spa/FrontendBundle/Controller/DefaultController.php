@@ -237,7 +237,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $banners = $em->getRepository('SpaBackendBundle:PageBanner')
             ->findBy(array('page' => $page), array('position' => 'ASC'));
-
+        $arr_banner = array();
         foreach ($banners as $banner)
         {
              
