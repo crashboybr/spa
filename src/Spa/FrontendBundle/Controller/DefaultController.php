@@ -21,6 +21,7 @@ class DefaultController extends Controller
         $user = null;
         $user_id = $session->get('user_id');
         $user_salt = $session->get('user_salt');
+        
         if ($user_salt)
         {
             $user = $em->getRepository('SpaBackendBundle:User')

@@ -101,4 +101,29 @@ class DefaultController extends Controller
         exit;//var_dump($banner_id, $page);exit;
     }
 
+    public function sendPasswordAction($email)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('SpaBackendBundle:User')
+            ->findOneBy(array('username' => $email));
+        if (!$user)
+            throw $this->createNotFoundException('Usuário não encontrado!');
+        $dados['salt'] = $user->getSalt();
+
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Spa das Sobrancelhas - Nova Senha')
+        ->setFrom($email)
+        ->setTo($email)
+        ->setBody(
+            $this->renderView(
+                'SpaBackendBundle:Default:sendPassword.txt.twig',
+                array('dados' => $dados)
+            )
+        )
+        ;
+        $this->get('mailer')->send($message);
+        exit;
+
+    }
+
 }

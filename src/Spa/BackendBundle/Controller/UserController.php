@@ -25,18 +25,26 @@ class UserController extends Controller
 
         //$entities = $em->getRepository('SpaBackendBundle:User')->findAll();
 
-        $entities = $em->getRepository('SpaBackendBundle:Unit')->findAll();
-
+        //$entities = $em->getRepository('SpaBackendBundle:Unit')->findAll();
+/*
         $query = $em->createQuery(
             'SELECT p, u
-            FROM SpaBackendBundle:User p, SpaBackendBundle:Unit u
-            WHERE p.username = u.email
+            FROM SpaBackendBundle:User p join SpaBackendBundle:Unit u
+            WHERE p.username = u.email and p.id = :id
             '
-        );
+        )->setParameter('id', 9);;
 
-        //$entities = $query->getResult();
+*/
+        
 
-        //var_dump($entities);exit;
+       // $entities = $query->getResult();
+
+
+        $sql = 'SELECT u.name as name, u.state as state, s.username as email from spa_users s LEFT Join (Unit u) on u.email = s.username';
+        $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        $entities = $stmt->fetchAll();
+        
 
 
         return $this->render('SpaBackendBundle:User:index.html.twig', array(
