@@ -63,10 +63,12 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setSalt(md5($entity->getUsername()));
+            $entity->setPassword('temp');
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('usuarios_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('usuarios'));
         }
 
         return $this->render('SpaBackendBundle:User:new.html.twig', array(
