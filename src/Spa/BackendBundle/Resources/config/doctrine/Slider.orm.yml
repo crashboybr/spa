@@ -21,6 +21,13 @@ Spa\BackendBundle\Entity\Slider:
             length: 10
         hided:
             type: boolean
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
     lifecycleCallbacks:
-        prePersist: [ preUpload ]
+        prePersist: [ preUpload, updatedTimestamps ]
+        preUpdate: [ updatedTimestamps ]
         postPersist: [ upload ]

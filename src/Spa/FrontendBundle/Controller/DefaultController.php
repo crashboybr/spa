@@ -46,7 +46,7 @@ class DefaultController extends Controller
         //$youtube_id = $youtube_id['v'];
         
         $sliders = $em->getRepository('SpaBackendBundle:Slider')
-            ->findBy(array(), array('position' => 'ASC')); 
+            ->findBy(array('hided' => false), array('position' => 'ASC')); 
 
 
         $repo = $this->getDoctrine()->getRepository('SpaBackendBundle:SimpleBanner');
@@ -348,8 +348,9 @@ class DefaultController extends Controller
             ->findOneBy(
                 array('fixed' => false),
                 array('createdAt' => 'DESC')
-            );    
-            
+            );
+
+        if (!$sazonal_promotion) return $this->viewPromotionAction($fixed_promotions[0]->getSlug());
          return $this->render('SpaFrontendBundle:Default:promotion.html.twig', array('sazonal_promotion' => $sazonal_promotion, 'fixed_promotions' => $fixed_promotions));
     }
 
@@ -362,11 +363,17 @@ class DefaultController extends Controller
         $promotion = $em->getRepository('SpaBackendBundle:Promotion')
             ->findOneBy(array('slug' => $slug));  
 
+        $sazonal_promotion = $em->getRepository('SpaBackendBundle:Promotion')
+            ->findOneBy(
+                array('fixed' => false),
+                array('createdAt' => 'DESC')
+            );
+
         if (!$promotion) {
             throw $this->createNotFoundException('Promoção não encontrada!');
         }    
 
-        return $this->render('SpaFrontendBundle:Default:viewPromotion.html.twig', array('promotion' => $promotion, 'fixed_promotions' => $fixed_promotions));       
+        return $this->render('SpaFrontendBundle:Default:viewPromotion.html.twig', array('promotion' => $promotion, 'sazonal_promotion' => $sazonal_promotion, 'fixed_promotions' => $fixed_promotions));       
     }
 
     public function franqueadoAction()

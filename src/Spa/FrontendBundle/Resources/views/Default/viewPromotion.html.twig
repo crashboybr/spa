@@ -23,9 +23,11 @@ $(document).ready(function() {
 		<div class="c02">
 			<div class="colConteudo">
 				<ul class="submenu-interno">
-					<li>
+					{% if (sazonal_promotion) %}
+					<li class="foco">
 						<a href="{{ path('spa_frontend_promotion') }}"}>Campanha</a><span></span>
 					</li>
+					{% endif %}
 					{% for p in fixed_promotions %}
 						<li {% if (p.id == promotion.id) %}class="foco"{% endif %}>
 							<a href="{{ path('spa_frontend_view_promotion', { slug: p.slug }) }}">{{ p.name }}</a>
@@ -58,7 +60,7 @@ $(document).ready(function() {
 			<div class="colBanners">
 				{{ render(controller('SpaFrontendBundle:Default:bannerFindUnity')) }}
 				
-				{{ render(controller('SpaFrontendBundle:Default:bannerRight')) }}
+				{{ render(controller('SpaFrontendBundle:Default:showBanner', { 'page': 'promocoes' })) }}
 
 			</div>
 			<hr class="fim" />

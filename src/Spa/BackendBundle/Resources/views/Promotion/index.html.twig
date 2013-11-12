@@ -3,7 +3,7 @@
 {% block body -%}
    <h1>Promoções</h1>
     <ul class="botoes">
-        <li><a href="spa-cms-promo-novo.html" class="botaoCriar"><i class="icon-plus"></i> Criar nova Promoção</a></li>
+        <li><a href="{{ path('promocao_new') }}" class="botaoCriar"><i class="icon-plus"></i> Criar nova Promoção</a></li>
     </ul>
     <table class="records_list">
         <thead>
@@ -36,6 +36,6 @@
         </tbody>
     </table>
     <ul class="botoes">
-        <li><a href="spa-cms-promo-novo.html" class="botaoCriar"><i class="icon-plus"></i> Criar nova Promoção</a></li>
+        <li><a href="{{ path('promocao_new') }}" class="botaoCriar"><i class="icon-plus"></i> Criar nova Promoção</a></li>
     </ul>
     {% endblock %}
