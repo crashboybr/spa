@@ -44,7 +44,7 @@ class UnitController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('unidades_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('unidades'));
         }
 
         return $this->render('SpaBackendBundle:Unit:new.html.twig', array(
@@ -172,7 +172,7 @@ class UnitController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('unidades_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('unidades'));
         }
 
         return $this->render('SpaBackendBundle:Unit:edit.html.twig', array(

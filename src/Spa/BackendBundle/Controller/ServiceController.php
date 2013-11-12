@@ -48,7 +48,7 @@ class ServiceController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('servicos_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('servicos'));
         }
 
         return $this->render('SpaBackendBundle:Service:new.html.twig', array(
@@ -176,7 +176,7 @@ class ServiceController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('servicos_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('servicos'));
         }
 
         return $this->render('SpaBackendBundle:Service:edit.html.twig', array(

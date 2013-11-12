@@ -44,7 +44,7 @@ class PostController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('noticias_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('noticias'));
         }
 
         return $this->render('SpaBackendBundle:Post:new.html.twig', array(
@@ -171,7 +171,7 @@ class PostController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('noticias_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('noticias'));
         }
 
         return $this->render('SpaBackendBundle:Post:edit.html.twig', array(
