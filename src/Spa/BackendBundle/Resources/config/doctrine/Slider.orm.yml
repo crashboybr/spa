@@ -13,9 +13,6 @@ Spa\BackendBundle\Entity\Slider:
         url:
             type: string
             length: 255
-        title:
-            type: string
-            length: 255
         position:
             type: integer
             length: 10

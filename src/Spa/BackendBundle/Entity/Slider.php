@@ -28,11 +28,6 @@ class Slider
     private $url;
 
     /**
-     * @var string
-     */
-    private $title;
-
-    /**
      * @var integer
      */
     private $position;
