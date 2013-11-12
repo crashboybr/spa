@@ -45,7 +45,7 @@ class ProductController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('produto_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('produto'));
         }
 
         return $this->render('SpaBackendBundle:Product:new.html.twig', array(
