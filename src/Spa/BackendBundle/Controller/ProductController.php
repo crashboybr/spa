@@ -172,7 +172,7 @@ class ProductController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('produto_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('produto'));
         }
 
         return $this->render('SpaBackendBundle:Product:edit.html.twig', array(

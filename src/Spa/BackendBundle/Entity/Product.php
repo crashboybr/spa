@@ -344,6 +344,13 @@ class Product
     public function updatedTimestamps()
     {
         $this->setUpdatedAt(new \DateTime('now'));
+        
+        if ($this->file)
+        {
+            $this->preUpload();
+            $this->temp = null;
+            $this->upload();
+        }
 
         if ($this->getCreatedAt() == null) {
             $this->setCreatedAt(new \DateTime('now'));
