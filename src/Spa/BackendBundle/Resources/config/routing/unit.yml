@@ -27,4 +27,4 @@ unidades_update:
 unidades_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SpaBackendBundle:Unit:delete" }
-    requirements: { _method: post|delete }
+    #requirements: { _method: post|delete }

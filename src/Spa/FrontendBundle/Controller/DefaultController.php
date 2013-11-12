@@ -419,6 +419,7 @@ class DefaultController extends Controller
             \Doctrine\Common\Util\Debug::dump($menu->getSubMenus());
         }
         exit;*/
+
         return $this->render('SpaFrontendBundle::menu.html.twig', array(
                 'menus' => $menus,
             ));
@@ -447,7 +448,7 @@ class DefaultController extends Controller
         $message = \Swift_Message::newInstance()
         ->setSubject('Contato Franquia')
         ->setFrom($dados['email'])
-        ->setTo('bernardo.d.alves@gmail.com')
+        ->setTo('faleconosco@spadassobrancelhas.com.br')
         ->setBody(
             $this->renderView(
                 'SpaFrontendBundle:Default:email.txt.twig',
@@ -479,7 +480,7 @@ class DefaultController extends Controller
         $message = \Swift_Message::newInstance()
         ->setSubject('Contato Fale Conosco')
         ->setFrom($dados['email'])
-        ->setTo('bernardo.d.alves@gmail.com')
+        ->setTo('faleconosco@spadassobrancelhas.com.br')
         ->setBody(
             $this->renderView(
                 'SpaFrontendBundle:Default:emailfaleconosco.txt.twig',

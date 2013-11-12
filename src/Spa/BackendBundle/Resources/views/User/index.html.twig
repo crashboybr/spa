@@ -73,7 +73,7 @@ function enviarSenha(email)
                 <td>
                     <ul class="ordenacao">
                         <li><a href="javascript:void(0)" onclick="enviarSenha('{{ entity.email }}')" title="enviar nova senha"><i class="icon-asterisk"></i></a></li>
-                        <li><a href="#" title="apagar"><i class="icon-trash"></i></a></li>
+                        <li><a href="{{ path('usuarios_delete', { id: entity.id }) }}" title="apagar"><i class="icon-trash"></i></a></li>
                     </ul>
                 </td>
                 <td>{{ entity.email }}</td>

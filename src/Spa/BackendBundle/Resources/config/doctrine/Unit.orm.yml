@@ -32,4 +32,5 @@ Spa\BackendBundle\Entity\Unit:
             nullable: true
         status:
             type: boolean
+            nullable: true
     lifecycleCallbacks: {  }

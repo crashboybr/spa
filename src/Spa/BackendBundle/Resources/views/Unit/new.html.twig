@@ -1,15 +1,74 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Unit creation</h1>
+    <h1>Home › Unidades › Novo</h1>
 
-    {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('unidades') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+		{{ form_start(form) }}
+		<div>
+			{{ form_label(form.name, 'Nome') }}
+			{{ form_errors(form.name) }}
+			{{ form_widget(form.name) }}
+		</div>
+
+		<div>
+			{{ form_label(form.email,'Email') }}
+			{{ form_errors(form.email) }}
+			{{ form_widget(form.email) }}
+		</div>
+
+		<div>
+			{{ form_label(form.address,'Endereço') }}
+			{{ form_errors(form.address) }}
+			{{ form_widget(form.address) }}
+		</div>
+
+		<div>
+			{{ form_label(form.city,'Cidade') }}
+			{{ form_errors(form.city) }}
+			{{ form_widget(form.city) }}
+		</div>
+
+		<div>
+			{{ form_label(form.state,'Estado') }}
+			{{ form_errors(form.state) }}
+			{{ form_widget(form.state) }}
+		</div>
+
+		<div>
+			{{ form_label(form.phone1,'Telefone 1') }}
+			{{ form_errors(form.phone1) }}
+			{{ form_widget(form.phone1) }}
+		</div>
+
+		<div>
+			{{ form_label(form.phone2,'Telefone 2') }}
+			{{ form_errors(form.phone2) }}
+			{{ form_widget(form.phone2) }}
+		</div>
+
+		<div>
+			{{ form_label(form.status,'Inaugurada') }}
+			{{ form_errors(form.status) }}
+			{{ form_widget(form.status) }}
+		</div>
+
+
+
+
+		<ul class="botoes">
+			<li>
+				{{ form_widget(form.submit, { label: 'Criar' })}}
+				
+			</li>
+		</ul>
+	{{ form_end(form) }}
+	
+
+
+    <ul class="record_actions">
+		<li><a href="{{ path('unidades') }}"><i class="icon-arrow-left"></i> Voltar para lista</a></li>
+	</ul>
+
+    
 {% endblock %}

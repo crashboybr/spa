@@ -40,7 +40,7 @@ class UserController extends Controller
        // $entities = $query->getResult();
 
 
-        $sql = 'SELECT u.name as name, u.state as state, s.username as email from spa_users s LEFT Join (Unit u) on u.email = s.username';
+        $sql = 'SELECT s.id as id, u.name as name, u.state as state, s.username as email from spa_users s LEFT Join (Unit u) on u.email = s.username';
         $stmt = $this->getDoctrine()->getManager()->getConnection()->prepare($sql);
         $stmt->execute();
         $entities = $stmt->fetchAll();
@@ -210,24 +210,20 @@ class UserController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SpaBackendBundle:User')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SpaBackendBundle:User')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find User entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
+        
 
         return $this->redirect($this->generateUrl('usuarios'));
     }
-
     /**
      * Creates a form to delete a User entity by id.
      *

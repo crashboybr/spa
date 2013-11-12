@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Spa\BackendBundle\Entity\Unit;
 use Spa\BackendBundle\Form\UnitType;
-
+use Spa\BackendBundle\Entity\User;
 /**
  * Unit controller.
  *
@@ -38,10 +38,18 @@ class UnitController extends Controller
         $entity = new Unit();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-        var_dump($form);exit;
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+            $em->flush();
+
+            $user = new User();
+            $user->setUsername($entity->getEmail());
+            $user->setSalt(md5($entity->getEmail()));
+            $user->setPassword('123');
+            $user->setIsActive(true);
+            $em->persist($user);
             $em->flush();
 
             return $this->redirect($this->generateUrl('unidades'));
@@ -182,25 +190,22 @@ class UnitController extends Controller
         ));
     }
     /**
-     * Deletes a Unit entity.
+     * Deletes a Slider entity.
      *
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SpaBackendBundle:Unit')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SpaBackendBundle:Unit')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Unit entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Slider entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
+        
 
         return $this->redirect($this->generateUrl('unidades'));
     }

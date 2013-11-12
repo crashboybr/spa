@@ -27,4 +27,4 @@ usuarios_update:
 usuarios_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SpaBackendBundle:User:delete" }
-    requirements: { _method: post|delete }
+    #requirements: { _method: post|delete }
