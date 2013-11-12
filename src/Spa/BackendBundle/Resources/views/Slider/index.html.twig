@@ -60,7 +60,6 @@ $(document).ready(function(){
         <thead>
             <tr>
                 <th>Ações</th>
-                <th>Título</th>
                 <th>Imagem</th>
                 <th>Link</th>
             </tr>
@@ -83,7 +82,6 @@ $(document).ready(function(){
                         <li><a href="{{ path('slider_delete', { 'id': entity.id }) }}" title="apagar"><i class="icon-trash"></i></a></li>
                     </ul>
                 </td>
-                <td><a href="{{ path('slider_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
                 <td><img src='{{ asset(entity.pic) }}' style="width: 98px;" /></td>
                 <td><a href="{{ entity.url }}">{{ entity.url }}</a></td>
                 

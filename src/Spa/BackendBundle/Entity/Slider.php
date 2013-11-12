@@ -222,18 +222,7 @@ class Slider
     }
 
 
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    
-        return $this;
-    }
 
-
-    public function getTitle()
-    {
-        return $this->title;
-    }
 
     public function setPosition($position)
     {
