@@ -16,6 +16,8 @@ Spa\BackendBundle\Entity\SubMenu:
         slug:
             type: string
             length: 255
+        position:
+            type: integer
     manyToOne:
         menu:
           targetEntity: Menu

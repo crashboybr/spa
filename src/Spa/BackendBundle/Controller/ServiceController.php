@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Spa\BackendBundle\Entity\Service;
 use Spa\BackendBundle\Form\ServiceType;
+use Spa\BackendBundle\Entity\Submenu;
 
 /**
  * Service controller.
@@ -46,6 +47,26 @@ class ServiceController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($entity);
+            $em->flush();
+
+            $menu = $em->getRepository('SpaBackendBundle:Menu')
+            ->find(3);
+
+            $submenu = new Submenu();
+            $submenu->setName($entity->getName());
+            $submenu->setSlug($entity->getSlug());
+
+            $submenu->setMenu($menu);
+
+            $query = 'SELECT MAX(position) as position FROM Submenu';
+            $stmt = $em->getConnection()->prepare($query);
+            $stmt->execute();
+            $position = $stmt->fetch();
+            $position = $position['position'];
+            
+            $submenu->setPosition($position + 1);
+
+            $em->persist($submenu);
             $em->flush();
 
             return $this->redirect($this->generateUrl('servicos'));

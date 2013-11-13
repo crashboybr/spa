@@ -40,12 +40,21 @@ class SubMenuController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $entity->setSlug($entity->getName());
             $em = $this->getDoctrine()->getManager();
+            $query = 'SELECT MAX(position) as position FROM Submenu';
+            $stmt = $em->getConnection()->prepare($query);
+            $stmt->execute();
+            $position = $stmt->fetch();
+            $position = $position['position'];
+            
+            $entity->setPosition($position + 1);
+
+            $entity->setSlug($entity->getName());
+            
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('submenu_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('submenu'));
         }
 
         return $this->render('SpaBackendBundle:SubMenu:new.html.twig', array(

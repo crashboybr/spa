@@ -33,7 +33,25 @@ class SubMenu
      */
     private $slug;
 
+    /**
+     * @var integer
+     */
+    private $position;
 
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    
+        return $this;
+    }
+
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+    
     /**
      * Get id
      *
