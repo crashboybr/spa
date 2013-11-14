@@ -189,7 +189,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository('SpaBackendBundle:Post')
-            ->findAll();
+            ->findBy(array(), array('createdAt' => 'DESC'));
 
         return $this->render('SpaFrontendBundle:Default:news.html.twig', array('posts' => $posts));
     

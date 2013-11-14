@@ -2,6 +2,21 @@
 
 {% block body -%}
 
+ <script src="/assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+
+
+$(document).ready(function(){
+	{% if (entity.page == 'faleconosco' or entity.page == 'seja-um-franqueado') %}
+		$("#form_show").show();
+	{% else %}
+		$("#form_show").hide();
+	{% endif %}
+});
+
+  </script>
+
     <h1>{% if entity.page == 'faleconosco' %}
     		Fale Conosco
     	{% elseif (entity.page == 'seja-um-franqueado') %}
@@ -22,10 +37,10 @@
 		</div>
 		
      	
-	
-		<div>
+		<br />
+		<div id="form_show">
 			{{ form_label(form.form, 'Formulário') }}
-			<span class="explicacao">Este campo é para usuários avançados, qualquer alteração pode comprometer o funcionamento do formulário.</span>
+			<span class="explicacao">Este campo é para usuários avançados, qualquer alteração pode comprometer o funcionamento do formulário.</span><br />
 			{{ form_errors(form.form) }}
 			{{ form_widget(form.form) }}
 		</div>

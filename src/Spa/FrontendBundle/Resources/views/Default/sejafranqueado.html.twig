@@ -74,6 +74,7 @@
 </script>
 <script type="text/javascript">
 jQuery(document).ready(function(){
+	$(".colConteudo").children('div').addClass('box-dados-franquia');
 	// Seta as regras de validação 
 	var options = 
 	{
@@ -175,7 +176,9 @@ jQuery(document).ready(function(){
 		<h2>Seja um Franqueado</h2>
 		<hr class="titulo" />
 		<div class="c02">
-			{{ pagecontent.content|raw }}
+			<div class="colConteudo">
+				{{ pagecontent.content|raw }}
+			</div>
 			<div class="colForm">
 				<h3>FAÇA SEU CADASTRO</h3>
 				{% if (obrigado) %}<p class='formSucesso'>Sua mensagem foi enviada com <em>sucesso</em>.</p>{% endif %}

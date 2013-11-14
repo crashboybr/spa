@@ -16,7 +16,7 @@ class PageContentType extends AbstractType
     {
         $builder
             ->add('page','hidden')
-            ->add('content')
+            ->add('content', 'ckeditor', array('config_name' => 'my_config'))
             ->add('form')
         ;
     }
