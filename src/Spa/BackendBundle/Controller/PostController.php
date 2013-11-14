@@ -23,7 +23,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SpaBackendBundle:Post')->findBy(array(), array('createdAt' => 'DESC'));
+        $entities = $em->getRepository('SpaBackendBundle:Post')->findBy(array(), array('position' => 'ASC'));
 
         return $this->render('SpaBackendBundle:Post:index.html.twig', array(
             'entities' => $entities,
@@ -41,7 +41,25 @@ class PostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $query = 'SELECT MAX(position) as position FROM Post';
+            $stmt = $em->getConnection()->prepare($query);
+            $stmt->execute();
+            $position = $stmt->fetch();
+            $position = $position['position'];
+
+
+            
+            $entity->setPosition($position + 1);
+
+            if ($form->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
+
+
             $em->persist($entity);
+
             $em->flush();
 
             return $this->redirect($this->generateUrl('noticias'));
@@ -169,7 +187,13 @@ class PostController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            if ($editForm->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
             $em->flush();
+
 
             return $this->redirect($this->generateUrl('noticias'));
         }
@@ -186,20 +210,16 @@ class PostController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SpaBackendBundle:Post')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SpaBackendBundle:Post')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Post entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Post entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
+        
 
         return $this->redirect($this->generateUrl('noticias'));
     }

@@ -40,14 +40,45 @@ $(document).ready(function() {
 					<p class="imgCenter">
 						<img src="{{ asset(post.pic) }}" />
 					</p>
-					<!--
+					
 					<div class="leiatb">
 						<h6>Leia também</h6>
+						
 						<ul>
-							<li><a href="#"><img src="/_imgs/noticia-20130926-001.jpg" /><span class="texto"><span class="titulo">Maquiagem com gloss nos olhos é tendência internacional</span><span class="descricao">Especialistas afirmam que a nova tendência de maquiagem é o gloss nos olhos.</span></span><hr class="fim" /></a></li>
-							<li><a href="#"><img src="/_imgs/noticia-20130926-001.jpg" /><span class="texto"><span class="titulo">Maquiagem com gloss nos olhos é tendência internacional</span><span class="descricao">Especialistas afirmam que a nova tendência de maquiagem é o gloss nos olhos.</span></span><hr class="fim" /></a></li>
+							{% if (related1) %}
+							<li>
+								<a href="#">
+									<img src="{{ asset(related1.pic) }}" />
+									<span class="texto">
+										<span class="titulo">
+											{{ asset(related1.title) }}
+										</span>
+										<span class="descricao">
+											
+										</span>
+									</span>
+									<hr class="fim" />
+								</a>
+							</li>
+							{% endif %}
+							{% if (related2) %}
+							<li>
+								<a href="#">
+									<img src="{{ asset(related2.pic) }}" />
+									<span class="texto">
+										<span class="titulo">
+											{{ asset(related2.title) }}
+										</span>
+										<span class="descricao">
+											
+										</span>
+									</span>
+									<hr class="fim" />
+								</a>
+							</li>
+							{% endif %}
 						</ul>
-					</div>-->
+					</div>
 				</div>
 			</div>
 			<div class="colBanners">

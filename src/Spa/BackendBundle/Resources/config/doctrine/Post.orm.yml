@@ -21,6 +21,22 @@ Spa\BackendBundle\Entity\Post:
         updatedAt:
             type: datetime
             column: updated_at
+        related1:
+            type: integer
+            nullable: true
+        related2:
+            type: integer
+            nullable: true
+        hided:
+            type: boolean
+            nullable: true
+        position:
+            type: integer
+            nullable: true
+        tags:
+            type: string
+            length: 255
+            nullable: true
     lifecycleCallbacks:
         prePersist: [ preUpload, updatedTimestamps ]
         preUpdate: [ updatedTimestamps ]

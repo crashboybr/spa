@@ -1,15 +1,63 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Post creation</h1>
+    <h1>Notícia › Novo</h1>
 
-    {{ form(form) }}
+	<ul class="record_actions">
+		<li><a href="javascript:history.back()"><i class="icon-arrow-left"></i> Voltar</a></li>
+	</ul>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('noticias') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+	{{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
+	    <div>
+			{{ form_label(form.title,'Título') }}
+			{{ form_errors(form.title) }}
+			{{ form_widget(form.title) }}
+		</div>
+
+		<div>
+			{{ form_label(form.content,'Conteúdo') }}
+			{{ form_errors(form.content) }}
+			{{ form_widget(form.content) }}
+		</div>
+
+		<div>
+			{{ form_label(form.file,'Imagem') }}
+			{{ form_errors(form.file) }}
+			{{ form_widget(form.file) }}
+		</div>
+
+		<div>
+			{{ form_label(form.tags,'Tags') }}
+			{{ form_errors(form.tags) }}
+			{{ form_widget(form.tags) }}
+			<span class="explicacao">(separar por vírgulas)</span>
+		</div>
+
+		<div>
+			{{ form_label(form.related1,'Notícia Relacionada 1') }}
+			{{ form_errors(form.related1) }}
+			{{ form_widget(form.related1) }}
+		</div>
+
+		<div>
+			{{ form_label(form.related2,'Notícia Relacionada 2') }}
+			{{ form_errors(form.related2) }}
+			{{ form_widget(form.related2) }}
+		</div>
+
+    <ul class="botoes">
+			<li>
+				{{ form_widget(form.save)}}
+				
+			</li>
+			<li>
+				{{ form_widget(form.save_and_publish) }}
+			</li>
+		</ul>
+	{{ form_end(form) }}
+
+
+     <ul class="record_actions">
+		<li><a href="javascript:history.back()"><i class="icon-arrow-left"></i> Voltar</a></li>
+	</ul>
 {% endblock %}

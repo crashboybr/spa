@@ -34,7 +34,6 @@ $(document).ready(function(){
             ids = $('#table tr[id]').map(function() { return this.id; }).get();
             jQuery.each(ids, function( i, val ) {
 
-                console.log(i, val);  
                 $.ajax({
                   type: "POST",
                   url: "/admin/bannerslider/" + val + "/changeposition/" + i,

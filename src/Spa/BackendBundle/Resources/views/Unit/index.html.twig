@@ -66,7 +66,13 @@ function filterRows(word){
             <tr>
                 <td>
                     <ul class="ordenacao">
-                        <li><a href="#" title="ocultar"><i class="icon-eye-open"></i></a></li>
+                        <li>
+                            {% if (entity.hided) %}
+                                <a href="{{ path('admin_hide', { 'id': entity.id, 'hide': 0, 'entity': 'Unit' }) }}" title="exibir"><i class="icon-eye-open"></i></a>
+                            {% else %}
+                                <a href="{{ path('admin_hide', { 'id': entity.id, 'hide': 1, 'entity': 'Unit' }) }}" title="ocultar"><i class="icon-eye-close"></i></a>
+                            {% endif %}   
+                        </li>
                         <li><a href="{{ path('unidades_edit', { 'id': entity.id }) }}" title="editar"><i class="icon-edit"></i></a></li>
                         <li><a href="{{ path('unidades_delete', { 'id': entity.id }) }}" title="apagar"><i class="icon-trash"></i></a></li>
                     </ul>

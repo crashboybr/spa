@@ -18,7 +18,15 @@ class PostType extends AbstractType
             ->add('title')
             ->add('content', 'ckeditor', array('config_name' => 'my_config'))
             ->add('file')
-            //->add('createdAt')
+            ->add('tags')
+            ->add('related1','entity', array(
+                'class' => 'SpaBackendBundle:Post',
+                'property' => 'title', 'empty_value' => 'Selecione uma notícia'))
+            ->add('related2','entity', array(
+                'class' => 'SpaBackendBundle:Post',
+                'property' => 'title', 'empty_value' => 'Selecione uma notícia'))
+            ->add('save', 'submit', array('label' => '<i class="icon-download-alt"></i> Salvar'))
+            ->add('save_and_publish', 'submit', array('label' => '<i class="icon-ok"></i> Salvar e Publicar' ))
             
         ;
     }

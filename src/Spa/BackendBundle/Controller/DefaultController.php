@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Spa\BackendBundle\Entity\PageBanner;
 use Spa\BackendBundle\Entity\Banner;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DefaultController extends Controller
 {
@@ -124,6 +126,34 @@ class DefaultController extends Controller
         $this->get('mailer')->send($message);
         exit;
 
+    }
+
+    public function hideAction($id, $hide, $entity)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('SpaBackendBundle:' . $entity)->find($id);
+        $entity->setHided($hide);
+        $em->persist($entity);
+        $em->flush();
+
+        $request = $this->getRequest();
+        $referer = $request->headers->get('referer');
+        return new RedirectResponse($referer);
+    }
+
+    public function changePositionAction($id, $position, $entity)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('SpaBackendBundle:' . $entity)->find($id);
+        $entity->setPosition($position);
+        $em->persist($entity);
+        $em->flush();
+        exit;
+        return 1;
     }
 
 }

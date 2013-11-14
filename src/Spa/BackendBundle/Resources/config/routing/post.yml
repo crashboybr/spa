@@ -27,4 +27,4 @@ noticias_update:
 noticias_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SpaBackendBundle:Post:delete" }
-    requirements: { _method: post|delete }
+    #requirements: { _method: post|delete }

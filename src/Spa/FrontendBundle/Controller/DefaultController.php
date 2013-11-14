@@ -90,8 +90,8 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $units = $em->getRepository('SpaBackendBundle:Unit')
-            //->findBy(array('status' => true))
-            ->findAll();
+            ->findBy(array('hided' => false));
+            //->findAll();
         
         $bannersunity = $em->getRepository('SpaBackendBundle:BannerUnity')
             ->findAll();    
@@ -119,9 +119,9 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         if (!$city)
-            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('state' => $uf));
+            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('state' => $uf, 'hided' => false));
         else
-            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('state' => $uf, 'city' => $city));
+            $units = $em->getRepository('SpaBackendBundle:Unit')->findBy(array('state' => $uf, 'city' => $city, 'hided' => false));
         
         $json_unit = array();
         foreach ($units as $unit)
@@ -189,7 +189,8 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository('SpaBackendBundle:Post')
-            ->findBy(array(), array('createdAt' => 'DESC'));
+            ->findBy(array('hided' => false), array('position' => 'ASC'));
+
 
         return $this->render('SpaFrontendBundle:Default:news.html.twig', array('posts' => $posts));
     
@@ -223,9 +224,24 @@ class DefaultController extends Controller
         case 12: $mes = "DEZEMBRO"; break;
          
         }
+        $related1 = null;
+        $related2 = null;
+        if ($post->getRelated1())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $related1 = $em->getRepository('SpaBackendBundle:Post')
+                ->find($post->getRelated1());
+        }
+        if ($post->getRelated2())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $related2 = $em->getRepository('SpaBackendBundle:Post')
+                ->find($post->getRelated1());
+        }
+
+
         
-        
-        return $this->render('SpaFrontendBundle:Default:viewNews.html.twig', array('post' => $post));
+        return $this->render('SpaFrontendBundle:Default:viewNews.html.twig', array('post' => $post, 'related1' => $related1, 'related2' => $related2));
     
     }
 

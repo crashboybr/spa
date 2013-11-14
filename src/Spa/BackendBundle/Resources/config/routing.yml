@@ -20,6 +20,15 @@ login_check:
 logout:
     path:   /logout
 
+admin_hide:
+    pattern:  /{id}/hide/{hide}/{entity}
+    defaults: { _controller: "SpaBackendBundle:Default:hide" }
+
+
+changepos:
+    pattern:  /{id}/changeposition/{position}/{entity}
+    defaults: { _controller: "SpaBackendBundle:Default:changePosition" }
+
 send_password:
     pattern:   /enviarsenha/{email}
     defaults:  { _controller: SpaBackendBundle:Default:sendPassword }

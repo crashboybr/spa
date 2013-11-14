@@ -33,6 +33,15 @@ class Post
     private $pic;
 
     /**
+     * @var string
+     */
+    private $tags;
+
+    private $hided;
+
+    private $position;
+
+    /**
      * @var \DateTime
      */
     private $createdAt;
@@ -41,6 +50,16 @@ class Post
      * @var \DateTime
      */
     private $updatedAt;
+
+    /**
+     * @var integer
+     */
+    private $related1;
+
+    /**
+     * @var integer
+     */
+    private $related2;
 
     /* begin upload file */
     /**
@@ -285,6 +304,65 @@ class Post
         return $this->updatedAt;
     }
 
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+        return $this->tags;
+    }
+
+    public function getHided()
+    {
+        return $this->hided;
+    }
+
+    public function setHided($hided)
+    {
+        $this->hided = $hided;
+        return $this->hided;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    
+        return $this;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    public function setRelated1($related1)
+    {
+        $this->related1 = $related1;
+    
+        return $this;
+    }
+
+    public function getRelated1()
+    {
+        return $this->related1;
+    }
+
+    public function setRelated2($related2)
+    {
+        $this->related2 = $related2;
+    
+        return $this;
+    }
+
+    public function getRelated2()
+    {
+        return $this->related2;
+    }
+
     /**
      *
      * @ORM\PrePersist
@@ -304,5 +382,10 @@ class Post
         if ($this->getCreatedAt() == null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+    public function __toString()
+    {
+        return strval($this->id);
     }
 }

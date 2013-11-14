@@ -54,6 +54,11 @@ class Unit
      */
     private $status;
 
+    /**
+     * @var boolean
+     */
+    private $hided;
+
 
     /**
      * Get id
@@ -242,6 +247,19 @@ class Unit
     public function getCity()
     {
         return $this->city;
+    }
+
+    public function setHided($hided)
+    {
+        $this->hided = $hided;
+    
+        return $this;
+    }
+
+
+    public function getHided()
+    {
+        return $this->hided;
     }
 
 }
