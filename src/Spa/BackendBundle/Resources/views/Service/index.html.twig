@@ -29,7 +29,7 @@
                     </ul>
                 </td>
                 <td>{{ entity.name }}</td>
-                <td><img src="{{ asset(entity.pic) }}" style="width: 98px;" /></td>
+                <td>{% if (entity.pic) %}<img src="{{ asset(entity.pic) }}" style="width: 98px;" />{% endif %}</td>
                 <td>/{{ entity.slug }}</td>
                 
             </tr>
