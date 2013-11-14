@@ -129,33 +129,8 @@
 	color:#999;
 }
 .arquivo {margin-bottom:1em;}
-.arquivo::-webkit-file-upload-button {
-	visibility: hidden;
-}
-.arquivo:before {
-	content: 'Selecione arquivo';
-	display: inline-block;
-	background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-	border: 1px solid #999;
-	border-radius: 3px;
-	padding:.25em .5em;
-	outline: none;
-	white-space: nowrap;
-	-webkit-user-select: none;
-	cursor: pointer;
-	text-shadow: 1px 1px #fff;
-	font-weight: 400;
-	font-size: 1em;
-	color:#666;
-	line-height:1em;
-}
-.arquivo:hover:before {
-	border-color: #7f3f98;
-	color: #7f3f98;
-}
-.arquivo:active:before {
-	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
+
+
 .boxImagem {
 	display:inline-block;
 	background:#b19bc9;
