@@ -23,7 +23,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SpaBackendBundle:Post')->findAll();
+        $entities = $em->getRepository('SpaBackendBundle:Post')->findBy(array(), array('createdAt' => 'DESC'));
 
         return $this->render('SpaBackendBundle:Post:index.html.twig', array(
             'entities' => $entities,
