@@ -27,6 +27,12 @@ Spa\BackendBundle\Entity\Promotion:
         fixed:
             type: boolean
             nullable: true
+        hided:
+            type: boolean
+            nullable: true
+        position:
+            type: integer
+            nullable: true
 
         slug:
                 type: string

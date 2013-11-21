@@ -19,6 +19,8 @@ class PromotionType extends AbstractType
             ->add('description')
             ->add('file')
             ->add('fixed')
+            ->add('save', 'submit', array('label' => '<i class="icon-download-alt"></i> Salvar'))
+            ->add('save_and_publish', 'submit', array('label' => '<i class="icon-ok"></i> Salvar e Publicar' ))
             
         ;
     }

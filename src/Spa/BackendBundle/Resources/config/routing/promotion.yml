@@ -27,4 +27,4 @@ promocao_update:
 promocao_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SpaBackendBundle:Promotion:delete" }
-    requirements: { _method: post|delete }
+    #requirements: { _method: post|delete }

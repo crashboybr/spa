@@ -23,8 +23,7 @@ class PromotionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SpaBackendBundle:Promotion')->findAll();
-
+        $entities = $em->getRepository('SpaBackendBundle:Promotion')->findBy(array(), array('position' => 'ASC'));
         return $this->render('SpaBackendBundle:Promotion:index.html.twig', array(
             'entities' => $entities,
         ));
@@ -42,10 +41,25 @@ class PromotionController extends Controller
         if ($form->isValid()) {
             $entity->setSlug($entity->getName());
             $em = $this->getDoctrine()->getManager();
+
+            $query = 'SELECT MAX(position) as position FROM Promotion';
+            $stmt = $em->getConnection()->prepare($query);
+            $stmt->execute();
+            $position = $stmt->fetch();
+            $position = $position['position'];
+
+
+            
+            $entity->setPosition($position + 1);
+
+            if ($form->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('promocao_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('promocao'));
         }
 
         return $this->render('SpaBackendBundle:Promotion:new.html.twig', array(
@@ -69,7 +83,7 @@ class PromotionController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        
 
         return $form;
     }
@@ -174,7 +188,7 @@ class PromotionController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('promocao_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('promocao'));
         }
 
         return $this->render('SpaBackendBundle:Promotion:edit.html.twig', array(
@@ -189,20 +203,17 @@ class PromotionController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SpaBackendBundle:Promotion')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SpaBackendBundle:Promotion')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Promotion entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Promotion entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
+        
 
         return $this->redirect($this->generateUrl('promocao'));
     }

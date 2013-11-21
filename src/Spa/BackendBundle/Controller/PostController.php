@@ -57,6 +57,27 @@ class PostController extends Controller
             else
                 $entity->setHided(true);
 
+            if (!$entity->getRelated1() || !$entity->getRelated2())
+            {
+                $tags = explode(',', $entity->getTags());
+                foreach ($tags as $tag)
+                {
+
+                    $query = 'SELECT id FROM Post where tags like "%' . trim($tag) . '%"';
+                    //var_dump($query);
+                    $stmt = $em->getConnection()->prepare($query);
+                    $stmt->execute();
+                    $post_related = $stmt->fetch();
+
+                    if (!$entity->getRelated1())
+                        $entity->setRelated1((int) $post_related['id']);
+                    else if (!$entity->getRelated2())
+                        $entity->setRelated2((int) $post_related['id']);
+                    //var_dump($entity);
+                }
+            }
+            //var_dump($post_related);exit;
+
 
             $em->persist($entity);
 
@@ -85,7 +106,6 @@ class PostController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
@@ -192,6 +212,27 @@ class PostController extends Controller
                 $entity->setHided(false);
             else
                 $entity->setHided(true);
+
+            if (!$entity->getRelated1() || !$entity->getRelated2())
+            {
+                $tags = explode(',', $entity->getTags());
+                foreach ($tags as $tag)
+                {
+
+                    $query = 'SELECT id FROM Post where tags like "%' . trim($tag) . '%"';
+                    //var_dump($query);
+                    $stmt = $em->getConnection()->prepare($query);
+                    $stmt->execute();
+                    $post_related = $stmt->fetch();
+
+                    if (!$entity->getRelated1())
+                        $entity->setRelated1((int) $post_related['id']);
+                    else if (!$entity->getRelated2())
+                        $entity->setRelated2((int) $post_related['id']);
+                    //var_dump($entity);
+                }
+            }
+
             $em->flush();
 
 

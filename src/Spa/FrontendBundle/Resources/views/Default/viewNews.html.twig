@@ -47,14 +47,19 @@ $(document).ready(function() {
 						<ul>
 							{% if (related1) %}
 							<li>
-								<a href="#">
+								<a href="{{ path('spa_frontend_view_post', { 'post': related1.id }) }}">
 									<img src="{{ asset(related1.pic) }}" />
 									<span class="texto">
 										<span class="titulo">
-											{{ asset(related1.title) }}
+											{{ related1.title }}
 										</span>
 										<span class="descricao">
 											
+											{% if (related1.content|length > 130) %}
+												{{ related1.content|slice(0, 130)|raw }} ...
+											{% else %}
+												{{ related1.content|raw }}
+											{% endif %}
 										</span>
 									</span>
 									<hr class="fim" />
@@ -63,14 +68,19 @@ $(document).ready(function() {
 							{% endif %}
 							{% if (related2) %}
 							<li>
-								<a href="#">
+								<a href="{{ path('spa_frontend_view_post', { 'post': related2.id }) }}">	
 									<img src="{{ asset(related2.pic) }}" />
 									<span class="texto">
 										<span class="titulo">
-											{{ asset(related2.title) }}
+											{{ related2.title }}
 										</span>
 										<span class="descricao">
-											
+
+											{% if (related2.content|length > 130) %}
+												{{ related2.content|slice(0, 130)|raw }} ...
+											{% else %}
+												{{ related2.content|raw }}
+											{% endif %}
 										</span>
 									</span>
 									<hr class="fim" />

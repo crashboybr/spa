@@ -47,6 +47,10 @@ class Promotion
      */
     private $fixed;
 
+    private $hided;
+
+    private $position;
+
 
     private $slug;
 
@@ -382,7 +386,31 @@ class Promotion
           {
             return 'n-a';
           }
+         
           return $text;
+    }
+
+    public function getHided()
+    {
+        return $this->hided;
+    }
+
+    public function setHided($hided)
+    {
+        $this->hided = $hided;
+        return $this->hided;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    
+        return $this;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
     }
 
 }

@@ -1,15 +1,49 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Promotion creation</h1>
+<h1>Promoção › Novo</h1>
 
-    {{ form(form) }}
+	<ul class="record_actions">
+		<li><a href="javascript:history.back()"><i class="icon-arrow-left"></i> Voltar</a></li>
+	</ul>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('promocao') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+	{{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
+	    <div>
+			{{ form_label(form.name,'Nome') }}
+			{{ form_errors(form.name) }}
+			{{ form_widget(form.name) }}
+		</div>
+
+		<div>
+			{{ form_label(form.description,'Descrição') }}
+			{{ form_errors(form.description) }}
+			{{ form_widget(form.description) }}
+		</div>
+
+		<div>
+			{{ form_label(form.file,'Imagem') }}
+			{{ form_errors(form.file) }}
+			{{ form_widget(form.file) }}
+		</div>
+
+		<div>
+			{{ form_label(form.fixed,'Campanha Fixa') }}
+			{{ form_errors(form.fixed) }}
+			{{ form_widget(form.fixed) }}
+		</div>
+    <ul class="botoes">
+			<li>
+				{{ form_widget(form.save)}}
+				
+			</li>
+			<li>
+				{{ form_widget(form.save_and_publish) }}
+			</li>
+		</ul>
+	{{ form_end(form) }}
+
+
+     <ul class="record_actions">
+		<li><a href="javascript:history.back()"><i class="icon-arrow-left"></i> Voltar</a></li>
+	</ul>
 {% endblock %}

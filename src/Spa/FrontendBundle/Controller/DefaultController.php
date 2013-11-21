@@ -199,6 +199,7 @@ class DefaultController extends Controller
     public function viewPostAction(Post $post)
     {
         $createdAt = $post->getCreatedAt();
+
         //var_dump($createdAt);exit;
         $dia = date('d');
         $mes = date('m');
@@ -224,21 +225,25 @@ class DefaultController extends Controller
         case 12: $mes = "DEZEMBRO"; break;
          
         }
+        $em = $this->getDoctrine()->getManager();
+
         $related1 = null;
         $related2 = null;
+
         if ($post->getRelated1())
         {
-            $em = $this->getDoctrine()->getManager();
             $related1 = $em->getRepository('SpaBackendBundle:Post')
                 ->find($post->getRelated1());
         }
+
+
         if ($post->getRelated2())
         {
-            $em = $this->getDoctrine()->getManager();
+            
             $related2 = $em->getRepository('SpaBackendBundle:Post')
-                ->find($post->getRelated1());
+                ->find($post->getRelated2());
         }
-
+        //var_dump($post->getRelated2());exit;
 
         
         return $this->render('SpaFrontendBundle:Default:viewNews.html.twig', array('post' => $post, 'related1' => $related1, 'related2' => $related2));
