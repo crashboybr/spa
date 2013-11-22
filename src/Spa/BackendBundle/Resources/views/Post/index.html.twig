@@ -39,7 +39,7 @@ $(document).ready(function(){
                 console.log(i, val);  
                 $.ajax({
                   type: "POST",
-                  url: "/admin/" + val + "/changeposition/" + i + "/Post",
+                  url: "/admin/" + val + "/changeposition/" + (i + 1) + "/Post",
                   
                 })
                 

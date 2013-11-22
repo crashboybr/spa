@@ -40,7 +40,7 @@ $(document).ready(function(){
                 console.log(i, val);  
                 $.ajax({
                   type: "POST",
-                  url: "/app_dev.php/admin/" + val + "/positionpagebanner/" + (i + 1) + "/{{ page }}",
+                  url: "/admin/" + val + "/positionpagebanner/" + (i + 1) + "/{{ page }}",
                   
                 })
                 
@@ -60,7 +60,7 @@ function addPageBanner(banner_id)
 {
 	$.ajax({
       type: "POST",
-      url: "/app_dev.php/admin/" + banner_id + "/addpagebanner/{{ page }}" ,
+      url: "/admin/" + banner_id + "/addpagebanner/{{ page }}" ,
       
     });
     location.reload();
