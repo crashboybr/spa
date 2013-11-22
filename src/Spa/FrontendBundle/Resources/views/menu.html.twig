@@ -3,12 +3,37 @@
 	
 		<li class="{{ menu.slug }}">
 			<a href="{{ path('spa_frontend_menu', { slug: menu.slug }) }}">{{ menu.name }}</a>
-			{% if (menu.submenus|length > 0) %}
-			<ul>
-				{% for s in menu.submenus %}
-					<li><a href="{{ path('spa_frontend_submenu', { slug: menu.slug, subslug: s.slug }) }}">{{ s.name }}</a><span></span></li>
-				{% endfor %}
-			</ul>
+			{% if menu.name == 'Serviços' %}
+					
+				<ul>
+					{% for s in services %}
+						<li>
+							<a href="{{ path('spa_frontend_show_service', { slug: s.slug }) }}">{{ s.name }}</a>
+							<span></span>
+						</li>
+					{% endfor %}
+				</ul>
+					
+
+			{% elseif menu.name == 'Produtos' %}
+				<ul>
+					{% for s in products %}
+						<li>
+							<a href="{{ path('spa_frontend_view_product', { slug: s.slug }) }}">{{ s.name }}</a>
+							<span></span>
+						</li>
+					{% endfor %}
+				</ul>
+
+			{% else %}
+				{% if (menu.submenus|length > 0) %}
+				<ul>
+					{% for s in menu.submenus %}
+						<li><a href="{{ path('spa_frontend_submenu', { slug: menu.slug, subslug: s.slug }) }}">{{ s.name }}</a><span></span></li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+
 			{% endif %}
 		</li>
 	

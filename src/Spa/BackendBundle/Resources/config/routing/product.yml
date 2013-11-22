@@ -27,4 +27,4 @@ produto_update:
 produto_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SpaBackendBundle:Product:delete" }
-    requirements: { _method: post|delete }
+    #requirements: { _method: post|delete }

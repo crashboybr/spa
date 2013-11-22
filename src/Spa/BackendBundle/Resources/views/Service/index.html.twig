@@ -1,11 +1,62 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<script src="/assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+
+<script>
+
+
+$(document).ready(function(){
+
+    $("#table tr:last i.icon-arrow-down").addClass("disabled");
+    //$("#table tr:last i.icon-arrow-down").parent().removeClass("down");
+
+    $("#table tr:nth-child(1) i.icon-arrow-up").addClass("disabled");
+    //$("#table tr:nth-child(1) i.icon-arrow-up").parent().removeClass("up");
+
+    $(".up,.down").click(function(){
+        if (!$(this).children().hasClass("disabled"))
+        {
+            var row = $(this).parents("tr:first");
+            if ($(this).is(".up")) {
+                row.insertBefore(row.prev());
+                
+            } else if ($(this).is(".down")) {
+                row.insertAfter(row.next());
+            } 
+
+            $("#table tr i").removeClass("disabled");
+            
+            $("#table tr:last i.icon-arrow-down").addClass("disabled");
+            
+
+            $("#table tr:nth-child(1) i.icon-arrow-up").addClass("disabled");
+            ids = $('#table tr[id]').map(function() { return this.id; }).get();
+            
+            jQuery.each(ids, function( i, val ) {
+
+                console.log(i, val);  
+                $.ajax({
+                  type: "POST",
+                  url: "/app_dev.php/admin/" + val + "/changeposition/" + (i + 1) + "/Service",
+                  
+                })
+                
+            });
+            
+        }
+        
+    });   
+
+    
+});
+
+</script>
     <h1>Serviços</h1>
     <ul class="botoes">
         <li><a href="{{ path('servicos_new') }}" class="botaoCriar"><i class="icon-plus"></i> Inserir novo serviço</a></li>
     </ul>
-    <table class="records_list">
+    <table class="records_list" id="table">
         <thead>
             <tr>
                 <th>Ações</th>
@@ -18,14 +69,28 @@
             
 
         {% for entity in entities %}
-            <tr>
+            <tr id="{{ entity.id }}">
                 <td>
                     <ul class="ordenacao">
-                        <li><i class="icon-arrow-up disabled"></i></li>
-                        <li><a href="#" title="mover para baixo"><i class="icon-arrow-down"></i></a></li>
-                        <li><a href="#" title="ocultar"><i class="icon-eye-open"></i></a></li>
+                        <li>
+                            <a href="javascript:void(0)" class="up" title="mover para cima">
+                                <i class="icon-arrow-up"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="down" title="mover para baixo">
+                                <i class="icon-arrow-down"></i>
+                            </a>
+                        </li>
+                        <li>
+                             {% if (entity.hided) %}
+                                <a href="{{ path('admin_hide', { 'id': entity.id, 'hide': 0, 'entity': 'Service' }) }}" title="exibir"><i class="icon-eye-open"></i></a>
+                            {% else %}
+                                <a href="{{ path('admin_hide', { 'id': entity.id, 'hide': 1, 'entity': 'Service' }) }}" title="ocultar"><i class="icon-eye-close"></i></a>
+                            {% endif %}
+                        </li>
                         <li><a href="{{ path('servicos_edit', { 'id': entity.id }) }}" title="editar"><i class="icon-edit"></i></a></li>
-                        <li><a href="#" title="apagar"><i class="icon-trash"></i></a></li>
+                         <li><a href="{{ path('servicos_delete', { 'id': entity.id }) }}" title="apagar"><i class="icon-trash"></i></a></li>
                     </ul>
                 </td>
                 <td>{{ entity.name }}</td>

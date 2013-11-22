@@ -41,6 +41,14 @@ add_page_banner:
     pattern:  /{banner}/addpagebanner/{page}
     defaults: { _controller: "SpaBackendBundle:Default:addPageBanner" }
 
+delete_page_banner:
+    pattern:  /{banner}/deletepagebanner/{page}
+    defaults: { _controller: "SpaBackendBundle:Default:delPageBanner" }
+
+position_page_banner:
+    pattern:  /{id}/positionpagebanner/{position}/{page}
+    defaults: { _controller: "SpaBackendBundle:Default:positionPageBanner" }
+
 SpaBackendBundle_produto:
     resource: "@SpaBackendBundle/Resources/config/routing/product.yml"
     prefix:   /produto

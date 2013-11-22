@@ -22,6 +22,12 @@ Spa\BackendBundle\Entity\Product:
         updatedAt:
             type: datetime
             column: updated_at
+        hided:
+            type: boolean
+            nullable: true
+        position:
+            type: integer
+            nullable: true
         slug:
                 type: string
                 length: 128

@@ -25,7 +25,7 @@ class ProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SpaBackendBundle:Product')->findAll();
+        $entities = $em->getRepository('SpaBackendBundle:Product')->findBy(array(), array('position' => 'ASC'));
 
         return $this->render('SpaBackendBundle:Product:index.html.twig', array(
             'entities' => $entities,
@@ -44,6 +44,22 @@ class ProductController extends Controller
         if ($form->isValid()) {
             $entity->setSlug($entity->getName());
             $em = $this->getDoctrine()->getManager();
+
+            $query = 'SELECT MAX(position) as position FROM Product';
+            $stmt = $em->getConnection()->prepare($query);
+            $stmt->execute();
+            $position = $stmt->fetch();
+            $position = $position['position'];
+
+
+            
+            $entity->setPosition($position + 1);
+
+            if ($form->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
+
             $em->persist($entity);
             $em->flush();
 
@@ -91,7 +107,7 @@ class ProductController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        
 
         return $form;
     }
@@ -210,20 +226,16 @@ class ProductController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SpaBackendBundle:Product')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SpaBackendBundle:Product')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Product entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
+        
 
         return $this->redirect($this->generateUrl('produto'));
     }

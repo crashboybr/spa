@@ -3,14 +3,67 @@
 
 
 {% block body -%}
+<script src="/assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+
+<script>
+
+
+$(document).ready(function(){
+
+    $("#table tr:last i.icon-arrow-down").addClass("disabled");
+    //$("#table tr:last i.icon-arrow-down").parent().removeClass("down");
+
+    $("#table tr:nth-child(1) i.icon-arrow-up").addClass("disabled");
+    //$("#table tr:nth-child(1) i.icon-arrow-up").parent().removeClass("up");
+
+    $(".up,.down").click(function(){
+        if (!$(this).children().hasClass("disabled"))
+        {
+            var row = $(this).parents("tr:first");
+            if ($(this).is(".up")) {
+                row.insertBefore(row.prev());
+                
+            } else if ($(this).is(".down")) {
+                row.insertAfter(row.next());
+            } 
+
+            $("#table tr i").removeClass("disabled");
+            
+            $("#table tr:last i.icon-arrow-down").addClass("disabled");
+            
+
+            $("#table tr:nth-child(1) i.icon-arrow-up").addClass("disabled");
+            ids = $('#table tr[id]').map(function() { return this.id; }).get();
+            
+            jQuery.each(ids, function( i, val ) {
+
+                console.log(i, val);  
+                $.ajax({
+                  type: "POST",
+                  url: "/app_dev.php/admin/" + val + "/positionpagebanner/" + (i + 1) + "/{{ page }}",
+                  
+                })
+                
+            });
+            
+        }
+        
+    });   
+
+    
+});
+
+</script>
+
 <script type="text/javascript">
 function addPageBanner(banner_id)
 {
 	$.ajax({
       type: "POST",
-      url: "/admin/" + banner_id + "/addpagebanner/{{ page }}" ,
+      url: "/app_dev.php/admin/" + banner_id + "/addpagebanner/{{ page }}" ,
       
-    })
+    });
+    location.reload();
     
 }
 </script>
@@ -33,7 +86,7 @@ function addPageBanner(banner_id)
 			<td class="bannerTitulo">{{ simple.title }}<span> [{{ simple.type }}]</span></td>
 		</tr>
 		<tr>
-			<td class="bannerAcoes"><ul class="ordenacao"><li><a href="{{ path('banners_edit', { id: simple.id }) }}" title="editar"><i class="icon-edit"></i></a></li><li><a href="#" title="apagar"><i class="icon-trash"></i></a></li><li><a href="#" class="botaoCriar" onclick="addPageBanner({{ simple.id }})">Inserir na página&nbsp;&nbsp;<i class="icon-arrow-right"></i></a></li></ul></td>
+			<td class="bannerAcoes"><ul class="ordenacao"><li><a href="{{ path('banners_edit', { id: simple.id }) }}" title="editar"><i class="icon-edit"></i></a></li><li><a href="#" title="apagar"><i class="icon-trash"></i></a></li><li><a href="javascript:void(0)" class="botaoCriar" onclick="addPageBanner({{ simple.id }})">Inserir na página&nbsp;&nbsp;<i class="icon-arrow-right"></i></a></li></ul></td>
 		</tr>
 
 		<tr>
@@ -62,7 +115,7 @@ function addPageBanner(banner_id)
 	</tbody>
 </table>	
 
-<table class="records_list listaBanner">
+<table class="records_list listaBanner" id="table">
 	<thead>
 		<tr>
 			<th>Ações</th>
@@ -74,8 +127,28 @@ function addPageBanner(banner_id)
 	</thead>
 	<tbody>
 		{% for pagebanner in pagebanners %}
-			<tr>
-				<td><ul class="ordenacao"><li><i class="icon-arrow-up disabled"></i></li><li><a href="#" title="mover para baixo"><i class="icon-arrow-down"></i></a></li><li><a href="#" title="ocultar"><i class="icon-eye-open"></i></a></li><li><a href="{{ path('banners_edit', { id: pagebanner.banner.id }) }}" title="editar"><i class="icon-edit"></i></a></li><li><a href="#" title="apagar"><i class="icon-trash"></i></a></li></ul></td>
+			<tr id='{{ pagebanner.id }}'>
+				<td>
+					<ul class="ordenacao">
+						<li>
+                            <a href="javascript:void(0)" class="up" title="mover para cima">
+                                <i class="icon-arrow-up"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="down" title="mover para baixo">
+                                <i class="icon-arrow-down"></i>
+                            </a>
+                        </li>
+						{% if (pagebanner.hided) %}
+                            <a href="{{ path('admin_hide', { 'id': pagebanner.id, 'hide': 0, 'entity': 'PageBanner' }) }}" title="exibir"><i class="icon-eye-open"></i></a>
+                        {% else %}
+                            <a href="{{ path('admin_hide', { 'id': pagebanner.id, 'hide': 1, 'entity': 'PageBanner' }) }}" title="ocultar"><i class="icon-eye-close"></i></a>
+                        {% endif %}
+						<li><a href="{{ path('banners_edit', { id: pagebanner.banner.id }) }}" title="editar"><i class="icon-edit"></i></a></li>
+						 <li><a href="{{ path('delete_page_banner', { 'banner': pagebanner.banner.id , 'page': page }) }}" title="apagar"><i class="icon-trash"></i></a></li>
+					</ul>
+				</td>
 
 				<td><a href="{{ path('banners_edit', { id: pagebanner.banner.id }) }}">{{ pagebanner.banner.title }}</a></td>
 				<td><img src="{{ asset(pagebanner.banner.pic) }}" style="width: 44px;" /></td>

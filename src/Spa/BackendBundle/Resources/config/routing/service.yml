@@ -27,4 +27,4 @@ servicos_update:
 servicos_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SpaBackendBundle:Service:delete" }
-    requirements: { _method: post|delete }
+    #requirements: { _method: post|delete }

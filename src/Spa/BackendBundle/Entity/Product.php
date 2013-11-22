@@ -44,6 +44,10 @@ class Product
      */
     private $updatedAt;
 
+    private $hided;
+
+    private $position;
+
     
     private $slug;
 
@@ -355,5 +359,27 @@ class Product
         if ($this->getCreatedAt() == null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+    public function getHided()
+    {
+        return $this->hided;
+    }
+
+    public function setHided($hided)
+    {
+        $this->hided = $hided;
+        return $this->hided;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    
+        return $this;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

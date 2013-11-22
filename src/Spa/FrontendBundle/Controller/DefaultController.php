@@ -93,7 +93,7 @@ class DefaultController extends Controller
             ->findBy(array('hided' => false));
             //->findAll();
         
-        $bannersunity = $em->getRepository('SpaBackendBundle:BannerUnity')
+        /*$bannersunity = $em->getRepository('SpaBackendBundle:BannerUnity')
             ->findAll();    
 
         $query = $em->createQuery(
@@ -103,11 +103,11 @@ class DefaultController extends Controller
         )->setMaxResults(2);
 
         $bannersdireita = $query->getResult(); 
-
+*/
         return $this->render('SpaFrontendBundle:Default:unit.html.twig', array(
             'units' => $units, 
-            'bannersunity' => $bannersunity,
-            'bannersdireita' => $bannersdireita
+  //          'bannersunity' => $bannersunity,
+  //          'bannersdireita' => $bannersdireita
             ));
     }
 
@@ -274,8 +274,8 @@ class DefaultController extends Controller
 
 
         }
-        
-         //\Doctrine\Common\Util\Debug::Dump($arr_banner[3]);exit; 
+        //echo "<pre>";
+         //\Doctrine\Common\Util\Debug::Dump($arr_banner);exit; 
         /*    echo "<pre>";
         foreach ($banners as $banner)
         {
@@ -308,7 +308,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $services = $em->getRepository('SpaBackendBundle:Service')
-            ->findAll();
+            ->findBy(array('hided' => false), array('position' => 'ASC'));
 
         $content = $em->getRepository('SpaBackendBundle:PageContent')
             ->findOneBy(array('page' => 'servicos'));      
@@ -321,13 +321,14 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $services = $em->getRepository('SpaBackendBundle:Service')
-            ->findAll();  
+            ->findBy(array('hided' => false), array('position' => 'ASC'));  
 
         $service = $em->getRepository('SpaBackendBundle:Service')
             ->findOneBy(array('slug' => $slug));  
 
         if (!$service) {
-            throw $this->createNotFoundException('Serviço não encontrado!');
+            //throw $this->createNotFoundException('Serviço não encontrado!');
+            return $this->redirect($this->generateUrl('spa_frontend_services'));
         }    
 
         return $this->render('SpaFrontendBundle:Default:viewService.html.twig', array('service' => $service, 'services' => $services));       
@@ -338,7 +339,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('SpaBackendBundle:Product')
-            ->findAll();
+            ->findBy(array('hided' => false), array('position' => 'ASC'));
    
         return $this->render('SpaFrontendBundle:Default:products.html.twig', array('products' => $products));
     }
@@ -347,13 +348,14 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('SpaBackendBundle:Product')
-            ->findAll();  
+            ->findBy(array('hided' => false), array('position' => 'ASC'));  
 
         $product = $em->getRepository('SpaBackendBundle:Product')
             ->findOneBy(array('slug' => $slug));  
 
         if (!$product) {
-            throw $this->createNotFoundException('Produto não encontrado!');
+            //throw $this->createNotFoundException('Produto não encontrado!');
+            return $this->redirect($this->generateUrl('spa_frontend_product'));
         }    
 
         return $this->render('SpaFrontendBundle:Default:viewProduct.html.twig', array('products' => $products, 'product' => $product));       
@@ -364,13 +366,13 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         $fixed_promotions = $em->getRepository('SpaBackendBundle:Promotion')
-            ->findBy(array('fixed' => true));    
+            ->findBy(array('fixed' => true, 'hided' => false), array('position' => 'ASC'));      
         $sazonal_promotion = $em->getRepository('SpaBackendBundle:Promotion')
             ->findOneBy(
                 array('fixed' => false),
-                array('createdAt' => 'DESC')
+                array('position' => 'ASC')
             );
-
+            //var_dump($sazonal_promotion);exit;
         if (!$sazonal_promotion) return $this->viewPromotionAction($fixed_promotions[0]->getSlug());
          return $this->render('SpaFrontendBundle:Default:promotion.html.twig', array('sazonal_promotion' => $sazonal_promotion, 'fixed_promotions' => $fixed_promotions));
     }
@@ -379,19 +381,20 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $fixed_promotions = $em->getRepository('SpaBackendBundle:Promotion')
-            ->findBy(array('fixed' => true));  
+            ->findBy(array('fixed' => true, 'hided' => false), array('position' => 'ASC'));  
 
         $promotion = $em->getRepository('SpaBackendBundle:Promotion')
-            ->findOneBy(array('slug' => $slug));  
+            ->findOneBy(array('slug' => $slug, 'hided' => false));  
 
         $sazonal_promotion = $em->getRepository('SpaBackendBundle:Promotion')
             ->findOneBy(
-                array('fixed' => false),
-                array('createdAt' => 'DESC')
+                array('fixed' => false, 'hided' => false),
+                array('position' => 'ASC')
             );
 
         if (!$promotion) {
-            throw $this->createNotFoundException('Promoção não encontrada!');
+            return $this->redirect($this->generateUrl('spa_frontend_promotion'));
+            //throw $this->createNotFoundException('Promoção não encontrada!');
         }    
 
         return $this->render('SpaFrontendBundle:Default:viewPromotion.html.twig', array('promotion' => $promotion, 'sazonal_promotion' => $sazonal_promotion, 'fixed_promotions' => $fixed_promotions));       
@@ -434,6 +437,11 @@ class DefaultController extends Controller
 
         $menus = $em->getRepository('SpaBackendBundle:Menu')
             ->findAll(); 
+
+        $products = $em->getRepository('SpaBackendBundle:Product')
+            ->findBy(array('hided' => false), array('position' => 'ASC'));
+        $services = $em->getRepository('SpaBackendBundle:Service')
+            ->findBy(array('hided' => false), array('position' => 'ASC'));   
         /*echo "<pre>";
         foreach ($menus as $menu)
         {
@@ -443,6 +451,8 @@ class DefaultController extends Controller
 
         return $this->render('SpaFrontendBundle::menu.html.twig', array(
                 'menus' => $menus,
+                'products' => $products,
+                'services' => $services
             ));
     }
 

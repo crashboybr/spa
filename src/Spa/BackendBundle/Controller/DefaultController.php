@@ -57,7 +57,7 @@ class DefaultController extends Controller
         
         //var_dump($arr_banner);exit;
         $pagebanners = $em->getRepository('SpaBackendBundle:PageBanner')
-            ->findBy(array('page' => $page));
+            ->findBy(array('page' => $page), array('position' => 'ASC'));
 
 
         return $this->render('SpaBackendBundle:Default:pagebanner.html.twig', 
@@ -101,6 +101,43 @@ class DefaultController extends Controller
         \Doctrine\Common\Util\Debug::dump($pagebanner);
         //print_r($pagebanner);
         exit;//var_dump($banner_id, $page);exit;
+    }
+
+    public function delPageBannerAction(Banner $banner, $page)
+    {
+        //var_dump($page);
+        $em = $this->getDoctrine()->getManager();
+        $pagebanner = $em->getRepository('SpaBackendBundle:PageBanner')
+            ->findOneBy(array('page' => $page, 'banner' => $banner));
+
+        if (!$pagebanner) {
+            throw $this->createNotFoundException('Unable to find PageBanner entity.');
+        }
+
+        $em->remove($pagebanner);
+        $em->flush();
+
+            //var_dump($pagebanner);exit;
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($pagebanner);exit;
+
+        $request = $this->getRequest();
+        $referer = $request->headers->get('referer');
+        return new RedirectResponse($referer);
+        
+    }
+
+    public function positionPageBannerAction($id, $position, $page)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('SpaBackendBundle:PageBanner')->findOneBy(array('id' => $id, 'page' => $page));
+        $entity->setPosition($position);
+        
+        $em->persist($entity);
+        $em->flush();
+        exit;
+        return 1;
     }
 
     public function sendPasswordAction($email)
