@@ -21,9 +21,9 @@ class BannerType extends AbstractType
                 'attr' => array('onchange' => 'changeType()'),
                 'label' => 'Tipo'
             ))
-            ->add('title', 'text', array('label' => 'Título'))
-            ->add('file', 'file', array('label' => 'Imagem'))
-            ->add('url', 'text', array('label' => 'Link'))
+            ->add('title')
+            ->add('file')
+            ->add('url')
 
             
         ;

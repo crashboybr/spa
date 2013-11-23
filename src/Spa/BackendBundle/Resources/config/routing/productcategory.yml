@@ -1,0 +1,30 @@
+linhasdeprodutos:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:ProductCategory:index" }
+
+linhasdeprodutos_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:ProductCategory:show" }
+
+linhasdeprodutos_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:ProductCategory:new" }
+
+linhasdeprodutos_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:ProductCategory:create" }
+    requirements: { _method: post }
+
+linhasdeprodutos_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:ProductCategory:edit" }
+
+linhasdeprodutos_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:ProductCategory:update" }
+    requirements: { _method: post|put }
+
+linhasdeprodutos_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:ProductCategory:delete" }
+    #requirements: { _method: post|delete }

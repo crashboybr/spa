@@ -163,7 +163,7 @@ class PromotionController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        
 
         return $form;
     }
@@ -186,6 +186,10 @@ class PromotionController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            if ($editForm->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
             $em->flush();
 
             return $this->redirect($this->generateUrl('promocao'));

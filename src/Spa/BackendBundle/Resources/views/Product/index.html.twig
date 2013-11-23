@@ -96,7 +96,7 @@ $(document).ready(function(){
                     </ul>
                 </td>
                 <td><a href="{{ path('produto_edit', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
-                <td>&nbsp;</td>
+                <td>{{ entity.productCategory }}</td>
                 <td><img src="{{ asset(entity.pic) }}" style="width: 50px;" /></td>
                 <td><a href="/produtos/{{ entity.slug }}" target="_blank">/produtos/{{ entity.slug }}</a></td>
             

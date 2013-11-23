@@ -340,8 +340,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('SpaBackendBundle:Product')
             ->findBy(array('hided' => false), array('position' => 'ASC'));
+        $content = $em->getRepository('SpaBackendBundle:PageContent')
+            ->findOneBy(array('page' => 'produtos'));  
    
-        return $this->render('SpaFrontendBundle:Default:products.html.twig', array('products' => $products));
+        return $this->render('SpaFrontendBundle:Default:products.html.twig', array('products' => $products, 'content' => $content));
     }
 
    public function viewProductAction($slug)

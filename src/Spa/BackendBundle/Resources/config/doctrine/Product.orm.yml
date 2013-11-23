@@ -22,6 +22,10 @@ Spa\BackendBundle\Entity\Product:
         updatedAt:
             type: datetime
             column: updated_at
+        productCategoryId:
+            type: integer
+            column: productCategory_id
+            nullable: true
         hided:
             type: boolean
             nullable: true
@@ -37,6 +41,10 @@ Spa\BackendBundle\Entity\Product:
                         style: camel
                         fields:
                             - name
+    manyToOne:
+        productCategory:
+          targetEntity: ProductCategory
+          inversedBy: productCategory
     indexes:
         search_idx:
             columns: slug

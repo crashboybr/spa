@@ -186,7 +186,7 @@ class ProductController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        
 
         return $form;
     }
@@ -209,6 +209,10 @@ class ProductController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            if ($editForm->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
             $em->flush();
 
             return $this->redirect($this->generateUrl('produto'));

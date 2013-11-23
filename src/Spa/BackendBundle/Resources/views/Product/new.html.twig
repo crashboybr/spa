@@ -26,6 +26,12 @@
 			{{ form_widget(form.file) }}
 		</div>
 
+		<div>
+			{{ form_label(form.productCategory,'Linha') }}
+			{{ form_errors(form.productCategory) }}
+			{{ form_widget(form.productCategory) }}
+		</div>
+
     <ul class="botoes">
 			<li>
 				{{ form_widget(form.save)}}

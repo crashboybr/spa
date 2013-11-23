@@ -51,6 +51,35 @@ class Product
     
     private $slug;
 
+    private $productCategoryId;
+
+    private $productCategory;
+
+    public function setProductCategory(\Spa\BackendBundle\Entity\ProductCategory $productCategory = null)
+    {
+        $this->productCategory = $productCategory;
+    
+        return $this;
+    }
+
+    public function getProductCategory()
+    {
+        return $this->productCategory;
+    }
+
+    public function setProductCategoryId($productCategoryId)
+    {
+        $this->productCategoryId = $productCategoryId;
+    
+        return $this;
+    }
+
+    public function getProductCategoryId()
+    {
+        return $this->productCategoryId;
+    }
+
+
     /* begin upload file */
     /**
      * @Assert\File(maxSize="6000000")

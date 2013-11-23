@@ -58,8 +58,11 @@
 
 		<ul class="botoes">
 			<li>
-				{{ form_widget(form.submit, { label: 'Criar' })}}
+				{{ form_widget(form.save)}}
 				
+			</li>
+			<li>
+				{{ form_widget(form.save_and_publish) }}
 			</li>
 		</ul>
 	{{ form_end(form) }}

@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Produtos › Linhas de Produtos › Editar</h1>
+
+
+		{{ form_start(edit_form) }}
+		<div>
+			{{ form_label(edit_form.name, 'Linha') }}
+			{{ form_errors(edit_form.name) }}
+			{{ form_widget(edit_form.name) }}
+		</div>
+		<ul class="botoes">
+			<li>
+				{{ form_widget(edit_form.submit)}}
+				
+			</li>
+
+		</ul>
+	{{ form_end(edit_form) }}
+	<ul class="record_actions">
+		<li><a href="{{ path('linhasdeprodutos') }}"><i class="icon-arrow-left"></i> Voltar para lista</a></li>
+	</ul>
+{% endblock %}

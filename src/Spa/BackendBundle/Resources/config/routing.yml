@@ -117,3 +117,7 @@ SpaBackendBundle_pagecontent:
         resource: "@SpaBackendBundle/Resources/config/routing/pagecontent.yml"
         prefix:   /content
 
+SpaBackendBundle_linhasdeprodutos:
+        resource: "@SpaBackendBundle/Resources/config/routing/productcategory.yml"
+        prefix:   /linhasdeprodutos
+

@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Produtos › Linhas de Produtos</h1>
+        <ul class="botoes">
+            <li><a href="{{ path('linhasdeprodutos_new') }}" class="botaoCriar"><i class="icon-plus"></i> Inserir nova Linha de Produtos</a></li>
+        </ul>
+        <table class="records_list">
+            <thead>
+                <tr>
+                    <th>Ações</th>
+                    <th>Linha</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+        {% for entity in entities %}
+            <tr>
+                <td>
+                    <ul class="ordenacao">
+                        <li>
+                            <a href="{{ path('linhasdeprodutos_edit', { 'id': entity.id }) }}" title="editar"><i class="icon-edit"></i></a>
+                        </li>
+                        <li>
+                            <a href="{{ path('linhasdeprodutos_delete', { 'id': entity.id }) }}" title="apagar"><i class="icon-trash"></i></a>
+                        </li>
+                    </ul>
+                </td>
+
+                <td>{{ entity.name }}</td>
+                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="botoes">
+        <li><a href="{{ path('linhasdeprodutos_new') }}" class="botaoCriar"><i class="icon-plus"></i> Inserir nova Linha de Produtos</a></li>
+    </ul>
+    {% endblock %}

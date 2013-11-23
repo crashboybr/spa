@@ -49,6 +49,12 @@ class UnitController extends Controller
             $user->setSalt(md5($entity->getEmail()));
             $user->setPassword('123');
             $user->setIsActive(true);
+
+            if ($form->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
+
             $em->persist($user);
             $em->flush();
 
@@ -76,7 +82,6 @@ class UnitController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
@@ -155,7 +160,6 @@ class UnitController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
@@ -178,6 +182,10 @@ class UnitController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            if ($editForm->get('save_and_publish')->isClicked())
+                $entity->setHided(false);
+            else
+                $entity->setHided(true);
             $em->flush();
 
             return $this->redirect($this->generateUrl('unidades'));

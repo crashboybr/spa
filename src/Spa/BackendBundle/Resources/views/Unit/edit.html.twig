@@ -1,16 +1,74 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Unit edit</h1>
+    <h1>Promoção › Editar</h1>
 
-    {{ form(edit_form) }}
+    <ul class="record_actions">
+		<li><a href="{{ path('unidades') }}"><i class="icon-arrow-left"></i> Voltar para lista</a></li>
+	</ul>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('unidades') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+	{{ form_start(edit_form) }}
+
+		<div>
+			{{ form_label(edit_form.name,'Nome') }}
+			{{ form_errors(edit_form.name) }}
+			{{ form_widget(edit_form.name) }}
+		</div>
+
+		<div>
+			{{ form_label(edit_form.email,'Email') }}
+			{{ form_errors(edit_form.email) }}
+			{{ form_widget(edit_form.email) }}
+		</div>
+
+		<div>
+			{{ form_label(edit_form.address,'Endereço') }}
+			{{ form_errors(edit_form.address) }}
+			{{ form_widget(edit_form.address) }}
+		</div>
+
+		<div>
+			{{ form_label(edit_form.city,'Cidade') }}
+			{{ form_errors(edit_form.city) }}
+			{{ form_widget(edit_form.city) }}
+		</div>
+
+		<div>
+			{{ form_label(edit_form.state,'UF') }}
+			{{ form_errors(edit_form.state) }}
+			{{ form_widget(edit_form.state) }}
+		</div>
+
+		<div>
+			{{ form_label(edit_form.phone1,'Telefone 1') }}
+			{{ form_errors(edit_form.phone1) }}
+			{{ form_widget(edit_form.phone1) }}
+		</div>
+
+		<div>
+			{{ form_label(edit_form.phone2,'Telefone 2') }}
+			{{ form_errors(edit_form.phone2) }}
+			{{ form_widget(edit_form.phone2) }}
+		</div>
+
+		<div>
+			{{ form_label(edit_form.status,'Inaugurada') }}
+			{{ form_errors(edit_form.status) }}
+			{{ form_widget(edit_form.status) }}
+		</div>
+
+
+		<ul class="botoes">
+			<li>
+				{{ form_widget(edit_form.save)}}
+				
+			</li>
+			<li>
+				{{ form_widget(edit_form.save_and_publish) }}
+			</li>
+		</ul>
+		<ul class="record_actions">
+			<li><a href="{{ path('unidades') }}"><i class="icon-arrow-left"></i> Voltar para lista</a></li>
+		</ul>
+	{{ form_end(edit_form) }}
 {% endblock %}

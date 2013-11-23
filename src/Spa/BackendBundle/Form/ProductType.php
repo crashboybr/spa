@@ -18,6 +18,10 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('file')
+            ->add('productCategory')
+            ->add('productCategory','entity', array(
+                'class' => 'SpaBackendBundle:ProductCategory',
+                'property' => 'name', 'empty_value' => 'Selecione uma linha'))
             ->add('save', 'submit', array('label' => '<i class="icon-download-alt"></i> Salvar'))
             ->add('save_and_publish', 'submit', array('label' => '<i class="icon-ok"></i> Salvar e Publicar' ))
         ;

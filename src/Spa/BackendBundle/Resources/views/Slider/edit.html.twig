@@ -36,11 +36,11 @@
 				{{ form_widget(edit_form.save_and_publish) }}
 			</li>
 		</ul>
+		
+	    <ul class="record_actions">
+			<li><a href="{{ path('slider') }}"><i class="icon-arrow-left"></i> Voltar para lista</a></li>
+		</ul>
 	{{ form_end(edit_form) }}
 	
 
-
-    <ul class="record_actions">
-		<li><a href="{{ path('slider') }}"><i class="icon-arrow-left"></i> Voltar para lista</a></li>
-	</ul>
 {% endblock %}
