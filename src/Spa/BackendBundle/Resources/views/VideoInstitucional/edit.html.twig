@@ -18,24 +18,36 @@
 					{{ form_label(edit_form.file_mp4,'MP4') }}
 					{{ form_errors(edit_form.file_mp4) }}
 					{{ form_widget(edit_form.file_mp4) }}
+					{% if entity.mp4 %}
+						<a href="{{ asset(entity.mp4) }}" target="_blank">Video Atual mp4</a>
+					{% endif %}
 				</div>
 
 				<div>
 					{{ form_label(edit_form.file_webm,'Webm') }}
 					{{ form_errors(edit_form.file_webm) }}
 					{{ form_widget(edit_form.file_webm) }}
+					{% if entity.webm %}
+						<a href="{{ asset(entity.webm) }}" target="_blank">Video Atual Webm</a>
+					{% endif %}
 				</div>
 
 				<div>
 					{{ form_label(edit_form.file_ogv,'Ogv') }}
 					{{ form_errors(edit_form.file_ogv) }}
 					{{ form_widget(edit_form.file_ogv) }}
+					{% if entity.ogv %}
+						<a href="{{ asset(entity.ogv) }}" target="_blank">Video Atual OGV</a>
+					{% endif %}
 				</div>
 
 				<div>
 					{{ form_label(edit_form.file_pic,'Imagem') }}
 					{{ form_errors(edit_form.file_pic) }}
 					{{ form_widget(edit_form.file_pic) }}
+					{% if entity.pic %}
+						<img src="{{ asset(entity.pic) }}" style="width: 100px;">
+					{% endif %}
 				</div>
 			</div>
 			<br>
@@ -45,6 +57,7 @@
 				{{ form_label(edit_form.url,'URL (Youtube ou Vimeo)') }}
 				{{ form_errors(edit_form.url) }}
 				{{ form_widget(edit_form.url) }}
+				
 			</div>
 		</div>
 	</div>
