@@ -1,0 +1,30 @@
+videoinstitucional:
+    pattern:  /
+    defaults: { _controller: "SpaBackendBundle:VideoInstitucional:index" }
+
+videoinstitucional_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SpaBackendBundle:VideoInstitucional:show" }
+
+videoinstitucional_new:
+    pattern:  /new
+    defaults: { _controller: "SpaBackendBundle:VideoInstitucional:new" }
+
+videoinstitucional_create:
+    pattern:  /create
+    defaults: { _controller: "SpaBackendBundle:VideoInstitucional:create" }
+    requirements: { _method: post }
+
+videoinstitucional_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SpaBackendBundle:VideoInstitucional:edit" }
+
+videoinstitucional_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SpaBackendBundle:VideoInstitucional:update" }
+    requirements: { _method: post|put }
+
+videoinstitucional_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SpaBackendBundle:VideoInstitucional:delete" }
+    requirements: { _method: post|delete }

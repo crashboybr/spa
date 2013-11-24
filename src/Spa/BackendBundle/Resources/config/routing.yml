@@ -121,3 +121,7 @@ SpaBackendBundle_linhasdeprodutos:
         resource: "@SpaBackendBundle/Resources/config/routing/productcategory.yml"
         prefix:   /linhasdeprodutos
 
+SpaBackendBundle_videoinstitucional:
+        resource: "@SpaBackendBundle/Resources/config/routing/videoinstitucional.yml"
+        prefix:   /videoinstitucional
+

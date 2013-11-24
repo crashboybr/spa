@@ -1,0 +1,43 @@
+Spa\BackendBundle\Entity\VideoInstitucional:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        title:
+            type: string
+            length: 255
+            nullable: true
+        mp4:
+            type: string
+            length: 255
+            nullable: true
+        webm:
+            type: string
+            length: 255
+            nullable: true
+        ogv:
+            type: string
+            length: 255
+            nullable: true
+        pic:
+            type: string
+            length: 255
+            nullable: true
+        url:
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+    lifecycleCallbacks:
+        prePersist: [ preUpload, updatedTimestamps ]
+        preUpdate: [ updatedTimestamps ]
+        postPersist: [ upload ]

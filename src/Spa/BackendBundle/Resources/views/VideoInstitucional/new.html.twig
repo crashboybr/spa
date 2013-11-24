@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Video Institucional › Novo</h1>
+
+	<ul class="record_actions">
+		<li><a href="javascript:history.back()"><i class="icon-arrow-left"></i> Voltar</a></li>
+	</ul>
+
+	{{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
+	<div id="spa_backendbundle_post">
+	    <div>
+			{{ form_label(form.title,'Título') }}
+			{{ form_errors(form.title) }}
+			{{ form_widget(form.title) }}
+		</div>
+
+		<div>
+			<label for="spa_backendbundle_post_file">Vídeo</label><br>
+			<div style="background:#eee; padding:.5em 1em 0 1em; width:90%; max-width:788px">
+				<div>
+					{{ form_label(form.file_mp4,'MP4') }}
+					{{ form_errors(form.file_mp4) }}
+					{{ form_widget(form.file_mp4) }}
+				</div>
+
+				<div>
+					{{ form_label(form.file_webm,'Webm') }}
+					{{ form_errors(form.file_webm) }}
+					{{ form_widget(form.file_webm) }}
+				</div>
+
+				<div>
+					{{ form_label(form.file_ogv,'Ogv') }}
+					{{ form_errors(form.file_ogv) }}
+					{{ form_widget(form.file_ogv) }}
+				</div>
+
+				<div>
+					{{ form_label(form.file_pic,'Imagem') }}
+					{{ form_errors(form.file_pic) }}
+					{{ form_widget(form.file_pic) }}
+				</div>
+			</div>
+			<br>
+			OU<br><br>
+
+			<div>
+				{{ form_label(form.url,'URL (Youtube ou Vimeo)') }}
+				{{ form_errors(form.url) }}
+				{{ form_widget(form.url) }}
+			</div>
+		</div>
+	</div>
+    <ul class="botoes">
+		<li>
+			{{ form_widget(form.submit, { label: 'Criar' })}}
+			
+		</li>
+		
+	</ul>
+	{{ form_end(form) }}
+
+
+     <ul class="record_actions">
+		<li><a href="javascript:history.back()"><i class="icon-arrow-left"></i> Voltar</a></li>
+	</ul>
+{% endblock %}
