@@ -555,7 +555,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $content = $em->getRepository('SpaBackendBundle:PageContent')
             ->findOneBy(array('page' => 'institucional'));  
-        return $this->render('SpaFrontendBundle:Default:institucional.html.twig', array('content' => $content));
+        $video = $em->getRepository('SpaBackendBundle:VideoInstitucional')
+            ->findOneBy(array());  
+            
+        return $this->render('SpaFrontendBundle:Default:institucional.html.twig', array('content' => $content, 'video' => $video));
     }
 
     public function faleConoscoAction()

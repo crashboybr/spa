@@ -16,18 +16,26 @@
 		</div>
 		<hr class="video" />
 		<h3 class="box">Confira nosso vídeo de apresentação e conheça um pouco de nossa história de sucesso.</h3>
-		<p class="video-institucional-thumb"><video controls="controls" poster="{{ asset('bundles/spafrontend/images/institucional-video.jpg') }}" width="100%">
-							<source src="/video-1.mp4" type="video/mp4" />
-							
-							<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="100%">
-								<param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
-								<param name="allowFullScreen" value="true" />
-								<param name="wmode" value="transparent" />
-								<param name="flashVars" value="config={'playlist':['http%3A%2F%2Fwww.spadassobrancelhas.com.br%2Fnewsletter%2F2013maio%2F1%2Fimg%2Fbg-video-1.jpg',{'url':'http%3A%2F%2Fwww.spadassobrancelhas.com.br%2Fnewsletter%2F2013maio%2F1%2Fvideo%2Fvideo-1.mp4','autoPlay':false}]}" />
-								<img src="{{ asset('bundles/spafrontend/images/institucional-video.jpg') }}" />
-							</object>
-						</video><!--<a href="#"><img src="/_imgs/institucional-video.jpg" /></a>--></p>
+		{% if video.url %}
+			{{ asset(video.url) }}
+		{% else %}
+		<p class="video-institucional-thumb">
+			<video controls="controls" poster="{{ asset(video.pic) }}" width="100%">
+				<source src="{{ asset(video.mp4) }}" type="video/mp4" />
+				<source src="{{ asset(video.webm) }}" type="video/webm" />
+				<source src="{{ asset(video.ogv) }}" type="video/ogg" />
+				<object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="100%">
+					<param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+					<param name="allowFullScreen" value="true" />
+					<param name="wmode" value="transparent" />
+					<param name="flashVars" value="config={'playlist':['{{ asset(video.pic) }}',{'url':'{{ asset(video.mp4) }}','autoPlay':false}]}" />
+					<img src="{{ asset(video.pic) }}" />
+				</object>
+			</video>
+		</p>
+		{% endif %}
 		<hr class="fim" />
+
 
 {% endblock %}
 
