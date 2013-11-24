@@ -17,7 +17,7 @@
 		<hr class="video" />
 		<h3 class="box">Confira nosso vídeo de apresentação e conheça um pouco de nossa história de sucesso.</h3>
 		{% if video.url %}
-			{{ asset(video.url) }}
+			{{ video.url|raw }}
 		{% else %}
 		<p class="video-institucional-thumb">
 			<video controls="controls" poster="{{ asset(video.pic) }}" width="100%">
