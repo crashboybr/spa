@@ -481,8 +481,8 @@ class DefaultController extends Controller
         $message = \Swift_Message::newInstance()
         ->setSubject('Contato Franquia')
         ->setFrom($dados['email'])
-        //->setTo('faleconosco@spadassobrancelhas.com.br')
-        ->setTo('bernardo.d.alves@gmail.com')
+        ->setTo('faleconosco@spadassobrancelhas.com.br')
+        //->setTo('bernardo.d.alves@gmail.com')
         ->setBody(
             $this->renderView(
                 'SpaFrontendBundle:Default:email.txt.twig',
