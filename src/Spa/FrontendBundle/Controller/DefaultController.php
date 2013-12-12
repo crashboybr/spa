@@ -477,19 +477,21 @@ class DefaultController extends Controller
         $dados['inicio_franquia'] = $request->request->get('inicio_franquia');
         $dados['observacoes'] = $request->request->get('observacoes');
 
-      
+        //var_dump($_POST);exit;
         $message = \Swift_Message::newInstance()
         ->setSubject('Contato Franquia')
         ->setFrom($dados['email'])
-        ->setTo('faleconosco@spadassobrancelhas.com.br')
+        //->setTo('faleconosco@spadassobrancelhas.com.br')
+        ->setTo('bernardo.d.alves@gmail.com')
         ->setBody(
             $this->renderView(
                 'SpaFrontendBundle:Default:email.txt.twig',
-                array('dados' => $dados)
+                array('dados' => $_POST)
             )
         )
         ;
         $this->get('mailer')->send($message);
+        //exit;
         
         return $this->redirect($this->generateUrl('spa_frontend_sejafranqueado', array('obrigado' => true)));
         //return $this->render('SpaFrontendBundle:Default:sejafranqueado.html.twig', array('obrigado' => true));
